@@ -7,23 +7,23 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #000;
-      --white: #fff;
-      --text: #f2f2f2;
-      --muted: #c9c9cf;
-      --soft: #9c9ca4;
-      --panel: rgba(255,255,255,0.045);
-      --panel2: rgba(255,255,255,0.075);
-      --border: rgba(255,255,255,0.11);
-      --border2: rgba(255,255,255,0.25);
       --mx: 50vw;
-      --my: 45vh;
+      --my: 40vh;
       --mx2: 70vw;
       --my2: 60vh;
+      --black: #000;
+      --white: #fff;
+      --text: #f3f3f3;
+      --muted: #c9c9cf;
+      --soft: #9d9da5;
+      --border: rgba(255,255,255,.14);
+      --border-strong: rgba(255,255,255,.28);
+      --card: rgba(255,255,255,.055);
+      --card-strong: rgba(255,255,255,.085);
     }
 
     * {
@@ -41,7 +41,7 @@
       min-height: 100vh;
       background: #000;
       color: var(--text);
-      font-family: "Alexandria", "IBM Plex Sans Arabic", "Segoe UI", Arial, sans-serif;
+      font-family: "Alexandria", "Segoe UI", Tahoma, Arial, sans-serif;
       font-weight: 400;
       line-height: 1.95;
       overflow-x: hidden;
@@ -55,13 +55,10 @@
     }
 
     button {
-      font-family: inherit;
+      font: inherit;
     }
 
-    /* =========================
-       الخلفية الفضائية الظاهرة
-    ========================= */
-
+    /* الخلفية الفضائية */
     .space-layer {
       position: fixed;
       inset: 0;
@@ -69,19 +66,19 @@
       overflow: hidden;
       pointer-events: none;
       background:
-        radial-gradient(circle at 20% 15%, rgba(255,255,255,0.10), transparent 26%),
-        radial-gradient(circle at 80% 22%, rgba(170,170,170,0.08), transparent 30%),
-        radial-gradient(circle at 50% 90%, rgba(120,120,120,0.08), transparent 34%),
-        linear-gradient(180deg, #000 0%, #050505 48%, #000 100%);
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,.10), transparent 26%),
+        radial-gradient(circle at 80% 22%, rgba(160,160,160,.08), transparent 30%),
+        radial-gradient(circle at 50% 88%, rgba(110,110,110,.08), transparent 36%),
+        linear-gradient(180deg, #000 0%, #050505 50%, #000 100%);
     }
 
     .space-grid {
       position: absolute;
-      inset: -25% -10% 0 -10%;
-      opacity: 0.38;
+      inset: -24% -12% 0 -12%;
+      opacity: .38;
       background-image:
-        linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,.13) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.13) 1px, transparent 1px);
       background-size: 58px 58px;
       transform: perspective(850px) rotateX(62deg) translateY(-18%);
       transform-origin: top center;
@@ -93,9 +90,9 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(430px circle at var(--mx) var(--my), rgba(255,255,255,0.20), transparent 62%),
-        radial-gradient(760px circle at var(--mx2) var(--my2), rgba(180,180,180,0.10), transparent 68%),
-        radial-gradient(620px circle at 25% 22%, rgba(120,120,120,0.08), transparent 70%);
+        radial-gradient(430px circle at var(--mx) var(--my), rgba(255,255,255,.20), transparent 62%),
+        radial-gradient(760px circle at var(--mx2) var(--my2), rgba(180,180,180,.10), transparent 68%),
+        radial-gradient(620px circle at 25% 22%, rgba(120,120,120,.08), transparent 70%);
       mix-blend-mode: screen;
       animation: glowFloat 8s ease-in-out infinite alternate;
     }
@@ -103,10 +100,10 @@
     .stars {
       position: absolute;
       inset: 0;
-      opacity: 0.38;
+      opacity: .38;
       background-image:
-        radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1.5px),
-        radial-gradient(circle, rgba(180,180,180,0.55) 1px, transparent 1.5px);
+        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(180,180,180,.55) 1px, transparent 1.5px);
       background-size: 120px 120px, 190px 190px;
       background-position: 0 0, 45px 75px;
       animation: starsMove 22s linear infinite;
@@ -118,9 +115,9 @@
       position: absolute;
       width: 86vw;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
-      opacity: 0.38;
-      filter: blur(0.2px);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+      opacity: .38;
+      filter: blur(.2px);
     }
 
     .space-lines::before {
@@ -139,11 +136,11 @@
 
     .floating-shape {
       position: absolute;
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.035);
       box-shadow:
-        0 0 55px rgba(255,255,255,0.07),
-        inset 0 0 24px rgba(255,255,255,0.045);
+        0 0 55px rgba(255,255,255,.07),
+        inset 0 0 24px rgba(255,255,255,.045);
       backdrop-filter: blur(8px);
     }
 
@@ -185,16 +182,14 @@
       animation: floatFour 8s ease-in-out infinite;
     }
 
-    nav,
-    main,
-    .container {
+    .page {
       position: relative;
-      z-index: 10;
+      z-index: 2;
     }
 
     .container {
       width: min(1180px, 92%);
-      margin: 0 auto;
+      margin: auto;
     }
 
     section {
@@ -202,22 +197,18 @@
       scroll-margin-top: 96px;
     }
 
-    /* =========================
-       Navbar
-    ========================= */
-
     .nav {
       position: sticky;
       top: 0;
-      z-index: 1000;
-      background: rgba(0,0,0,0.78);
-      border-bottom: 1px solid rgba(255,255,255,0.10);
+      z-index: 50;
+      background: rgba(0,0,0,.78);
+      border-bottom: 1px solid rgba(255,255,255,.10);
       backdrop-filter: blur(18px);
     }
 
     .nav-inner {
       width: min(1180px, 96%);
-      margin: 0 auto;
+      margin: auto;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -233,8 +224,8 @@
       color: #050505;
       font-size: 15px;
       font-weight: 600;
-      box-shadow: 0 10px 32px rgba(255,255,255,0.09);
       white-space: nowrap;
+      box-shadow: 0 10px 32px rgba(255,255,255,.09);
     }
 
     .nav-links {
@@ -253,30 +244,25 @@
       flex: 0 0 auto;
       padding: 9px 14px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.13);
-      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(255,255,255,.045);
       color: #e6e6e6;
       font-size: 12.5px;
       font-weight: 400;
-      transition: 0.22s ease;
+      transition: .22s ease;
       white-space: nowrap;
     }
 
     .nav-links a:hover {
       transform: translateY(-1px);
-      background: rgba(255,255,255,0.09);
-      border-color: rgba(255,255,255,0.24);
-      color: #fff;
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.24);
     }
-
-    /* =========================
-       Hero
-    ========================= */
 
     .hero {
       min-height: 88vh;
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1.05fr .95fr;
       gap: 34px;
       align-items: center;
       padding-top: 54px;
@@ -288,12 +274,20 @@
       gap: 8px;
       padding: 8px 16px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.13);
-      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(255,255,255,.045);
       color: #e6e6e6;
       font-size: 12px;
       font-weight: 400;
       margin-bottom: 18px;
+    }
+
+    .latin {
+      direction: ltr;
+      unicode-bidi: embed;
+      font-family: "Inter", sans-serif;
+      font-weight: 600;
+      display: inline-block;
     }
 
     h1 {
@@ -301,10 +295,9 @@
       font-size: clamp(38px, 6vw, 72px);
       line-height: 1.18;
       font-weight: 700;
-      letter-spacing: -0.7px;
+      letter-spacing: -.7px;
       color: #fff;
       text-wrap: balance;
-      text-shadow: none;
     }
 
     h2 {
@@ -314,7 +307,6 @@
       color: #f7f7f7;
       margin-bottom: 14px;
       text-wrap: balance;
-      text-shadow: none;
     }
 
     h3 {
@@ -324,7 +316,6 @@
       color: #f7f7f7;
       margin-bottom: 10px;
       text-wrap: balance;
-      text-shadow: none;
     }
 
     h4 {
@@ -333,11 +324,10 @@
       font-weight: 650;
       color: #f7f7f7;
       margin-bottom: 8px;
-      text-shadow: none;
     }
 
     p {
-      color: #c9c9cf;
+      color: var(--muted);
       font-size: 15.7px;
       line-height: 2.05;
       font-weight: 400;
@@ -362,49 +352,40 @@
       align-items: center;
       justify-content: center;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.13);
-      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(255,255,255,.045);
       color: #e6e6e6;
       padding: 12px 20px;
       font-size: 14.5px;
       font-weight: 400;
       cursor: pointer;
-      transition: 0.22s ease;
+      transition: .22s ease;
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      background: rgba(255,255,255,0.09);
-      border-color: rgba(255,255,255,0.23);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.23);
     }
 
     .btn.primary {
       background: linear-gradient(180deg, #fff, #cfcfcf);
       color: #050505;
-      border-color: rgba(255,255,255,0.75);
+      border-color: rgba(255,255,255,.75);
       font-weight: 500;
     }
 
-    .btn.primary:hover {
-      background: linear-gradient(180deg, #f7f7f7, #c5c5c5);
-    }
-
-    /* =========================
-       Cards
-    ========================= */
-
     .card {
-      border: 1px solid rgba(255,255,255,0.16);
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.085), rgba(255,255,255,0.025));
+      border: 1px solid rgba(255,255,255,.16);
+      background: linear-gradient(145deg, rgba(255,255,255,.085), rgba(255,255,255,.025));
       border-radius: 30px;
       padding: 24px;
       box-shadow:
-        0 30px 90px rgba(0,0,0,0.62),
-        0 0 30px rgba(255,255,255,0.035),
-        inset 0 1px 0 rgba(255,255,255,0.10);
+        0 30px 90px rgba(0,0,0,.62),
+        0 0 30px rgba(255,255,255,.035),
+        inset 0 1px 0 rgba(255,255,255,.10);
       backdrop-filter: blur(18px);
-      transition: 0.25s ease;
+      transition: .25s ease;
       overflow: hidden;
       animation: cardFloatSoft 7s ease-in-out infinite;
     }
@@ -417,13 +398,12 @@
     .card:hover {
       animation-play-state: paused;
       transform: translateY(-8px) scale(1.01);
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.035));
-      border-color: rgba(255,255,255,0.28);
+      background: linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.035));
+      border-color: rgba(255,255,255,.28);
       box-shadow:
-        0 34px 95px rgba(0,0,0,0.68),
-        0 0 45px rgba(255,255,255,0.065),
-        inset 0 1px 0 rgba(255,255,255,0.12);
+        0 34px 95px rgba(0,0,0,.68),
+        0 0 45px rgba(255,255,255,.065),
+        inset 0 1px 0 rgba(255,255,255,.12);
     }
 
     .hero-side .card {
@@ -432,17 +412,17 @@
     }
 
     .sub-card {
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.035);
       border-radius: 24px;
       padding: 18px;
-      transition: 0.22s ease;
+      transition: .22s ease;
       overflow: hidden;
     }
 
     .sub-card:hover {
-      background: rgba(255,255,255,0.055);
-      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,.055);
+      border-color: rgba(255,255,255,.18);
     }
 
     .section-title {
@@ -461,8 +441,8 @@
       padding: 6px 12px;
       margin: 3px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.13);
-      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(255,255,255,.045);
       color: #e6e6e6;
       font-size: 12px;
       font-weight: 400;
@@ -473,7 +453,7 @@
     .badge.active {
       background: linear-gradient(180deg, #fff, #cfcfcf);
       color: #050505;
-      border-color: rgba(255,255,255,0.75);
+      border-color: rgba(255,255,255,.75);
     }
 
     .grid {
@@ -556,24 +536,32 @@
     .filter-btn {
       padding: 10px 16px;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.13);
-      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(255,255,255,.045);
       color: #e6e6e6;
       font-size: 14px;
       font-weight: 400;
       cursor: pointer;
-      transition: 0.2s ease;
+      transition: .2s ease;
     }
 
     .filter-btn:hover {
-      background: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,.08);
     }
 
     .filter-btn.active {
       background: linear-gradient(180deg, #fff, #cfcfcf);
       color: #050505;
-      border-color: rgba(255,255,255,0.75);
+      border-color: rgba(255,255,255,.75);
       font-weight: 500;
+    }
+
+    .summary-card {
+      display: block;
+    }
+
+    .summary-card.hidden {
+      display: none;
     }
 
     .term-card h3 {
@@ -593,8 +581,16 @@
       justify-content: space-between;
     }
 
-    .flashcard:hover {
-      transform: translateY(-8px) scale(1.015);
+    .flashcard .back {
+      display: none;
+    }
+
+    .flashcard.is-flipped .front {
+      display: none;
+    }
+
+    .flashcard.is-flipped .back {
+      display: block;
     }
 
     .small {
@@ -652,8 +648,8 @@
     .progress {
       height: 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.11);
-      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,.11);
+      background: rgba(255,255,255,.04);
       overflow: hidden;
       padding: 2px;
       margin-bottom: 24px;
@@ -664,13 +660,13 @@
       height: 100%;
       width: 0%;
       border-radius: 999px;
-      background: linear-gradient(90deg, #cfcfcf, #ffffff, #cfcfcf);
-      transition: 0.35s ease;
+      background: linear-gradient(90deg, #cfcfcf, #fff, #cfcfcf);
+      transition: .35s ease;
     }
 
     .quiz-question {
-      border: 1px solid rgba(255,255,255,0.09);
-      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,.09);
+      background: rgba(255,255,255,.02);
       border-radius: 22px;
       padding: 17px;
       margin-bottom: 14px;
@@ -692,8 +688,8 @@
     }
 
     .option {
-      border: 1px solid rgba(255,255,255,0.13);
-      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(255,255,255,.045);
       color: #e6e6e6;
       border-radius: 16px;
       padding: 11px 12px;
@@ -702,33 +698,33 @@
       font-weight: 400;
       line-height: 1.75;
       cursor: pointer;
-      transition: 0.18s ease;
+      transition: .18s ease;
     }
 
     .option:hover {
-      background: rgba(255,255,255,0.09);
-      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.18);
     }
 
     .option.correct {
       background: linear-gradient(180deg, #fff, #cfcfcf);
       color: #050505;
-      border-color: rgba(255,255,255,0.9);
+      border-color: rgba(255,255,255,.9);
       font-weight: 500;
     }
 
     .option.wrong {
-      background: rgba(255,255,255,0.12);
+      background: rgba(255,255,255,.12);
       color: #fff;
-      border-color: rgba(255,255,255,0.35);
+      border-color: rgba(255,255,255,.35);
     }
 
     .feedback {
       display: none;
       margin-top: 12px;
-      border: 1px solid rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,.09);
       border-radius: 16px;
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,.03);
       padding: 12px;
       color: #d5d5db;
       font-size: 14px;
@@ -747,18 +743,6 @@
       color: #d7d7dd;
     }
 
-    .latin {
-      direction: ltr;
-      unicode-bidi: embed;
-      font-family: "Inter", sans-serif;
-      font-weight: 600;
-      display: inline-block;
-    }
-
-    /* =========================
-       Animations
-    ========================= */
-
     @keyframes gridDrift {
       0% { background-position: 0 0; }
       100% { background-position: 58px 58px; }
@@ -766,7 +750,7 @@
 
     @keyframes glowFloat {
       0% {
-        opacity: 0.65;
+        opacity: .65;
         transform: translate3d(0, 0, 0) scale(1);
       }
       100% {
@@ -781,25 +765,13 @@
     }
 
     @keyframes lineMoveA {
-      0% {
-        transform: rotate(-18deg) translateX(0);
-        opacity: 0.18;
-      }
-      100% {
-        transform: rotate(-18deg) translateX(70px);
-        opacity: 0.42;
-      }
+      0% { transform: rotate(-18deg) translateX(0); opacity: .18; }
+      100% { transform: rotate(-18deg) translateX(70px); opacity: .42; }
     }
 
     @keyframes lineMoveB {
-      0% {
-        transform: rotate(17deg) translateX(0);
-        opacity: 0.18;
-      }
-      100% {
-        transform: rotate(17deg) translateX(-80px);
-        opacity: 0.40;
-      }
+      0% { transform: rotate(17deg) translateX(0); opacity: .18; }
+      100% { transform: rotate(17deg) translateX(-80px); opacity: .40; }
     }
 
     @keyframes floatOne {
@@ -841,14 +813,8 @@
       .grid-5 { grid-template-columns: repeat(2, 1fr); }
       .grid-4 { grid-template-columns: repeat(2, 1fr); }
       .grid-3 { grid-template-columns: repeat(2, 1fr); }
-
-      .hero {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-side .card {
-        min-height: auto;
-      }
+      .hero { grid-template-columns: 1fr; }
+      .hero-side .card { min-height: auto; }
     }
 
     @media (max-width: 720px) {
@@ -916,11 +882,11 @@
       }
 
       .space-grid {
-        opacity: 0.26;
+        opacity: .26;
       }
 
       .floating-shape {
-        opacity: 0.55;
+        opacity: .55;
       }
 
       .shape-1 {
@@ -953,544 +919,208 @@
     <div class="floating-shape shape-4"></div>
   </div>
 
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="#hero" class="brand">AI نهائي</a>
-      <div class="nav-links">
-        <a href="#roadmap">الخطة</a>
-        <a href="#quick">1-5</a>
-        <a href="#focus">6-10</a>
-        <a href="#summaries">الملخصات</a>
-        <a href="#definitions">التعاريف</a>
-        <a href="#comparisons">المقارنات</a>
-        <a href="#terms">المصطلحات</a>
-        <a href="#flashcards">البطاقات</a>
-        <a href="#exam">النقاط</a>
-        <a href="#quiz">الاختبار</a>
-      </div>
-    </div>
-  </nav>
-
-  <main>
-    <section id="hero" class="container hero">
-      <div class="hero-main">
-        <span class="tag">مراجعة نظرية نهائية • <span class="latin">Fundamentals of Artificial Intelligence</span></span>
-        <h1>منصة مراجعة نهائية لأساسيات الذكاء الاصطناعي</h1>
-        <p>
-          موقع دراسي عربي كامل للمحتوى النظري في المحاضرات من 1 إلى 10، مع مراجعة سريعة للمحاضرات 1 إلى 5،
-          وتركيز أعمق وأقوى على المحاضرات 6 إلى 10.
-        </p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#focus">ابدأ بالتركيز العالي</a>
-          <a class="btn" href="#quiz">اختبار 40 سؤال</a>
+  <div class="page">
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="#hero" class="brand">AI نهائي</a>
+        <div class="nav-links">
+          <a href="#roadmap">الخطة</a>
+          <a href="#quick">1-5</a>
+          <a href="#focus">6-10</a>
+          <a href="#summaries">الملخصات</a>
+          <a href="#definitions">التعاريف</a>
+          <a href="#comparisons">المقارنات</a>
+          <a href="#terms">المصطلحات</a>
+          <a href="#flashcards">البطاقات</a>
+          <a href="#exam">النقاط</a>
+          <a href="#quiz">الاختبار</a>
         </div>
       </div>
+    </nav>
 
-      <div class="hero-side">
-        <div class="card">
-          <span class="badge active">لوحة المراجعة</span>
-          <span class="badge">نظري فقط</span>
-          <div id="heroFocusList" style="margin-top:18px"></div>
+    <main>
+      <section id="hero" class="container hero">
+        <div class="hero-main">
+          <span class="tag">مراجعة نظرية نهائية • <span class="latin">Fundamentals of Artificial Intelligence</span></span>
+          <h1>منصة مراجعة نهائية لأساسيات الذكاء الاصطناعي</h1>
+          <p>
+            موقع دراسي عربي كامل للمحتوى النظري في المحاضرات من 1 إلى 10، مع مراجعة سريعة للمحاضرات 1 إلى 5،
+            وتركيز أعمق وأقوى على المحاضرات 6 إلى 10.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#focus">ابدأ بالتركيز العالي</a>
+            <a class="btn" href="#quiz">اختبار 40 سؤال</a>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <section id="roadmap" class="container">
-      <div class="section-title">
-        <span class="tag">Study Roadmap</span>
-        <h2>خريطة الدراسة من المحاضرة 1 إلى 10</h2>
-        <p>
-          المحاضرات 1 إلى 5 مراجعة سريعة، والمحاضرات 6 إلى 10 تركيز عالي مع ملخصات أعمق وملاحظات اختبار أوضح.
-        </p>
-      </div>
-      <div id="roadmapGrid" class="grid grid-5"></div>
-    </section>
+        <div class="hero-side">
+          <div class="card">
+            <span class="badge active">لوحة المراجعة</span>
+            <span class="badge">نظري فقط</span>
 
-    <section id="quick" class="container">
-      <div class="section-title">
-        <span class="tag">Quick Review</span>
-        <h2>مراجعة سريعة للمحاضرات 1 إلى 5</h2>
-        <p>ملخصات قصيرة مركزة على المفاهيم النظرية الأساسية دون الجزء العملي.</p>
-      </div>
-      <div id="quickGrid" class="grid grid-3"></div>
-    </section>
+            <div class="sub-card" style="margin-top:18px;margin-bottom:12px">
+              <h3>محاضرة 6: معالجة اللغة الطبيعية NLP</h3>
+              <p>معالجة اللغة الطبيعية تجعل الحاسوب يفهم اللغة البشرية من خلال تحليل الكلمات والجمل والسياق.</p>
+            </div>
 
-    <section id="focus" class="container">
-      <div class="section-title">
-        <span class="tag">High Priority</span>
-        <h2>تركيز قوي على المحاضرات 6 إلى 10</h2>
-        <p>
-          هذا القسم هو الأهم للاختبار النهائي: تعريفات، أفكار رئيسية، ملاحظات اختبار، ومفاهيم قد تختلط في الأسئلة.
-        </p>
-      </div>
-      <div id="focusGrid" class="grid"></div>
-    </section>
+            <div class="sub-card" style="margin-bottom:12px">
+              <h3>محاضرة 7: الرؤية الحاسوبية Computer Vision</h3>
+              <p>الرؤية الحاسوبية تجعل الآلة تفهم الصور والفيديو بعد تحويلها إلى بيانات رقمية قابلة للتحليل.</p>
+            </div>
 
-    <section id="summaries" class="container">
-      <div class="section-title">
-        <span class="tag">Organized Summaries</span>
-        <h2>بطاقات ملخصة لكل محاضرة</h2>
-        <p>كل بطاقة تعرض اسم المحاضرة، ملخصها، مفاهيمها، وأهم ملاحظات الاختبار.</p>
-      </div>
+            <div class="sub-card" style="margin-bottom:12px">
+              <h3>محاضرة 8: تطبيقات الذكاء الاصطناعي</h3>
+              <p>توضح تطبيقات AI في التعليم والطب والأعمال والحياة اليومية مع فوائدها وتحدياتها.</p>
+            </div>
 
-      <div class="filters">
-        <button class="filter-btn active" data-filter="all">الكل</button>
-        <button class="filter-btn" data-filter="quick">مراجعة 1-5</button>
-        <button class="filter-btn" data-filter="focus">تركيز 6-10</button>
-      </div>
+            <div class="sub-card" style="margin-bottom:12px">
+              <h3>محاضرة 9: أخلاقيات وتحديات AI</h3>
+              <p>تركز على الخصوصية، حماية البيانات، التحيز، أثر AI على الوظائف، والاستخدام المسؤول.</p>
+            </div>
 
-      <div id="summariesGrid" class="grid grid-2"></div>
-    </section>
-
-    <section id="definitions" class="container">
-      <div class="section-title">
-        <span class="tag">Definitions</span>
-        <h2>أهم التعاريف النظرية</h2>
-        <p>تعريفات مختصرة وواضحة للمصطلحات الأكثر أهمية، مع تركيز أكبر على المحاضرات 6 إلى 10.</p>
-      </div>
-      <div id="definitionsGrid" class="grid grid-3"></div>
-    </section>
-
-    <section id="comparisons" class="container">
-      <div class="section-title">
-        <span class="tag">Comparisons</span>
-        <h2>مقارنات مهمة للاختبار</h2>
-        <p>مقارنات مرتبة تساعدك في أسئلة الاختيار من متعدد والصح والخطأ.</p>
-      </div>
-      <div id="comparisonsGrid" class="grid grid-2"></div>
-    </section>
-
-    <section id="terms" class="container">
-      <div class="section-title">
-        <span class="tag">Key Terms</span>
-        <h2>مصطلحات مهمة</h2>
-        <p>مصطلحات أساسية مع شرح عربي مختصر وسهل الحفظ.</p>
-      </div>
-      <div id="termsGrid" class="grid grid-3"></div>
-    </section>
-
-    <section id="flashcards" class="container">
-      <div class="section-title">
-        <span class="tag">Flashcards</span>
-        <h2>بطاقات تفاعلية للحفظ</h2>
-        <p>اضغط على البطاقة لإظهار الإجابة، واضغط مرة أخرى للعودة للسؤال.</p>
-      </div>
-      <div id="flashcardsGrid" class="grid grid-3"></div>
-    </section>
-
-    <section id="exam" class="container">
-      <div class="section-title">
-        <span class="tag">Expected Review Points</span>
-        <h2>نقاط مراجعة نظرية مهمة</h2>
-        <p>هذه نقاط مراجعة مفيدة للاختبار، وليست ادعاءً بأنها أسئلة حقيقية.</p>
-      </div>
-      <div class="card">
-        <div id="examPointsGrid" class="grid grid-2"></div>
-      </div>
-    </section>
-
-    <section id="quiz" class="container">
-      <div class="section-title">
-        <span class="tag">Final Quiz</span>
-        <h2>اختبار تفاعلي نهائي: 40 سؤال</h2>
-        <p>20 سؤال صح وخطأ، و20 سؤال اختيار من متعدد. جميع الأسئلة نظرية فقط.</p>
-      </div>
-
-      <div class="grid grid-4 stats">
-        <div class="card stat">
-          <strong id="correctCount">0</strong>
-          <span>صحيحة</span>
+            <div class="sub-card">
+              <h3>محاضرة 10: مستقبل AI ومراجعة المساق</h3>
+              <p>تلخص المفاهيم الأساسية وتعرض اتجاهات مستقبل الذكاء الاصطناعي والفرص والتحديات.</p>
+            </div>
+          </div>
         </div>
-        <div class="card stat">
-          <strong id="wrongCount">0</strong>
-          <span>خاطئة</span>
+      </section>
+
+      <section id="roadmap" class="container">
+        <div class="section-title">
+          <span class="tag">Study Roadmap</span>
+          <h2>خريطة الدراسة من المحاضرة 1 إلى 10</h2>
+          <p>المحاضرات 1 إلى 5 مراجعة سريعة، والمحاضرات 6 إلى 10 تركيز عالي مع ملخصات أعمق وملاحظات اختبار أوضح.</p>
         </div>
-        <div class="card stat">
-          <strong id="answeredCount">0/40</strong>
-          <span>تمت الإجابة</span>
+
+        <div class="grid grid-5">
+          <article class="card road-card">
+            <div class="lecture-number">01</div>
+            <span class="badge">مراجعة سريعة</span>
+            <h3>أساسيات الذكاء الاصطناعي</h3>
+            <p class="road-summary">تعرّف المحاضرة الذكاء الاصطناعي بأنه علم وهندسة إنشاء آلات قادرة على أداء مهام تحتاج عادةً إلى ذكاء بشري مثل التفكير والتعلم وحل المشكلات واتخاذ القرار.</p>
+            <div class="road-concepts">تعريف AI • أهداف AI • التفكير • التعلم</div>
+          </article>
+
+          <article class="card road-card">
+            <div class="lecture-number">02</div>
+            <span class="badge">مراجعة سريعة</span>
+            <h3>نشأة وتطور الذكاء الاصطناعي</h3>
+            <p class="road-summary">تستعرض المحاضرة تطور AI من الأفكار المبكرة إلى مؤتمر دارتموث، ثم الذكاء الرمزي والأنظمة الخبيرة والتعلم الآلي والتعلم العميق.</p>
+            <div class="road-concepts">دارتموث • الذكاء الرمزي • الأنظمة الخبيرة • ML</div>
+          </article>
+
+          <article class="card road-card">
+            <div class="lecture-number">03</div>
+            <span class="badge">مراجعة سريعة</span>
+            <h3>أنواع الذكاء الاصطناعي</h3>
+            <p class="road-summary">تشرح المحاضرة الأنواع الرئيسية للذكاء الاصطناعي: الذكاء الضيق، الذكاء العام، والذكاء الفائق، مع توضيح خصائص كل نوع.</p>
+            <div class="road-concepts">Narrow AI • General AI • Super AI</div>
+          </article>
+
+          <article class="card road-card">
+            <div class="lecture-number">04</div>
+            <span class="badge">مراجعة سريعة</span>
+            <h3>مقدمة في التعلم الآلي</h3>
+            <p class="road-summary">التعلم الآلي فرع من AI يسمح للأنظمة بتعلم الأنماط من البيانات وتحسين الأداء دون كتابة كل القواعد يدويًا.</p>
+            <div class="road-concepts">Machine Learning • Data • Prediction</div>
+          </article>
+
+          <article class="card road-card">
+            <div class="lecture-number">05</div>
+            <span class="badge">مراجعة سريعة</span>
+            <h3>التعلم العميق والشبكات العصبية</h3>
+            <p class="road-summary">التعلم العميق يعتمد على الشبكات العصبية متعددة الطبقات لتعلم الأنماط المعقدة في الصور والكلام والنصوص.</p>
+            <div class="road-concepts">Deep Learning • Neural Networks • Weights</div>
+          </article>
+
+          <article class="card road-card">
+            <div class="lecture-number">06</div>
+            <span class="badge active">تركيز عالي</span>
+            <h3>معالجة اللغة الطبيعية NLP</h3>
+            <p class="road-summary">NLP يجعل الحاسوب يفهم اللغة البشرية من خلال تحويل الكلمات إلى رموز وأرقام ثم تحليلها لاستخراج المعنى.</p>
+            <div class="road-concepts">NLP • السياق • الترجمة • Chatbots</div>
+          </article>
+
+          <article class="card road-card">
+            <div class="lecture-number">07</div>
+            <span class="badge active">تركيز عالي</span>
+            <h3>الرؤية الحاسوبية Computer Vision</h3>
+            <p class="road-summary">الرؤية الحاسوبية تجعل الحاسوب يفهم الصور والفيديو بعد تحويلها إلى أرقام وتحليلها لاستخراج المعنى.</p>
+            <div class="road-concepts">Images • Videos • Face Detection</div>
+          </article>
+
+          <article class="card road-card">
+            <div class="lecture-number">08</div>
+            <span class="badge active">تركيز عالي</span>
+            <h3>تطبيقات الذكاء الاصطناعي</h3>
+            <p class="road-summary">تعرض المحاضرة كيف يستخدم AI في التعليم والطب والأعمال والحياة اليومية لتحسين السرعة والدقة ودعم القرار.</p>
+            <div class="road-concepts">Education • Healthcare • Business</div>
+          </article>
+
+          <article class="card road-card">
+            <div class="lecture-number">09</div>
+            <span class="badge active">تركيز عالي</span>
+            <h3>أخلاقيات وتحديات AI</h3>
+            <p class="road-summary">توضح أن AI تقنية قوية لكنها تحتاج استخدامًا عادلًا وآمنًا ومسؤولًا، مع الانتباه للخصوصية والتحيز والوظائف.</p>
+            <div class="road-concepts">Privacy • Bias • Responsible AI</div>
+          </article>
+
+          <article class="card road-card">
+            <div class="lecture-number">10</div>
+            <span class="badge active">تركيز عالي</span>
+            <h3>مستقبل AI ومراجعة المساق</h3>
+            <p class="road-summary">تراجع مفاهيم المساق الأساسية وتتحدث عن مستقبل AI بوصفه مجالًا سريع التطور مليئًا بالفرص والتحديات.</p>
+            <div class="road-concepts">Future AI • Opportunities • Challenges</div>
+          </article>
         </div>
-        <div class="card stat">
-          <strong id="percentCount">0%</strong>
-          <span>النسبة</span>
+      </section>
+
+      <section id="quick" class="container">
+        <div class="section-title">
+          <span class="tag">Quick Review</span>
+          <h2>مراجعة سريعة للمحاضرات 1 إلى 5</h2>
+          <p>ملخصات قصيرة مركزة على المفاهيم النظرية الأساسية دون الجزء العملي.</p>
         </div>
-      </div>
 
-      <div class="progress">
-        <span id="progressBar"></span>
-      </div>
+        <div class="grid grid-3">
+          <article class="card">
+            <span class="badge">محاضرة 1</span>
+            <span class="badge">مراجعة سريعة</span>
+            <h3>أساسيات الذكاء الاصطناعي</h3>
+            <p>الذكاء الاصطناعي هو علم وهندسة إنشاء آلات قادرة على أداء مهام تحتاج عادةً إلى ذكاء بشري مثل التفكير والتعلم وحل المشكلات واتخاذ القرار.</p>
+            <div class="sub-card" style="margin-top:16px">
+              <h4>نقاط اختبار مهمة</h4>
+              <ul>
+                <li>AI يعتمد على البيانات والخوارزميات.</li>
+                <li>AI سريع ودقيق لكنه لا يمتلك مشاعر أو تعاطفًا.</li>
+                <li>أفضل استخدام له يكون مع وجود دور بشري في المتابعة والحكم.</li>
+              </ul>
+            </div>
+          </article>
 
-      <div id="finalScore" class="card center" style="display:none; margin-bottom:24px;"></div>
+          <article class="card">
+            <span class="badge">محاضرة 2</span>
+            <span class="badge">مراجعة سريعة</span>
+            <h3>نشأة وتطور الذكاء الاصطناعي</h3>
+            <p>تستعرض المحاضرة تطور AI من الأفكار المبكرة إلى مؤتمر دارتموث، ثم الذكاء الرمزي والأنظمة الخبيرة والتعلم الآلي والتعلم العميق.</p>
+            <div class="sub-card" style="margin-top:16px">
+              <h4>نقاط اختبار مهمة</h4>
+              <ul>
+                <li>الذكاء الرمزي يعتمد على القواعد والمنطق.</li>
+                <li>الأنظمة الخبيرة مثلت مرحلة مهمة في تاريخ AI.</li>
+                <li>التعلم الآلي نقل AI من القواعد اليدوية إلى التعلم من البيانات.</li>
+              </ul>
+            </div>
+          </article>
 
-      <div class="grid grid-2">
-        <div class="card">
-          <h3>قسم صح / خطأ</h3>
-          <div id="tfQuiz"></div>
-        </div>
-        <div class="card">
-          <h3>قسم اختيار من متعدد</h3>
-          <div id="mcQuiz"></div>
-        </div>
-      </div>
-
-      <div class="center" style="margin-top:30px;">
-        <button class="btn primary" onclick="resetQuiz()">إعادة الاختبار</button>
-      </div>
-    </section>
-
-    <section id="final" class="container">
-      <div class="card center">
-        <h2>أحسنت، أنت الآن تملك مراجعة منظمة.</h2>
-        <p class="final-text">
-          تم إعداد هذا الموقع كمراجعة منظمة وشاملة للمحتوى النظري في ملف المحاضرات من 1 إلى 10،
-          مع تركيز أكبر على المحاضرات 6 إلى 10 استعدادًا للاختبار النهائي.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const pageRoot = document.documentElement;
-
-    window.addEventListener("mousemove", function (e) {
-      pageRoot.style.setProperty("--mx", e.clientX + "px");
-      pageRoot.style.setProperty("--my", e.clientY + "px");
-      pageRoot.style.setProperty("--mx2", e.clientX * 0.75 + 120 + "px");
-      pageRoot.style.setProperty("--my2", e.clientY * 0.85 + 90 + "px");
-    });
-
-    window.addEventListener("touchmove", function (e) {
-      const t = e.touches[0];
-      if (!t) return;
-      pageRoot.style.setProperty("--mx", t.clientX + "px");
-      pageRoot.style.setProperty("--my", t.clientY + "px");
-      pageRoot.style.setProperty("--mx2", t.clientX * 0.75 + 120 + "px");
-      pageRoot.style.setProperty("--my2", t.clientY * 0.85 + 90 + "px");
-    }, { passive: true });
-
-    const lectures = [
-      {
-        id: 1,
-        title: "أساسيات الذكاء الاصطناعي",
-        type: "quick",
-        summary: "تعرّف المحاضرة الذكاء الاصطناعي بأنه علم وهندسة إنشاء آلات قادرة على أداء مهام تحتاج عادةً إلى ذكاء بشري مثل التفكير والتعلم وحل المشكلات واتخاذ القرار.",
-        deep: "تركز هذه المحاضرة على تعريف الذكاء الاصطناعي وأهدافه والفرق بينه وبين الذكاء البشري، مع أمثلة يومية وأهمية الذكاء الاصطناعي في العصر الرقمي.",
-        concepts: ["تعريف AI", "أهداف AI", "التفكير", "التعلم", "حل المشكلات", "اتخاذ القرار"],
-        notes: [
-          "AI يعتمد على البيانات والخوارزميات.",
-          "AI سريع ودقيق لكنه لا يمتلك مشاعر أو تعاطفًا.",
-          "أفضل استخدام له يكون مع وجود دور بشري في المتابعة والحكم."
-        ],
-        confusion: "الأتمتة وحدها ليست دائمًا ذكاءً اصطناعيًا؛ المهم وجود تحليل أو تعلم أو قرار ذكي."
-      },
-      {
-        id: 2,
-        title: "نشأة وتطور الذكاء الاصطناعي",
-        type: "quick",
-        summary: "تستعرض المحاضرة تطور AI من الأفكار المبكرة إلى مؤتمر دارتموث 1956، ثم الذكاء الرمزي والأنظمة الخبيرة والتعلم الآلي والتعلم العميق والذكاء الاصطناعي الحديث.",
-        deep: "توضح المحاضرة كيف تطور المجال من الاعتماد على القواعد والمنطق إلى التعلم من البيانات والنماذج الحديثة.",
-        concepts: ["مؤتمر دارتموث", "الذكاء الرمزي", "الأنظمة الخبيرة", "ML", "DL", "Modern AI"],
-        notes: [
-          "الذكاء الرمزي يعتمد على القواعد والمنطق.",
-          "الأنظمة الخبيرة مثلت مرحلة مهمة في تاريخ AI.",
-          "التعلم الآلي نقل الذكاء الاصطناعي من القواعد اليدوية إلى التعلم من البيانات."
-        ],
-        confusion: "المراحل الحديثة لا تلغي السابقة، بل تُعد امتدادًا لها."
-      },
-      {
-        id: 3,
-        title: "أنواع الذكاء الاصطناعي",
-        type: "quick",
-        summary: "تشرح المحاضرة الأنواع الرئيسية للذكاء الاصطناعي: الذكاء الضيق، الذكاء العام، والذكاء الفائق، مع توضيح خصائص كل نوع.",
-        deep: "الذكاء الضيق متخصص في مهمة واحدة، بينما الذكاء العام والذكاء الفائق ما زالا ضمن الإطار النظري أو المستقبلي.",
-        concepts: ["Narrow AI", "General AI", "Super AI", "القدرات", "القيود"],
-        notes: [
-          "الذكاء الضيق هو الأكثر انتشارًا اليوم.",
-          "الذكاء العام ما يزال نظريًا.",
-          "الذكاء الفائق فكرة افتراضية مرتبطة بتحديات أخلاقية."
-        ],
-        confusion: "كون النظام قويًا في مهمة واحدة لا يعني أنه يمتلك ذكاءً عامًا."
-      },
-      {
-        id: 4,
-        title: "مقدمة في التعلم الآلي",
-        type: "quick",
-        summary: "التعلم الآلي فرع من AI يسمح للأنظمة بتعلم الأنماط من البيانات وتحسين الأداء دون كتابة كل القواعد يدويًا.",
-        deep: "يركز التعلم الآلي على استخدام البيانات لاستخراج الأنماط وبناء نماذج للتنبؤ أو التصنيف أو التوصية.",
-        concepts: ["Machine Learning", "Data", "Prediction", "Recommendation", "Patterns"],
-        notes: [
-          "البرمجة التقليدية تبدأ بقواعد مكتوبة.",
-          "Machine Learning يبدأ بالبيانات ويستنتج الأنماط.",
-          "التنبؤ والتوصية من أشهر تطبيقاته."
-        ],
-        confusion: "ML لا يلغي البرمجة، لكنه يغيّر طريقة بناء الحل."
-      },
-      {
-        id: 5,
-        title: "التعلم العميق والشبكات العصبية",
-        type: "quick",
-        summary: "التعلم العميق فرع من التعلم الآلي يعتمد على الشبكات العصبية متعددة الطبقات لتعلم الأنماط المعقدة في الصور والكلام والنصوص.",
-        deep: "تتكون الشبكات العصبية من عقد ووصلات وطبقات، وتتعلم بتعديل الأوزان أثناء التدريب لتقليل الخطأ.",
-        concepts: ["Deep Learning", "Neural Networks", "Nodes", "Layers", "Weights", "Activation"],
-        notes: [
-          "الشبكات العصبية تتكون من عقد ووصلات وطبقات.",
-          "الأوزان تتعدل أثناء التدريب لتحسين النتائج.",
-          "الطبقات العميقة تساعد على فهم أنماط أكثر تعقيدًا."
-        ],
-        confusion: "الشبكة العصبية ليست دماغًا حقيقيًا، بل نموذج رياضي مستوحى من فكرة الخلايا العصبية."
-      },
-      {
-        id: 6,
-        title: "معالجة اللغة الطبيعية NLP",
-        type: "focus",
-        summary: "معالجة اللغة الطبيعية فرع من الذكاء الاصطناعي يهدف إلى جعل الحاسوب يفهم اللغة البشرية من خلال تحويل الكلمات إلى رموز وأرقام ثم تحليلها لاستخراج المعنى.",
-        deep: "تمر عملية فهم اللغة آليًا بعدة مراحل، منها تمثيل الكلمات والجمل وتحليل السياق والمعنى. تظهر NLP في الترجمة الآلية، محركات البحث، المساعدات الذكية، وروبوتات الدردشة. من أهم تحدياتها تعدد المعاني، اختلاف اللهجات، والسياق الذي قد يغيّر معنى الجملة.",
-        concepts: ["NLP", "تحليل المعنى", "السياق", "الترجمة الآلية", "Chatbots", "اللهجات", "تعدد المعاني"],
-        notes: [
-          "NLP يجعل الحاسوب يتعامل مع اللغة البشرية.",
-          "Google Translate مثال واضح على NLP.",
-          "روبوتات الدردشة تعتمد على فهم النصوص وتحليلها.",
-          "السياق من أهم التحديات في هذا المجال."
-        ],
-        confusion: "فهم اللغة عند الآلة هو تحليل بيانات ورموز وسياق، وليس فهمًا إنسانيًا كاملًا."
-      },
-      {
-        id: 7,
-        title: "الرؤية الحاسوبية Computer Vision",
-        type: "focus",
-        summary: "الرؤية الحاسوبية فرع من AI يجعل الحاسوب يفهم الصور والفيديو بعد تحويلها إلى أرقام وتحليلها لاستخراج المعنى.",
-        deep: "تُستخدم الرؤية الحاسوبية في التعرف على الصور والفيديو، كشف الوجوه، كشف الأجسام، وقراءة النصوص داخل الصور. تدخل في تطبيقات الأمن، الطب، السيارات الذكية، والهواتف. من تحدياتها الإضاءة، زاوية التصوير، تشابه الأجسام، الخصوصية، والحاجة إلى بيانات كثيرة.",
-        concepts: ["Computer Vision", "Image Recognition", "Video Recognition", "Face Detection", "Object Detection", "Pixels"],
-        notes: [
-          "الآلة لا ترى مثل الإنسان، بل تحلل أرقام الصورة.",
-          "كشف الوجوه يتأثر بالإضاءة والزاوية.",
-          "كشف الأجسام يحدد أشياء مثل سيارة أو حيوان أو منتج.",
-          "الخصوصية من أبرز القضايا في هذا المجال."
-        ],
-        confusion: "كشف الوجوه تطبيق واحد فقط من تطبيقات الرؤية الحاسوبية، وليس المجال بأكمله."
-      },
-      {
-        id: 8,
-        title: "تطبيقات الذكاء الاصطناعي",
-        type: "focus",
-        summary: "تعرض المحاضرة كيف يستخدم AI في التعليم والطب والأعمال والحياة اليومية لتحسين السرعة والدقة ودعم اتخاذ القرار.",
-        deep: "في التعليم يساعد AI على التلخيص والترجمة والاختبارات الذكية وتحليل أداء الطلاب. في الطب يساعد على التشخيص وتحليل الأشعة والكشف المبكر. في الأعمال يساعد في خدمة العملاء، التسويق، تحليل بيانات العملاء، وإدارة المخزون والتنبؤ بالمبيعات.",
-        concepts: ["AI in Education", "AI in Healthcare", "AI in Business", "Recommendations", "Smart Assistants"],
-        notes: [
-          "AI يساعد الطلاب والمعلمين في تلخيص وترجمة المحتوى.",
-          "AI يدعم الأطباء ولا يلغي دورهم.",
-          "AI يحسن الكفاءة والدقة في الأعمال.",
-          "التحديات تشمل الخصوصية، التكلفة، والأخطاء المحتملة."
-        ],
-        confusion: "وجود AI في مجال ما لا يعني أن نتائجه صحيحة دائمًا؛ يجب دائمًا وجود مراجعة ومسؤولية."
-      },
-      {
-        id: 9,
-        title: "أخلاقيات وتحديات الذكاء الاصطناعي",
-        type: "focus",
-        summary: "توضح المحاضرة أن AI تقنية قوية لكنها تحتاج استخدامًا عادلًا وآمنًا ومسؤولًا، مع الانتباه لقضايا الخصوصية والتحيز والوظائف.",
-        deep: "من أهم قضايا AI الأخلاقية: الخصوصية وحماية البيانات، التحيز الخوارزمي، التأثير على الوظائف، والشفافية. إذا كانت البيانات غير عادلة فقد تصبح النتائج غير عادلة. كما أن AI يغير سوق العمل، لذا يصبح التعلم المستمر ضروريًا.",
-        concepts: ["Privacy", "Data Protection", "Algorithmic Bias", "Responsible AI", "Transparency", "Impact on Jobs"],
-        notes: [
-          "الخصوصية أساس الثقة في التقنية.",
-          "التحيز قد ينتج من بيانات غير عادلة أو غير متنوعة.",
-          "الإنسان مسؤول عن استخدام الذكاء الاصطناعي.",
-          "الاستخدام المسؤول يحترم القوانين والحقوق."
-        ],
-        confusion: "التحيز ليس دائمًا مقصودًا؛ قد يظهر بسبب البيانات أو طريقة بناء النموذج."
-      },
-      {
-        id: 10,
-        title: "مستقبل الذكاء الاصطناعي ومراجعة المساق",
-        type: "focus",
-        summary: "تراجع المحاضرة مفاهيم المساق الأساسية وتتحدث عن مستقبل AI بوصفه مجالًا سريع التطور مليئًا بالفرص والتحديات.",
-        deep: "تشير المحاضرة إلى أن مستقبل AI يتجه نحو تعليم أكثر تفاعلًا، طب أكثر دقة، أعمال أسرع، سيارات ذاتية القيادة، روبوتات مساعدة، ترجمة أفضل، واستخدام أوسع في الأمن السيبراني. كما تربط بين مفاهيم AI وML وDL وNLP والرؤية الحاسوبية والأخلاقيات.",
-        concepts: ["Future AI", "Course Review", "Opportunities", "Challenges", "Continuous Learning", "Cybersecurity"],
-        notes: [
-          "مستقبل AI يجمع بين الفرص والتحديات.",
-          "التعلم المستمر ضروري مع تطور التقنية.",
-          "المراجعة النهائية تربط بين مفاهيم المساق كلها.",
-          "فهم الأساسيات يساعد على فهم التطورات المستقبلية."
-        ],
-        confusion: "التوقعات المستقبلية لا تعني أن كل شيء تحقق الآن، بل تشير إلى اتجاهات وفرص قادمة."
-      }
-    ];
-
-    const definitions = [
-      ["الذكاء الاصطناعي AI", "علم وهندسة إنشاء آلات قادرة على أداء مهام تتطلب عادةً ذكاءً بشريًا مثل التفكير والتعلم وحل المشكلات واتخاذ القرار."],
-      ["التعلم الآلي ML", "فرع من AI يسمح للأنظمة بالتعلم من البيانات دون كتابة كل القواعد يدويًا."],
-      ["التعلم العميق DL", "فرع من ML يعتمد على الشبكات العصبية متعددة الطبقات لتعلم الأنماط المعقدة."],
-      ["الشبكات العصبية", "نماذج تتكون من عقد ووصلات وطبقات لمعالجة البيانات بطريقة مستوحاة من الدماغ."],
-      ["الأوزان Weights", "قيم تعبّر عن قوة الروابط بين العقد في الشبكة العصبية وتتعدل أثناء التدريب."],
-      ["NLP", "فرع من AI يجعل الحاسوب يفهم اللغة البشرية من خلال تحليل الكلمات والجمل والمعاني."],
-      ["الترجمة الآلية", "تحويل النصوص من لغة إلى أخرى باستخدام تقنيات معالجة اللغة الطبيعية."],
-      ["روبوتات الدردشة", "برامج تعتمد على NLP لفهم النصوص والرد على المستخدمين."],
-      ["الرؤية الحاسوبية", "فرع من AI يجعل الآلة تفهم الصور والفيديو بعد تحويلها إلى أرقام."],
-      ["كشف الوجوه", "تحديد الوجوه داخل الصور أو الفيديو."],
-      ["كشف الأجسام", "تحديد الأشياء المختلفة داخل الصور أو الفيديو."],
-      ["الخصوصية", "حماية البيانات الشخصية والحساسة من الاستخدام غير المناسب."],
-      ["التحيز الخوارزمي", "نتائج غير عادلة تنتج بسبب بيانات غير عادلة أو تصميم غير مناسب."],
-      ["الاستخدام المسؤول", "استخدام AI بطريقة تحترم القوانين والحقوق وتقلل الضرر."]
-    ];
-
-    const comparisons = [
-      {
-        title: "AI مقابل ML مقابل DL",
-        a: "AI",
-        b: "ML / DL",
-        pa: ["AI هو المجال الأوسع للأنظمة الذكية.", "يشمل التعلم والاستدلال وحل المشكلات واتخاذ القرار."],
-        pb: ["ML فرع من AI يتعلم من البيانات.", "DL فرع من ML يعتمد على الشبكات العصبية متعددة الطبقات."]
-      },
-      {
-        title: "البرمجة التقليدية مقابل التعلم الآلي",
-        a: "البرمجة التقليدية",
-        b: "التعلم الآلي",
-        pa: ["القواعد تُكتب يدويًا.", "مناسبة للمهام الواضحة والمحددة."],
-        pb: ["يتعلم الأنماط من البيانات.", "أكثر مرونة في المشكلات المعقدة."]
-      },
-      {
-        title: "NLP مقابل Computer Vision",
-        a: "NLP",
-        b: "Computer Vision",
-        pa: ["يتعامل مع اللغة والنصوص والكلام.", "أمثلة: الترجمة الآلية وروبوتات الدردشة."],
-        pb: ["يتعامل مع الصور والفيديو.", "أمثلة: كشف الوجوه والأجسام وقراءة النص داخل الصور."]
-      },
-      {
-        title: "الخصوصية مقابل التحيز",
-        a: "الخصوصية",
-        b: "التحيز",
-        pa: ["تركز على حماية البيانات الشخصية.", "مرتبطة بالاستخدام الصحيح والشفافية."],
-        pb: ["يركز على عدالة النتائج.", "قد ينتج من بيانات غير متنوعة أو غير عادلة."]
-      },
-      {
-        title: "التدريب مقابل الاختبار",
-        a: "Training",
-        b: "Testing",
-        pa: ["مرحلة يتعلم فيها النموذج من البيانات.", "تهدف إلى تحسين أداء النموذج."],
-        pb: ["مرحلة تقييم أداء النموذج.", "تتحقق من مدى دقة النموذج على بيانات جديدة."]
-      }
-    ];
-
-    const terms = [
-      ["Reasoning", "الاستدلال: استخدام المنطق للوصول إلى نتيجة."],
-      ["Problem Solving", "حل المشكلات: تحليل المشكلة واقتراح حل مناسب."],
-      ["Automation", "الأتمتة: تنفيذ مهام متكررة بسرعة وكفاءة."],
-      ["Narrow AI", "ذكاء اصطناعي متخصص في مهمة محددة."],
-      ["General AI", "ذكاء اصطناعي نظري قادر على التعلم في مجالات متعددة مثل الإنسان."],
-      ["Super AI", "ذكاء افتراضي قد يتجاوز قدرات الإنسان."],
-      ["Prediction", "التنبؤ: توقع نتيجة اعتمادًا على البيانات."],
-      ["Recommendation", "التوصية: اقتراح محتوى أو منتجات للمستخدم."],
-      ["Weights", "الأوزان: قوة الروابط بين عقد الشبكة العصبية."],
-      ["Hidden Layers", "الطبقات المخفية: طبقات داخل الشبكة العصبية تتعلم الأنماط تدريجيًا."],
-      ["Context", "السياق: ما يحدد المعنى الصحيح للكلمة أو الجملة."],
-      ["Chatbot", "روبوت محادثة يفهم النصوص ويرد عليها."],
-      ["Face Detection", "كشف الوجوه داخل الصور أو الفيديو."],
-      ["Object Detection", "كشف الأشياء وتحديد مواقعها داخل الصور أو الفيديو."],
-      ["Privacy", "حماية البيانات الشخصية."],
-      ["Responsible AI", "استخدام AI بطريقة عادلة وآمنة ومسؤولة."],
-      ["Continuous Learning", "التعلم المستمر: تطوير المعرفة والمهارات مع تطور المجال."]
-    ];
-
-    const flashcards = [
-      ["ما تعريف AI؟", "علم وهندسة إنشاء آلات تؤدي مهام تحتاج عادةً إلى ذكاء بشري."],
-      ["ما الفرق بين ML والبرمجة التقليدية؟", "ML يتعلم من البيانات، أما البرمجة التقليدية فتعتمد على قواعد مكتوبة يدويًا."],
-      ["لماذا يسمى DL عميقًا؟", "لأنه يستخدم طبقات متعددة داخل الشبكات العصبية."],
-      ["ما معنى NLP؟", "معالجة اللغة الطبيعية، وهي جعل الحاسوب يفهم اللغة البشرية."],
-      ["اذكر تطبيقين لـ NLP.", "الترجمة الآلية وروبوتات الدردشة."],
-      ["ما أهم تحديات NLP؟", "السياق، اللهجات، تعدد المعاني، والتعبيرات المختلفة."],
-      ["ما معنى Computer Vision؟", "جعل الحاسوب يفهم الصور والفيديو بعد تحويلها إلى أرقام."],
-      ["اذكر تطبيقين للرؤية الحاسوبية.", "كشف الوجوه وكشف الأجسام."],
-      ["اذكر تحديًا في الرؤية الحاسوبية.", "الإضاءة، الزاوية، تشابه الأجسام، أو الخصوصية."],
-      ["كيف يساعد AI في التعليم؟", "يساعد في التلخيص والترجمة والاختبارات الذكية وتحليل الأداء."],
-      ["كيف يساعد AI في الصحة؟", "يساعد في التشخيص وتحليل الأشعة والكشف المبكر."],
-      ["ما معنى التحيز الخوارزمي؟", "نتائج غير عادلة بسبب بيانات أو خوارزميات غير عادلة."],
-      ["لماذا الخصوصية مهمة؟", "لأن AI يتعامل أحيانًا مع بيانات شخصية أو حساسة."],
-      ["ما معنى الاستخدام المسؤول؟", "استخدام AI بطريقة تحترم القوانين والحقوق وتمنع الضرر."],
-      ["ما مستقبل AI؟", "توسع في التعليم والطب والأعمال والروبوتات والأمن السيبراني."]
-    ];
-
-    const examPoints = [
-      "تعريف AI وأهدافه: التعلم، التفكير، حل المشكلات، واتخاذ القرارات.",
-      "AI لا يمتلك مشاعر أو تعاطفًا رغم سرعته ودقته.",
-      "مراحل تطور AI: الذكاء الرمزي، الأنظمة الخبيرة، ML، DL، والذكاء الحديث.",
-      "الفرق بين Narrow AI وGeneral AI وSuper AI.",
-      "الفرق بين البرمجة التقليدية والتعلم الآلي.",
-      "الشبكات العصبية تتكون من عقد ووصلات وطبقات.",
-      "التعلم العميق يعتمد على الشبكات العصبية متعددة الطبقات.",
-      "NLP يجعل الآلة تفهم اللغة البشرية عبر تحليل الرموز والمعاني.",
-      "تطبيقات NLP: الترجمة الآلية وروبوتات الدردشة.",
-      "تحديات NLP: السياق، اللهجات، تعدد المعاني، ودقة الترجمة.",
-      "Computer Vision يجعل الآلة تفهم الصور والفيديو.",
-      "تطبيقات الرؤية الحاسوبية: كشف الوجوه، كشف الأجسام، وقراءة النصوص داخل الصور.",
-      "تحديات الرؤية الحاسوبية: الإضاءة، الزاوية، الخصوصية، وتشابه الأجسام.",
-      "AI في التعليم يساعد في التلخيص والترجمة والاختبارات الذكية.",
-      "AI في الصحة يساعد في التشخيص وتحليل الأشعة والكشف المبكر.",
-      "AI في الأعمال يساعد في خدمة العملاء وتحليل البيانات والتنبؤ.",
-      "أخلاقيات AI تشمل الخصوصية، حماية البيانات، التحيز، والشفافية.",
-      "البيانات غير العادلة قد تؤدي إلى نتائج متحيزة.",
-      "AI أداة والإنسان مسؤول عن طريقة استخدامها.",
-      "مستقبل AI مليء بالفرص والتحديات ويتطلب تعلمًا مستمرًا."
-    ];
-
-    const quiz = [
-      { t:"tf", l:1, q:"AI يعتمد على البيانات والخوارزميات.", c:true, e:"لأن الذكاء الاصطناعي يعتمد على تحليل البيانات باستخدام خوارزميات." },
-      { t:"tf", l:1, q:"AI يمتلك مشاعر وتعاطفًا مثل الإنسان.", c:false, e:"AI لا يمتلك مشاعر أو تعاطفًا حقيقيًا." },
-      { t:"tf", l:2, q:"مؤتمر دارتموث 1956 يُعد محطة مهمة في تاريخ AI.", c:true, e:"لأنه ارتبط بظهور الذكاء الاصطناعي كمجال علمي منظم." },
-      { t:"tf", l:2, q:"الذكاء الرمزي يعتمد على الصور فقط.", c:false, e:"الذكاء الرمزي يعتمد أساسًا على القواعد والمنطق." },
-      { t:"tf", l:3, q:"الذكاء الضيق متخصص في مهمة محددة.", c:true, e:"مثل الترجمة أو التوصيات أو التعرف على الوجوه." },
-      { t:"tf", l:3, q:"الذكاء العام متوفر اليوم بشكل كامل مثل الإنسان.", c:false, e:"الذكاء العام ما يزال مفهومًا نظريًا." },
-      { t:"tf", l:4, q:"التعلم الآلي يتعلم من البيانات.", c:true, e:"هذه هي الفكرة الأساسية للتعلم الآلي." },
-      { t:"tf", l:4, q:"في التعلم الآلي يجب كتابة كل قاعدة يدويًا.", c:false, e:"النموذج يستنتج الأنماط من البيانات." },
-      { t:"tf", l:5, q:"الشبكات العصبية أساس مهم في التعلم العميق.", c:true, e:"Deep Learning يعتمد على الشبكات العصبية متعددة الطبقات." },
-      { t:"tf", l:5, q:"الأوزان في الشبكة العصبية لا تتغير أثناء التدريب.", c:false, e:"الأوزان تتغير لتقليل الخطأ وتحسين الأداء." },
-      { t:"tf", l:6, q:"NLP يجعل الحاسوب يتعامل مع اللغة البشرية.", c:true, e:"هذا هو الهدف الأساسي لمعالجة اللغة الطبيعية." },
-      { t:"tf", l:6, q:"الترجمة الآلية دقيقة دائمًا بنسبة 100%.", c:false, e:"قد تخطئ بسبب السياق أو اللهجات أو تعدد المعاني." },
-      { t:"tf", l:6, q:"السياق قد يغيّر معنى الجملة.", c:true, e:"السياق من أهم العناصر في فهم اللغة." },
-      { t:"tf", l:7, q:"الرؤية الحاسوبية تتعامل مع الصور والفيديو.", c:true, e:"هذا هو جوهر مجال Computer Vision." },
-      { t:"tf", l:7, q:"تغير الإضاءة لا يؤثر على كشف الوجوه.", c:false, e:"الإضاءة والزاوية من تحديات كشف الوجوه." },
-      { t:"tf", l:8, q:"AI يساعد في التعليم والطب والأعمال.", c:true, e:"هذه من أهم تطبيقات الذكاء الاصطناعي." },
-      { t:"tf", l:8, q:"AI لا يمكن أن يخطئ.", c:false, e:"AI قد يخطئ، لذلك يحتاج إلى مراجعة ومسؤولية." },
-      { t:"tf", l:9, q:"البيانات غير العادلة قد تؤدي إلى نتائج متحيزة.", c:true, e:"هذا هو جوهر التحيز الخوارزمي." },
-      { t:"tf", l:9, q:"الاستخدام المسؤول لا يهتم بحقوق الإنسان.", c:false, e:"الاستخدام المسؤول يحترم القوانين والحقوق." },
-      { t:"tf", l:10, q:"مستقبل AI يجمع بين الفرص والتحديات.", c:true, e:"المحاضرة تؤكد وجود فرص كبيرة مع تحديات واضحة." },
-
-      { t:"mc", l:1, q:"أي مما يلي من أهداف AI؟", o:["التعلم وحل المشكلات", "منع تحليل البيانات", "إلغاء الخوارزميات", "إيقاف الأتمتة"], c:0, e:"AI يهدف إلى التعلم وحل المشكلات واتخاذ القرار." },
-      { t:"mc", l:2, q:"أي مرحلة اعتمدت على القواعد والمنطق؟", o:["الذكاء الرمزي", "الرؤية الحاسوبية", "الترجمة الآلية", "تحليل الصور"], c:0, e:"الذكاء الرمزي يعتمد على القواعد والمنطق." },
-      { t:"mc", l:3, q:"Google Translate مثال على:", o:["ذكاء ضيق", "ذكاء عام", "ذكاء فائق", "ليس AI"], c:0, e:"لأنه متخصص في مهمة محددة هي الترجمة." },
-      { t:"mc", l:4, q:"أساس التعلم الآلي هو:", o:["البيانات", "كتابة كل القواعد يدويًا", "إلغاء التدريب", "إلغاء التحليل"], c:0, e:"ML يعتمد على البيانات لاستخراج الأنماط." },
-      { t:"mc", l:5, q:"الشبكات العصبية تتكون من:", o:["عقد ووصلات وطبقات", "نصوص فقط", "صور فقط", "تعاريف فقط"], c:0, e:"هذا هو التركيب الأساسي للشبكات العصبية." },
-      { t:"mc", l:5, q:"سبب تسمية DL بالعميق هو:", o:["وجود طبقات متعددة", "غياب البيانات", "عدم الحاجة للتدريب", "إلغاء الأوزان"], c:0, e:"العمق يشير إلى تعدد الطبقات." },
-      { t:"mc", l:6, q:"NLP يتعامل مع:", o:["اللغة والنصوص", "الصور فقط", "الفيديو فقط", "الأجسام فقط"], c:0, e:"NLP مختص باللغة البشرية." },
-      { t:"mc", l:6, q:"أي تطبيق من تطبيقات NLP؟", o:["روبوتات الدردشة", "كشف الوجوه", "تحليل الأشعة", "السيارات الذكية"], c:0, e:"Chatbots تعتمد على معالجة اللغة الطبيعية." },
-      { t:"mc", l:6, q:"من تحديات NLP:", o:["تعدد المعاني", "ثبات المعنى دائمًا", "عدم الحاجة إلى سياق", "عدم وجود لهجات"], c:0, e:"تعدد المعاني من أهم تحديات NLP." },
-      { t:"mc", l:6, q:"الترجمة الآلية تفيد في:", o:["التواصل بين اللغات", "كشف الوجوه", "قراءة الصور فقط", "إلغاء النصوص"], c:0, e:"الترجمة الآلية تحول النص بين اللغات." },
-      { t:"mc", l:7, q:"Computer Vision يتعامل مع:", o:["الصور والفيديو", "النصوص فقط", "الجداول فقط", "المعادلات فقط"], c:0, e:"الرؤية الحاسوبية تختص بالصور والفيديو." },
-      { t:"mc", l:7, q:"من تطبيقات الرؤية الحاسوبية:", o:["كشف الأجسام", "تلخيص المقالات", "تحليل المشاعر النصية", "الترجمة"], c:0, e:"كشف الأجسام تطبيق بصري واضح." },
-      { t:"mc", l:7, q:"من تحديات كشف الوجوه:", o:["الإضاءة والزاوية", "عدم وجود بيانات", "إلغاء الخصوصية", "وضوح الصور دائمًا"], c:0, e:"الإضاءة والزاوية قد تؤثران في الدقة." },
-      { t:"mc", l:8, q:"AI في التعليم يساعد في:", o:["التلخيص والترجمة", "إلغاء التعلم", "منع التحليل", "إلغاء الاختبارات"], c:0, e:"من تطبيقاته التعليمية التلخيص والترجمة والاختبارات الذكية." },
-      { t:"mc", l:8, q:"AI في الصحة يساعد في:", o:["تحليل الأشعة والتشخيص", "إلغاء دور الطبيب", "منع العلاج", "إلغاء البيانات"], c:0, e:"AI يدعم التشخيص وتحليل الأشعة." },
-      { t:"mc", l:8, q:"من تحديات AI:", o:["الخصوصية والتكلفة", "استحالة الخطأ", "عدم الحاجة للبيانات", "عدم الحاجة للمراجعة"], c:0, e:"الخصوصية والتكلفة والأخطاء من التحديات." },
-      { t:"mc", l:9, q:"التحيز الخوارزمي يعني:", o:["نتائج غير عادلة", "زيادة سرعة الجهاز", "تحسين الشاشة", "إلغاء البيانات"], c:0, e:"التحيز يعني عدم عدالة النتائج." },
-      { t:"mc", l:9, q:"الخصوصية تهتم بـ:", o:["حماية البيانات الشخصية", "نشر كل المعلومات", "إلغاء المعلومات", "غياب القوانين"], c:0, e:"الخصوصية تعني حماية البيانات الشخصية." },
-      { t:"mc", l:10, q:"من اتجاهات مستقبل AI:", o:["الأمن السيبراني والروبوتات", "اختفاء التعليم", "توقف الطب", "إلغاء الترجمة"], c:0, e:"المحاضرة تشير إلى الروبوتات والأمن السيبراني ضمن المستقبل." },
-      { t:"mc", l:10, q:"الاستعداد لمستقبل AI يحتاج إلى:", o:["تعلم مستمر", "إيقاف التعلم", "تجاهل الأساسيات", "إلغاء الأخلاقيات"], c:0, e:"التعلم المستمر ضروري مع تطور المجال." }
-    ].map((q, i) => ({ ...q, id: i + 1 }));
-
-    let userAnswers = {};
-
-    const $ = (id) => document.getElementById(id);
-
-    function esc(text) {
-      return String(text)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#39;");
-    }
-
-    function badge(text, active = false) {
-      return `<span class="badge ${active ? "active" : ""}">${esc(text)}</span>`;
-    }
-
-    function list(items) {
-      return `<ul>${items.map(item => `<li>${
+          <article class="card">
+            <span class="badge">محاضرة 3</span>
+            <span class="badge">مراجعة سريعة</span>
+            <h3>أنواع الذكاء الاصطناعي</h3>
+            <p>تشرح المحاضرة الأنواع الرئيسية للذكاء الاصطناعي: الذكاء الضيق، الذكاء العام، والذكاء الفائق، مع توضيح خصائص كل نوع.</p>
+            <div class="sub-card" style="margin-top:16px">
+              <h4>نقاط اختبار مهمة</h4>
+              <ul>
+                <li>الذكاء الضيق هو الأكثر انتشارًا اليوم.</li>
+                <

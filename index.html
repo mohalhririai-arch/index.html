@@ -20,9 +20,8 @@
       --panel2: rgba(255,255,255,0.075);
       --border: rgba(255,255,255,0.11);
       --border2: rgba(255,255,255,0.25);
-      --shadow: 0 28px 90px rgba(0,0,0,0.58);
       --mx: 50vw;
-      --my: 42vh;
+      --my: 45vh;
       --mx2: 70vw;
       --my2: 60vh;
     }
@@ -59,52 +58,68 @@
       font-family: inherit;
     }
 
+    /* =========================
+       الخلفية الفضائية الظاهرة
+    ========================= */
+
     .space-layer {
       position: fixed;
       inset: 0;
-      z-index: -20;
+      z-index: 0;
       overflow: hidden;
       pointer-events: none;
       background:
-        radial-gradient(circle at 18% 12%, rgba(255,255,255,0.075), transparent 24%),
-        radial-gradient(circle at 86% 20%, rgba(175,175,175,0.05), transparent 28%),
-        radial-gradient(circle at 50% 92%, rgba(130,130,130,0.055), transparent 35%),
+        radial-gradient(circle at 20% 15%, rgba(255,255,255,0.10), transparent 26%),
+        radial-gradient(circle at 80% 22%, rgba(170,170,170,0.08), transparent 30%),
+        radial-gradient(circle at 50% 90%, rgba(120,120,120,0.08), transparent 34%),
         linear-gradient(180deg, #000 0%, #050505 48%, #000 100%);
     }
 
     .space-grid {
       position: absolute;
-      inset: -20% -10% 0 -10%;
-      opacity: 0.25;
+      inset: -25% -10% 0 -10%;
+      opacity: 0.38;
       background-image:
-        linear-gradient(rgba(255,255,255,0.085) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.085) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px);
       background-size: 58px 58px;
       transform: perspective(850px) rotateX(62deg) translateY(-18%);
       transform-origin: top center;
       mask-image: linear-gradient(to bottom, black 0%, transparent 78%);
-      animation: gridDrift 16s linear infinite;
+      animation: gridDrift 13s linear infinite;
     }
 
     .space-glow {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(420px circle at var(--mx) var(--my), rgba(255,255,255,0.14), transparent 62%),
-        radial-gradient(760px circle at var(--mx2) var(--my2), rgba(190,190,190,0.055), transparent 68%),
-        radial-gradient(620px circle at 25% 22%, rgba(120,120,120,0.055), transparent 70%);
+        radial-gradient(430px circle at var(--mx) var(--my), rgba(255,255,255,0.20), transparent 62%),
+        radial-gradient(760px circle at var(--mx2) var(--my2), rgba(180,180,180,0.10), transparent 68%),
+        radial-gradient(620px circle at 25% 22%, rgba(120,120,120,0.08), transparent 70%);
       mix-blend-mode: screen;
-      animation: glowFloat 10s ease-in-out infinite alternate;
+      animation: glowFloat 8s ease-in-out infinite alternate;
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      opacity: 0.38;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(180,180,180,0.55) 1px, transparent 1.5px);
+      background-size: 120px 120px, 190px 190px;
+      background-position: 0 0, 45px 75px;
+      animation: starsMove 22s linear infinite;
     }
 
     .space-lines::before,
     .space-lines::after {
       content: "";
       position: absolute;
-      width: 82vw;
+      width: 86vw;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.48), transparent);
-      opacity: 0.28;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.65), transparent);
+      opacity: 0.38;
       filter: blur(0.2px);
     }
 
@@ -112,23 +127,23 @@
       top: 18%;
       right: -18%;
       transform: rotate(-18deg);
-      animation: lineMoveA 9s ease-in-out infinite alternate;
+      animation: lineMoveA 8s ease-in-out infinite alternate;
     }
 
     .space-lines::after {
       bottom: 19%;
       left: -18%;
       transform: rotate(17deg);
-      animation: lineMoveB 11s ease-in-out infinite alternate;
+      animation: lineMoveB 10s ease-in-out infinite alternate;
     }
 
     .floating-shape {
       position: absolute;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.022);
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.035);
       box-shadow:
-        0 0 44px rgba(255,255,255,0.045),
-        inset 0 0 22px rgba(255,255,255,0.03);
+        0 0 55px rgba(255,255,255,0.07),
+        inset 0 0 24px rgba(255,255,255,0.045);
       backdrop-filter: blur(8px);
     }
 
@@ -139,48 +154,57 @@
       left: 7%;
       border-radius: 42px;
       transform: rotate(18deg);
-      animation: floatOne 8s ease-in-out infinite;
+      animation: floatOne 7s ease-in-out infinite;
     }
 
     .shape-2 {
-      width: 120px;
-      height: 120px;
-      top: 63%;
+      width: 130px;
+      height: 130px;
+      top: 62%;
       right: 8%;
       border-radius: 50%;
-      animation: floatTwo 10s ease-in-out infinite;
+      animation: floatTwo 9s ease-in-out infinite;
     }
 
     .shape-3 {
-      width: 95px;
-      height: 95px;
-      top: 38%;
+      width: 100px;
+      height: 100px;
+      top: 39%;
       right: 42%;
       border-radius: 26px;
       transform: rotate(45deg);
-      animation: floatThree 12s ease-in-out infinite;
+      animation: floatThree 11s ease-in-out infinite;
     }
 
     .shape-4 {
-      width: 240px;
-      height: 82px;
+      width: 250px;
+      height: 86px;
       bottom: 12%;
       left: 22%;
       border-radius: 999px;
-      animation: floatFour 9s ease-in-out infinite;
+      animation: floatFour 8s ease-in-out infinite;
+    }
+
+    nav,
+    main,
+    .container {
+      position: relative;
+      z-index: 10;
     }
 
     .container {
       width: min(1180px, 92%);
       margin: 0 auto;
-      position: relative;
-      z-index: 5;
     }
 
     section {
       padding: 82px 0;
       scroll-margin-top: 96px;
     }
+
+    /* =========================
+       Navbar
+    ========================= */
 
     .nav {
       position: sticky;
@@ -229,21 +253,25 @@
       flex: 0 0 auto;
       padding: 9px 14px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.11);
-      background: rgba(255,255,255,0.035);
-      color: #e1e1e5;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.045);
+      color: #e6e6e6;
       font-size: 12.5px;
-      font-weight: 500;
+      font-weight: 400;
       transition: 0.22s ease;
       white-space: nowrap;
     }
 
     .nav-links a:hover {
       transform: translateY(-1px);
-      background: rgba(255,255,255,0.085);
+      background: rgba(255,255,255,0.09);
       border-color: rgba(255,255,255,0.24);
       color: #fff;
     }
+
+    /* =========================
+       Hero
+    ========================= */
 
     .hero {
       min-height: 88vh;
@@ -260,9 +288,9 @@
       gap: 8px;
       padding: 8px 16px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.11);
-      background: rgba(255,255,255,0.035);
-      color: #d7d7dc;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.045);
+      color: #e6e6e6;
       font-size: 12px;
       font-weight: 400;
       margin-bottom: 18px;
@@ -276,6 +304,7 @@
       letter-spacing: -0.7px;
       color: #fff;
       text-wrap: balance;
+      text-shadow: none;
     }
 
     h2 {
@@ -285,23 +314,26 @@
       color: #f7f7f7;
       margin-bottom: 14px;
       text-wrap: balance;
+      text-shadow: none;
     }
 
     h3 {
       font-size: clamp(19px, 2vw, 25px);
       line-height: 1.58;
-      font-weight: 600;
+      font-weight: 650;
       color: #f7f7f7;
       margin-bottom: 10px;
       text-wrap: balance;
+      text-shadow: none;
     }
 
     h4 {
       font-size: 17px;
       line-height: 1.5;
-      font-weight: 600;
+      font-weight: 650;
       color: #f7f7f7;
       margin-bottom: 8px;
+      text-shadow: none;
     }
 
     p {
@@ -330,12 +362,12 @@
       align-items: center;
       justify-content: center;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.11);
-      background: rgba(255,255,255,0.035);
-      color: #f1f1f1;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.045);
+      color: #e6e6e6;
       padding: 12px 20px;
       font-size: 14.5px;
-      font-weight: 500;
+      font-weight: 400;
       cursor: pointer;
       transition: 0.22s ease;
     }
@@ -349,45 +381,59 @@
     .btn.primary {
       background: linear-gradient(180deg, #fff, #cfcfcf);
       color: #050505;
-      border-color: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.75);
+      font-weight: 500;
     }
 
     .btn.primary:hover {
       background: linear-gradient(180deg, #f7f7f7, #c5c5c5);
     }
 
+    /* =========================
+       Cards
+    ========================= */
+
     .card {
-      border: 1px solid rgba(255,255,255,0.13);
-      background: linear-gradient(145deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
+      border: 1px solid rgba(255,255,255,0.16);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.085), rgba(255,255,255,0.025));
       border-radius: 30px;
       padding: 24px;
       box-shadow:
-        0 28px 80px rgba(0,0,0,0.55),
-        inset 0 1px 0 rgba(255,255,255,0.08);
+        0 30px 90px rgba(0,0,0,0.62),
+        0 0 30px rgba(255,255,255,0.035),
+        inset 0 1px 0 rgba(255,255,255,0.10);
       backdrop-filter: blur(18px);
       transition: 0.25s ease;
       overflow: hidden;
-      transform-style: preserve-3d;
+      animation: cardFloatSoft 7s ease-in-out infinite;
+    }
+
+    .card:nth-child(even) {
+      animation-name: cardFloatSoftReverse;
+      animation-duration: 8s;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      background: linear-gradient(145deg, rgba(255,255,255,0.11), rgba(255,255,255,0.035));
+      animation-play-state: paused;
+      transform: translateY(-8px) scale(1.01);
+      background:
+        linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.035));
       border-color: rgba(255,255,255,0.28);
       box-shadow:
-        0 34px 95px rgba(0,0,0,0.65),
-        0 0 45px rgba(255,255,255,0.055),
+        0 34px 95px rgba(0,0,0,0.68),
+        0 0 45px rgba(255,255,255,0.065),
         inset 0 1px 0 rgba(255,255,255,0.12);
     }
 
     .hero-side .card {
       min-height: 540px;
-      animation: cardFloat 6.5s ease-in-out infinite;
+      animation: cardFloatHero 6.5s ease-in-out infinite;
     }
 
     .sub-card {
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.035);
       border-radius: 24px;
       padding: 18px;
       transition: 0.22s ease;
@@ -395,8 +441,8 @@
     }
 
     .sub-card:hover {
-      background: rgba(255,255,255,0.045);
-      border-color: rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.055);
+      border-color: rgba(255,255,255,0.18);
     }
 
     .section-title {
@@ -406,7 +452,7 @@
 
     .section-title p {
       font-size: 16px;
-      color: #cfcfd5;
+      color: #c9c9cf;
     }
 
     .badge {
@@ -415,9 +461,9 @@
       padding: 6px 12px;
       margin: 3px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.11);
-      background: rgba(255,255,255,0.035);
-      color: #e5e5e5;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.045);
+      color: #e6e6e6;
       font-size: 12px;
       font-weight: 400;
       line-height: 1.55;
@@ -459,7 +505,7 @@
       font-size: 14.3px;
       line-height: 1.95;
       margin-top: 10px;
-      color: #c7c7ce;
+      color: #c9c9cf;
     }
 
     .road-concepts {
@@ -510,11 +556,11 @@
     .filter-btn {
       padding: 10px 16px;
       border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.11);
-      background: rgba(255,255,255,0.035);
-      color: #f1f1f1;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.045);
+      color: #e6e6e6;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 400;
       cursor: pointer;
       transition: 0.2s ease;
     }
@@ -527,6 +573,7 @@
       background: linear-gradient(180deg, #fff, #cfcfcf);
       color: #050505;
       border-color: rgba(255,255,255,0.75);
+      font-weight: 500;
     }
 
     .term-card h3 {
@@ -547,7 +594,7 @@
     }
 
     .flashcard:hover {
-      transform: translateY(-4px) scale(1.01);
+      transform: translateY(-8px) scale(1.015);
     }
 
     .small {
@@ -645,9 +692,9 @@
     }
 
     .option {
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.035);
-      color: #ededf0;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.045);
+      color: #e6e6e6;
       border-radius: 16px;
       padding: 11px 12px;
       text-align: right;
@@ -708,19 +755,9 @@
       display: inline-block;
     }
 
-    .road-card:nth-child(odd),
-    #quickGrid .card:nth-child(odd),
-    #focusGrid .card:nth-child(odd),
-    #summariesGrid .card:nth-child(odd) {
-      animation: softFloatA 8s ease-in-out infinite;
-    }
-
-    .road-card:nth-child(even),
-    #quickGrid .card:nth-child(even),
-    #focusGrid .card:nth-child(even),
-    #summariesGrid .card:nth-child(even) {
-      animation: softFloatB 9s ease-in-out infinite;
-    }
+    /* =========================
+       Animations
+    ========================= */
 
     @keyframes gridDrift {
       0% { background-position: 0 0; }
@@ -730,56 +767,73 @@
     @keyframes glowFloat {
       0% {
         opacity: 0.65;
-        transform: translate3d(0,0,0) scale(1);
+        transform: translate3d(0, 0, 0) scale(1);
       }
       100% {
         opacity: 1;
-        transform: translate3d(-24px,18px,0) scale(1.04);
+        transform: translate3d(-22px, 18px, 0) scale(1.04);
       }
     }
 
+    @keyframes starsMove {
+      0% { background-position: 0 0, 45px 75px; }
+      100% { background-position: 120px 120px, 235px 265px; }
+    }
+
     @keyframes lineMoveA {
-      0% { transform: rotate(-18deg) translateX(0); opacity: 0.17; }
-      100% { transform: rotate(-18deg) translateX(60px); opacity: 0.36; }
+      0% {
+        transform: rotate(-18deg) translateX(0);
+        opacity: 0.18;
+      }
+      100% {
+        transform: rotate(-18deg) translateX(70px);
+        opacity: 0.42;
+      }
     }
 
     @keyframes lineMoveB {
-      0% { transform: rotate(17deg) translateX(0); opacity: 0.16; }
-      100% { transform: rotate(17deg) translateX(-70px); opacity: 0.33; }
+      0% {
+        transform: rotate(17deg) translateX(0);
+        opacity: 0.18;
+      }
+      100% {
+        transform: rotate(17deg) translateX(-80px);
+        opacity: 0.40;
+      }
     }
 
     @keyframes floatOne {
-      0%, 100% { transform: translate3d(0,0,0) rotate(18deg); }
-      50% { transform: translate3d(24px,-28px,0) rotate(25deg); }
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(18deg); }
+      50% { transform: translate3d(26px, -30px, 0) rotate(26deg); }
     }
 
     @keyframes floatTwo {
-      0%, 100% { transform: translate3d(0,0,0) scale(1); }
-      50% { transform: translate3d(-28px,24px,0) scale(1.08); }
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-30px, 26px, 0) scale(1.08); }
     }
 
     @keyframes floatThree {
-      0%, 100% { transform: translate3d(0,0,0) rotate(45deg); }
-      50% { transform: translate3d(18px,26px,0) rotate(62deg); }
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(45deg); }
+      50% { transform: translate3d(20px, 28px, 0) rotate(64deg); }
     }
 
     @keyframes floatFour {
-      0%, 100% { transform: translate3d(0,0,0) rotate(-4deg); }
-      50% { transform: translate3d(38px,-20px,0) rotate(3deg); }
+      0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+      50% { transform: translate3d(42px, -22px, 0) rotate(3deg); }
     }
 
-    @keyframes cardFloat {
+    @keyframes cardFloatHero {
       0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
       50% { transform: translateY(-18px) rotateX(1deg) rotateY(-1deg); }
     }
 
-    @keyframes softFloatA {
+    @keyframes cardFloatSoft {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-9px); }
+      50% { transform: translateY(-10px); }
     }
 
-    @keyframes softFloatB {
-      0%, 100% { transform: translateY(-3px); }
+    @keyframes cardFloatSoftReverse {
+      0%, 100% { transform: translateY(-4px); }
       50% { transform: translateY(8px); }
     }
 
@@ -833,6 +887,7 @@
       .card {
         padding: 20px;
         border-radius: 26px;
+        animation-duration: 10s;
       }
 
       .sub-card {
@@ -860,8 +915,12 @@
         font-size: 28px;
       }
 
+      .space-grid {
+        opacity: 0.26;
+      }
+
       .floating-shape {
-        opacity: 0.45;
+        opacity: 0.55;
       }
 
       .shape-1 {
@@ -878,12 +937,6 @@
       .shape-4 {
         display: none;
       }
-
-      .card,
-      .road-card,
-      .hero-side .card {
-        animation-duration: 10s !important;
-      }
     }
   </style>
 </head>
@@ -893,6 +946,7 @@
     <div class="space-grid"></div>
     <div class="space-glow"></div>
     <div class="space-lines"></div>
+    <div class="stars"></div>
     <div class="floating-shape shape-1"></div>
     <div class="floating-shape shape-2"></div>
     <div class="floating-shape shape-3"></div>
@@ -1104,10 +1158,14 @@
       pageRoot.style.setProperty("--my2", e.clientY * 0.85 + 90 + "px");
     });
 
-    window.addEventListener("scroll", function () {
-      const y = window.scrollY;
-      pageRoot.style.setProperty("--my2", 55 + y * 0.012 + "vh");
-    });
+    window.addEventListener("touchmove", function (e) {
+      const t = e.touches[0];
+      if (!t) return;
+      pageRoot.style.setProperty("--mx", t.clientX + "px");
+      pageRoot.style.setProperty("--my", t.clientY + "px");
+      pageRoot.style.setProperty("--mx2", t.clientX * 0.75 + 120 + "px");
+      pageRoot.style.setProperty("--my2", t.clientY * 0.85 + 90 + "px");
+    }, { passive: true });
 
     const lectures = [
       {
@@ -1435,334 +1493,4 @@
     }
 
     function list(items) {
-      return `<ul>${items.map(item => `<li>${esc(item)}</li>`).join("")}</ul>`;
-    }
-
-    function renderAll() {
-      renderHeroFocus();
-      renderRoadmap();
-      renderQuick();
-      renderFocus();
-      renderSummaries("all");
-      renderDefinitions();
-      renderComparisons();
-      renderTerms();
-      renderFlashcards();
-      renderExamPoints();
-      renderQuiz();
-      bindFilters();
-    }
-
-    function renderHeroFocus() {
-      $("heroFocusList").innerHTML = lectures
-        .filter(l => l.type === "focus")
-        .map(l => `
-          <div class="sub-card" style="margin-bottom:12px;">
-            <h3>محاضرة ${l.id}: ${esc(l.title)}</h3>
-            <p>${esc(l.summary)}</p>
-          </div>
-        `)
-        .join("");
-    }
-
-    function renderRoadmap() {
-      $("roadmapGrid").innerHTML = lectures
-        .map(l => `
-          <div class="card road-card">
-            <div class="lecture-number">${String(l.id).padStart(2, "0")}</div>
-            ${badge(l.type === "focus" ? "تركيز عالي" : "مراجعة سريعة", l.type === "focus")}
-            <h3>${esc(l.title)}</h3>
-            <p class="road-summary">${esc(l.summary)}</p>
-            <div class="road-concepts">${esc(l.concepts.slice(0, 4).join(" • "))}</div>
-          </div>
-        `)
-        .join("");
-    }
-
-    function renderQuick() {
-      $("quickGrid").innerHTML = lectures
-        .filter(l => l.type === "quick")
-        .map(l => `
-          <div class="card">
-            ${badge("محاضرة " + l.id)}
-            ${badge("مراجعة سريعة")}
-            <h3>${esc(l.title)}</h3>
-            <p>${esc(l.summary)}</p>
-            <div class="sub-card" style="margin-top:16px;">
-              <h4>نقاط اختبار مهمة</h4>
-              ${list(l.notes)}
-            </div>
-          </div>
-        `)
-        .join("");
-    }
-
-    function renderFocus() {
-      $("focusGrid").innerHTML = lectures
-        .filter(l => l.type === "focus")
-        .map(l => `
-          <div class="card focus-card">
-            ${badge("محاضرة " + l.id, true)}
-            ${badge("تركيز عالي")}
-            <h3>${esc(l.title)}</h3>
-            <p class="deep">${esc(l.deep)}</p>
-
-            <div class="grid grid-3 focus-tools">
-              <div class="sub-card">
-                <h4>المفاهيم</h4>
-                <div style="margin-top:8px;">
-                  ${l.concepts.map(c => badge(c)).join("")}
-                </div>
-              </div>
-
-              <div class="sub-card">
-                <h4>ملاحظات اختبار</h4>
-                ${list(l.notes)}
-              </div>
-
-              <div class="sub-card">
-                <h4>مفهوم قد يختلط</h4>
-                <p>${esc(l.confusion)}</p>
-              </div>
-            </div>
-          </div>
-        `)
-        .join("");
-    }
-
-    function renderSummaries(type) {
-      const data = lectures.filter(l => type === "all" || l.type === type);
-
-      $("summariesGrid").innerHTML = data
-        .map(l => `
-          <div class="card">
-            ${badge("محاضرة " + l.id, l.type === "focus")}
-            ${badge(l.type === "focus" ? "تركيز عالي" : "مراجعة سريعة")}
-            <h3>${esc(l.title)}</h3>
-            <p>${esc(l.summary)}</p>
-
-            <div class="sub-card" style="margin-top:14px;">
-              <h4>المفاهيم</h4>
-              <p>${esc(l.concepts.join("، "))}</p>
-            </div>
-
-            <div class="sub-card" style="margin-top:12px;">
-              <h4>ملاحظات الاختبار</h4>
-              ${list(l.notes)}
-            </div>
-          </div>
-        `)
-        .join("");
-    }
-
-    function renderDefinitions() {
-      $("definitionsGrid").innerHTML = definitions
-        .map(([term, text]) => `
-          <div class="card">
-            <h3>${esc(term)}</h3>
-            <p>${esc(text)}</p>
-          </div>
-        `)
-        .join("");
-    }
-
-    function renderComparisons() {
-      $("comparisonsGrid").innerHTML = comparisons
-        .map(c => `
-          <div class="card">
-            <h3>${esc(c.title)}</h3>
-            <div class="grid grid-2" style="margin-top:12px;">
-              <div class="sub-card">
-                <h4>${esc(c.a)}</h4>
-                ${list(c.pa)}
-              </div>
-              <div class="sub-card">
-                <h4>${esc(c.b)}</h4>
-                ${list(c.pb)}
-              </div>
-            </div>
-          </div>
-        `)
-        .join("");
-    }
-
-    function renderTerms() {
-      $("termsGrid").innerHTML = terms
-        .map(([term, text]) => `
-          <div class="card term-card">
-            <h3>${esc(term)}</h3>
-            <p>${esc(text)}</p>
-          </div>
-        `)
-        .join("");
-    }
-
-    function renderFlashcards() {
-      $("flashcardsGrid").innerHTML = flashcards
-        .map(([front, back], i) => `
-          <div
-            class="card flashcard"
-            id="flash-${i}"
-            data-front="${esc(front)}"
-            data-back="${esc(back)}"
-            data-state="front"
-            onclick="flipCard(${i})"
-          >
-            ${badge("السؤال")}
-            <div>
-              <h3>${esc(front)}</h3>
-              <p class="small">اضغط للقلب</p>
-            </div>
-          </div>
-        `)
-        .join("");
-    }
-
-    function flipCard(i) {
-      const card = $("flash-" + i);
-      const front = card.dataset.front;
-      const back = card.dataset.back;
-      const state = card.dataset.state;
-
-      if (state === "front") {
-        card.dataset.state = "back";
-        card.innerHTML = `
-          ${badge("الإجابة", true)}
-          <div>
-            <h3>${back}</h3>
-            <p class="small">اضغط للعودة</p>
-          </div>
-        `;
-      } else {
-        card.dataset.state = "front";
-        card.innerHTML = `
-          ${badge("السؤال")}
-          <div>
-            <h3>${front}</h3>
-            <p class="small">اضغط للقلب</p>
-          </div>
-        `;
-      }
-    }
-
-    function renderExamPoints() {
-      $("examPointsGrid").innerHTML = examPoints
-        .map((point, i) => `
-          <div class="sub-card exam-item">
-            <div class="num">${i + 1}</div>
-            <p>${esc(point)}</p>
-          </div>
-        `)
-        .join("");
-    }
-
-    function renderQuiz() {
-      $("tfQuiz").innerHTML = quiz.filter(q => q.t === "tf").map(renderQuestion).join("");
-      $("mcQuiz").innerHTML = quiz.filter(q => q.t === "mc").map(renderQuestion).join("");
-      updateScore();
-    }
-
-    function renderQuestion(q) {
-      const options = q.t === "tf"
-        ? [["صح", true], ["خطأ", false]]
-        : q.o.map((option, index) => [option, index]);
-
-      return `
-        <div class="quiz-question" id="q-${q.id}">
-          ${badge("سؤال " + q.id)}
-          ${badge("محاضرة " + q.l)}
-          <p class="question-text">${esc(q.q)}</p>
-          <div class="options">
-            ${options.map(([label, value]) => `
-              <button class="option" onclick='answerQuestion(${q.id}, ${JSON.stringify(value)})'>
-                ${esc(label)}
-              </button>
-            `).join("")}
-          </div>
-          <div class="feedback" id="fb-${q.id}"></div>
-        </div>
-      `;
-    }
-
-    function answerQuestion(id, value) {
-      userAnswers[id] = value;
-
-      const q = quiz.find(item => item.id === id);
-      const box = $("q-" + id);
-      const buttons = box.querySelectorAll(".option");
-
-      buttons.forEach(button => {
-        button.classList.remove("correct", "wrong");
-
-        const label = button.textContent.trim();
-        const optionValue = q.t === "tf"
-          ? (label === "صح")
-          : q.o.indexOf(label);
-
-        if (optionValue === q.c) {
-          button.classList.add("correct");
-        }
-
-        if (optionValue === value && value !== q.c) {
-          button.classList.add("wrong");
-        }
-      });
-
-      const feedback = $("fb-" + id);
-      feedback.style.display = "block";
-      feedback.innerHTML = `<strong>${value === q.c ? "إجابة صحيحة: " : "إجابة غير صحيحة: "}</strong>${esc(q.e)}`;
-
-      updateScore();
-    }
-
-    function updateScore() {
-      let correct = 0;
-
-      Object.keys(userAnswers).forEach(id => {
-        const q = quiz.find(item => item.id === Number(id));
-        if (q && userAnswers[id] === q.c) correct++;
-      });
-
-      const answered = Object.keys(userAnswers).length;
-      const wrong = answered - correct;
-      const percent = Math.round((correct / quiz.length) * 100);
-
-      $("correctCount").textContent = correct;
-      $("wrongCount").textContent = wrong;
-      $("answeredCount").textContent = `${answered}/${quiz.length}`;
-      $("percentCount").textContent = `${percent}%`;
-      $("progressBar").style.width = `${(answered / quiz.length) * 100}%`;
-
-      const finalScore = $("finalScore");
-
-      if (answered === quiz.length) {
-        finalScore.style.display = "block";
-        finalScore.innerHTML = `
-          <h3>النتيجة النهائية: ${correct} من ${quiz.length}</h3>
-          <p>الإجابات الصحيحة: ${correct} • الإجابات الخاطئة: ${wrong} • النسبة: ${percent}%</p>
-        `;
-      } else {
-        finalScore.style.display = "none";
-      }
-    }
-
-    function resetQuiz() {
-      userAnswers = {};
-      renderQuiz();
-      location.hash = "quiz";
-    }
-
-    function bindFilters() {
-      document.querySelectorAll(".filter-btn").forEach(button => {
-        button.onclick = () => {
-          document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-          button.classList.add("active");
-          renderSummaries(button.dataset.filter);
-        };
-      });
-    }
-
-    renderAll();
-  </script>
-</body>
-</html>
+      return `<ul>${items.map(item => `<li>${

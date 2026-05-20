@@ -1,1 +1,1187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مراجعة أساسيات الذكاء الاصطناعي</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+      background: #000;
+      color: #f5f5f5;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.12), transparent 25%),
+        radial-gradient(circle at 80% 30%, rgba(255,255,255,0.08), transparent 25%),
+        linear-gradient(180deg, #000, #050505 45%, #000);
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      opacity: 0.35;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 55px 55px;
+      transform: perspective(700px) rotateX(58deg) translateY(-18%);
+      transform-origin: top center;
+      mask-image: linear-gradient(to bottom, black 0%, transparent 75%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(0,0,0,0.78);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      width: min(1180px, 94%);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      overflow-x: auto;
+    }
+
+    .logo {
+      background: #fff;
+      color: #000;
+      padding: 9px 16px;
+      border-radius: 16px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-links a {
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      color: #d4d4d8;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: 0.25s;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .hero {
+      min-height: 86vh;
+      display: grid;
+      align-items: center;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 35px;
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 8px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      color: #d4d4d8;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 7vw, 82px);
+      line-height: 1.15;
+      font-weight: 950;
+      letter-spacing: -1px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.25;
+      font-weight: 950;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      font-size: 21px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #d4d4d8;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-top: 24px;
+      max-width: 760px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 12px 20px;
+      border-radius: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: 0.25s;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
+
+    .btn.primary {
+      background: #fff;
+      color: #000;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      background: rgba(255,255,255,0.14);
+    }
+
+    .btn.primary:hover {
+      background: #e5e5e5;
+    }
+
+    .card {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.045);
+      border-radius: 30px;
+      padding: 24px;
+      box-shadow: 0 28px 70px rgba(0,0,0,0.42);
+      backdrop-filter: blur(18px);
+      transition: 0.28s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.075);
+    }
+
+    .hero-card {
+      animation: floatSoft 7s ease-in-out infinite;
+    }
+
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .grid-5 {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: #d4d4d8;
+      font-size: 12px;
+      font-weight: 900;
+      margin: 3px;
+    }
+
+    .badge.active {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .lecture-number {
+      font-size: 42px;
+      font-weight: 950;
+      color: #fff;
+      opacity: 0.95;
+    }
+
+    .section-title {
+      margin-bottom: 35px;
+      max-width: 780px;
+    }
+
+    ul {
+      list-style: none;
+      margin-top: 15px;
+    }
+
+    li {
+      color: #c9c9cf;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    li::before {
+      content: "• ";
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .sub-card {
+      border: 1px solid rgba(255,255,255,0.09);
+      background: rgba(0,0,0,0.32);
+      border-radius: 22px;
+      padding: 18px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .filter-btn {
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 16px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: #fff;
+      color: #000;
+    }
+
+    .flashcard {
+      min-height: 175px;
+      text-align: right;
+      cursor: pointer;
+    }
+
+    .flashcard .small {
+      color: #777;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .quiz-question {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.35);
+      padding: 18px;
+      border-radius: 24px;
+      margin-bottom: 14px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .option {
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: #e5e5e5;
+      padding: 12px;
+      border-radius: 16px;
+      cursor: pointer;
+      font-weight: 800;
+      text-align: right;
+      transition: 0.2s;
+    }
+
+    .option:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.35);
+    }
+
+    .option.correct {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+
+    .option.wrong {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    .feedback {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.45);
+      color: #d4d4d8;
+      font-size: 14px;
+    }
+
+    .stats {
+      margin-bottom: 25px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 34px;
+      color: #fff;
+      font-weight: 950;
+    }
+
+    .progress {
+      height: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 25px;
+      padding: 2px;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: #fff;
+      border-radius: 999px;
+      transition: 0.35s;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .final-text {
+      max-width: 900px;
+      margin: 20px auto 0;
+      font-size: 18px;
+      line-height: 2;
+    }
+
+    @media (max-width: 1000px) {
+      .hero,
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .grid-5 {
+        grid-template-columns: 1fr;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 58px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="logo">AI نهائي</a>
+      <div class="nav-links">
+        <a href="#roadmap">الخطة</a>
+        <a href="#quick">1-5</a>
+        <a href="#focus">6-10</a>
+        <a href="#summaries">الملخصات</a>
+        <a href="#definitions">التعاريف</a>
+        <a href="#comparisons">المقارنات</a>
+        <a href="#terms">المصطلحات</a>
+        <a href="#flashcards">البطاقات</a>
+        <a href="#exam">النقاط</a>
+        <a href="#quiz">الاختبار</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section id="hero" class="container hero">
+      <div>
+        <span class="tag">مراجعة نظرية نهائية • Fundamentals of Artificial Intelligence</span>
+        <h1>منصة مراجعة نهائية لأساسيات الذكاء الاصطناعي</h1>
+        <p>
+          موقع دراسي عربي منظم للمحتوى النظري في المحاضرات من 1 إلى 10، مع مراجعة سريعة للمحاضرات 1 إلى 5 وتركيز أعمق على المحاضرات 6 إلى 10.
+        </p>
+        <div class="buttons">
+          <a class="btn primary" href="#focus">ابدأ بالتركيز العالي</a>
+          <a class="btn" href="#quiz">اختبار 40 سؤال</a>
+        </div>
+      </div>
+
+      <div class="card hero-card">
+        <span class="badge active">لوحة المراجعة</span>
+        <span class="badge">نظري فقط</span>
+        <div id="heroFocusList" style="margin-top: 20px;"></div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="container">
+      <div class="section-title">
+        <span class="tag">Study Roadmap</span>
+        <h2>خريطة الدراسة من المحاضرة 1 إلى 10</h2>
+        <p>المحاضرات 1 إلى 5 مراجعة سريعة، والمحاضرات 6 إلى 10 تركيز عالي.</p>
+      </div>
+      <div id="roadmapGrid" class="grid grid-5"></div>
+    </section>
+
+    <section id="quick" class="container">
+      <div class="section-title">
+        <span class="tag">Quick Review</span>
+        <h2>مراجعة سريعة للمحاضرات 1 إلى 5</h2>
+      </div>
+      <div id="quickGrid" class="grid grid-3"></div>
+    </section>
+
+    <section id="focus" class="container">
+      <div class="section-title">
+        <span class="tag">High Priority</span>
+        <h2>تركيز قوي على المحاضرات 6 إلى 10</h2>
+        <p>هذا القسم هو الأهم: تعريفات، أفكار رئيسية، ملاحظات اختبار، ومفاهيم قد تختلط.</p>
+      </div>
+      <div id="focusGrid" class="grid"></div>
+    </section>
+
+    <section id="summaries" class="container">
+      <div class="section-title">
+        <span class="tag">Organized Summaries</span>
+        <h2>بطاقات ملخصة لكل محاضرة</h2>
+      </div>
+
+      <div class="filters">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="quick">مراجعة 1-5</button>
+        <button class="filter-btn" data-filter="focus">تركيز 6-10</button>
+      </div>
+
+      <div id="summariesGrid" class="grid grid-2"></div>
+    </section>
+
+    <section id="definitions" class="container">
+      <div class="section-title">
+        <span class="tag">Definitions</span>
+        <h2>أهم التعاريف النظرية</h2>
+      </div>
+      <div id="definitionsGrid" class="grid grid-3"></div>
+    </section>
+
+    <section id="comparisons" class="container">
+      <div class="section-title">
+        <span class="tag">Comparisons</span>
+        <h2>مقارنات مهمة للاختبار</h2>
+      </div>
+      <div id="comparisonsGrid" class="grid grid-2"></div>
+    </section>
+
+    <section id="terms" class="container">
+      <div class="section-title">
+        <span class="tag">Key Terms</span>
+        <h2>مصطلحات مهمة</h2>
+      </div>
+      <div id="termsGrid" class="grid grid-3"></div>
+    </section>
+
+    <section id="flashcards" class="container">
+      <div class="section-title">
+        <span class="tag">Flashcards</span>
+        <h2>بطاقات تفاعلية للحفظ</h2>
+        <p>اضغط على البطاقة لإظهار الإجابة.</p>
+      </div>
+      <div id="flashcardsGrid" class="grid grid-3"></div>
+    </section>
+
+    <section id="exam" class="container">
+      <div class="section-title">
+        <span class="tag">Expected Review Points</span>
+        <h2>نقاط مراجعة نظرية مهمة</h2>
+        <p>هذه نقاط مراجعة مهمة وليست ادعاءً بأنها أسئلة حقيقية.</p>
+      </div>
+      <div class="card">
+        <div id="examPointsGrid" class="grid grid-2"></div>
+      </div>
+    </section>
+
+    <section id="quiz" class="container">
+      <div class="section-title">
+        <span class="tag">Final Quiz</span>
+        <h2>اختبار تفاعلي نهائي: 40 سؤال</h2>
+        <p>20 سؤال صح وخطأ، و20 سؤال اختيار من متعدد. جميع الأسئلة نظرية فقط.</p>
+      </div>
+
+      <div class="grid grid-4 stats">
+        <div class="card stat">
+          <strong id="correctCount">0</strong>
+          <span>صحيحة</span>
+        </div>
+        <div class="card stat">
+          <strong id="wrongCount">0</strong>
+          <span>خاطئة</span>
+        </div>
+        <div class="card stat">
+          <strong id="answeredCount">0/40</strong>
+          <span>تمت الإجابة</span>
+        </div>
+        <div class="card stat">
+          <strong id="percentCount">0%</strong>
+          <span>النسبة</span>
+        </div>
+      </div>
+
+      <div class="progress">
+        <span id="progressBar"></span>
+      </div>
+
+      <div id="finalScore" class="card center" style="display:none; margin-bottom: 25px;"></div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>قسم صح / خطأ</h3>
+          <div id="tfQuiz"></div>
+        </div>
+        <div class="card">
+          <h3>قسم اختيار من متعدد</h3>
+          <div id="mcQuiz"></div>
+        </div>
+      </div>
+
+      <div class="center" style="margin-top: 30px;">
+        <button class="btn primary" onclick="resetQuiz()">إعادة الاختبار</button>
+      </div>
+    </section>
+
+    <section id="final" class="container">
+      <div class="card center">
+        <h2>أحسنت، أنت الآن تملك مراجعة منظمة.</h2>
+        <p class="final-text">
+          تم إعداد هذا الموقع كمراجعة منظمة وشاملة للمحتوى النظري في ملف المحاضرات من 1 إلى 10، مع تركيز أكبر على المحاضرات 6 إلى 10 استعدادًا للاختبار النهائي.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const lectures = [
+      {
+        id: 1,
+        title: "أساسيات الذكاء الاصطناعي",
+        type: "quick",
+        summary: "تعريف AI وأهدافه وأهميته، والفرق بين الذكاء البشري والذكاء الاصطناعي.",
+        concepts: ["تعريف AI", "أهداف AI", "التفكير", "التعلم", "اتخاذ القرار"],
+        notes: [
+          "AI يعتمد على البيانات والخوارزميات.",
+          "AI سريع ودقيق لكنه لا يمتلك مشاعر.",
+          "التعاون بين الإنسان والآلة مهم."
+        ],
+        confusion: "الأتمتة وحدها ليست دائمًا ذكاءً اصطناعيًا."
+      },
+      {
+        id: 2,
+        title: "نشأة وتطور الذكاء الاصطناعي",
+        type: "quick",
+        summary: "تطور AI من مؤتمر دارتموث إلى الذكاء الرمزي والأنظمة الخبيرة والتعلم الآلي والتعلم العميق.",
+        concepts: ["دارتموث", "الذكاء الرمزي", "الأنظمة الخبيرة", "ML", "DL"],
+        notes: [
+          "الذكاء الرمزي يعتمد على القواعد والمنطق.",
+          "ML نقل AI نحو التعلم من البيانات.",
+          "الذكاء الحديث يشمل النماذج التوليدية."
+        ],
+        confusion: "الذكاء الحديث امتداد لمراحل سابقة وليس منفصلًا تمامًا عنها."
+      },
+      {
+        id: 3,
+        title: "أنواع الذكاء الاصطناعي",
+        type: "quick",
+        summary: "الذكاء الضيق، الذكاء العام، والذكاء الفائق.",
+        concepts: ["Narrow AI", "General AI", "Super AI"],
+        notes: [
+          "الذكاء الضيق هو الأكثر انتشارًا اليوم.",
+          "الذكاء العام ما يزال نظريًا.",
+          "الذكاء الفائق افتراضي ويثير تحديات أخلاقية."
+        ],
+        confusion: "النظام المتقدم في مهمة واحدة لا يعني أنه ذكاء عام."
+      },
+      {
+        id: 4,
+        title: "مقدمة في التعلم الآلي",
+        type: "quick",
+        summary: "ML يتعلم الأنماط من البيانات بدل كتابة كل القواعد يدويًا.",
+        concepts: ["Machine Learning", "Data", "Prediction", "Recommendation"],
+        notes: [
+          "البرمجة التقليدية تبدأ بالقواعد.",
+          "ML يبدأ بالبيانات.",
+          "التنبؤ والتوصية من تطبيقات ML."
+        ],
+        confusion: "ML لا يلغي البرمجة، لكنه يغير طريقة بناء الحل."
+      },
+      {
+        id: 5,
+        title: "التعلم العميق والشبكات العصبية",
+        type: "quick",
+        summary: "DL يعتمد على الشبكات العصبية ذات الطبقات المتعددة لتعلم الأنماط المعقدة.",
+        concepts: ["Deep Learning", "Neural Networks", "Nodes", "Layers", "Weights"],
+        notes: [
+          "الشبكات العصبية تتكون من عقد ووصلات وطبقات.",
+          "الأوزان تتعدل أثناء التدريب.",
+          "الطبقات العميقة تلتقط أنماطًا أكثر تعقيدًا."
+        ],
+        confusion: "الشبكة العصبية نموذج رياضي وليست دماغًا حقيقيًا."
+      },
+      {
+        id: 6,
+        title: "معالجة اللغة الطبيعية NLP",
+        type: "focus",
+        summary: "NLP يجعل الحاسوب يفهم اللغة البشرية بتحويل الكلمات إلى رموز وأرقام وتحليل المعنى.",
+        deep: "الآلة لا تفهم اللغة مثل الإنسان مباشرة؛ لذلك يتم تحويل الكلمات إلى تمثيلات رقمية وتحليلها. من تطبيقات NLP الترجمة الآلية وروبوتات الدردشة. من تحدياتها تعدد المعاني، اللهجات، الأمثال، والسياق.",
+        concepts: ["NLP", "الترجمة", "Chatbots", "السياق", "اللهجات"],
+        notes: [
+          "Google Translate مثال على NLP.",
+          "روبوتات الدردشة تعتمد على فهم النص.",
+          "الترجمة الآلية ليست دقيقة دائمًا.",
+          "السياق يغير معنى الجملة."
+        ],
+        confusion: "فهم اللغة آليًا هو تحليل بيانات ورموز، وليس فهمًا إنسانيًا كاملًا."
+      },
+      {
+        id: 7,
+        title: "الرؤية الحاسوبية Computer Vision",
+        type: "focus",
+        summary: "Computer Vision يجعل الآلة تفهم الصور والفيديو بعد تحويلها إلى أرقام.",
+        deep: "تستخدم الرؤية الحاسوبية في التعرف على الصور والفيديو، كشف الوجوه، كشف الأجسام، قراءة النصوص داخل الصور، الأمن، الطب، السيارات الذكية، والهواتف. من تحدياتها الإضاءة، الزاوية، تشابه الأجسام، الخصوصية، والحاجة إلى بيانات كثيرة.",
+        concepts: ["Images", "Videos", "Face Detection", "Object Detection", "Pixels"],
+        notes: [
+          "الآلة تحلل أرقام الصورة.",
+          "كشف الوجه يتأثر بالإضاءة والزاوية.",
+          "كشف الأجسام يحدد الأشياء داخل الصورة.",
+          "الخصوصية تحدٍ مهم."
+        ],
+        confusion: "كشف الوجه تطبيق واحد فقط من مجال الرؤية الحاسوبية."
+      },
+      {
+        id: 8,
+        title: "تطبيقات الذكاء الاصطناعي",
+        type: "focus",
+        summary: "AI يستخدم في التعليم والطب والأعمال والحياة اليومية.",
+        deep: "في التعليم يساعد AI على التلخيص والترجمة والاختبارات الذكية. في الطب يساعد في التشخيص وتحليل الأشعة والكشف المبكر. في الأعمال يساعد في خدمة العملاء والتسويق وتحليل البيانات والتنبؤ بالمبيعات.",
+        concepts: ["Education", "Healthcare", "Business", "Daily Life"],
+        notes: [
+          "AI يساعد الطلاب والمعلمين.",
+          "AI يدعم الأطباء ولا يلغي دورهم.",
+          "AI يحسن السرعة والدقة.",
+          "تحدياته تشمل الخصوصية والتكلفة والأخطاء."
+        ],
+        confusion: "استخدام AI لا يعني أن النتائج صحيحة دائمًا."
+      },
+      {
+        id: 9,
+        title: "أخلاقيات وتحديات الذكاء الاصطناعي",
+        type: "focus",
+        summary: "AI يحتاج استخدامًا عادلًا وآمنًا ومسؤولًا.",
+        deep: "من أهم قضايا AI الخصوصية، حماية البيانات، التحيز الخوارزمي، التأثير على الوظائف، والشفافية. إذا كانت البيانات غير عادلة فقد تكون النتائج غير عادلة. الاستخدام المسؤول يحترم القوانين والحقوق ويمنع الضرر.",
+        concepts: ["Privacy", "Bias", "Jobs", "Responsible AI", "Transparency"],
+        notes: [
+          "الخصوصية أساس الثقة.",
+          "التحيز قد ينتج من بيانات غير عادلة.",
+          "AI أداة والإنسان مسؤول عن استخدامها.",
+          "التعلم المستمر مهم لسوق العمل."
+        ],
+        confusion: "التحيز قد يكون غير مقصود بسبب ضعف البيانات."
+      },
+      {
+        id: 10,
+        title: "مستقبل الذكاء الاصطناعي ومراجعة",
+        type: "focus",
+        summary: "مستقبل AI مليء بالفرص والتحديات ويتطلب فهم الأساسيات والتعلم المستمر.",
+        deep: "من اتجاهات المستقبل: تعليم أكثر تفاعلًا، طب أكثر دقة، أعمال أسرع، سيارات ذاتية القيادة، روبوتات مساعدة، ترجمة أفضل، واستخدام AI في الأمن السيبراني.",
+        concepts: ["Future AI", "Opportunities", "Challenges", "Continuous Learning"],
+        notes: [
+          "المستقبل يجمع الفرص والتحديات.",
+          "التعلم المستمر ضروري.",
+          "المراجعة تربط بين AI وML وDL وNLP وComputer Vision."
+        ],
+        confusion: "الاتجاهات المستقبلية ليست كلها واقعة الآن، بل هي فرص وتطورات متوقعة."
+      }
+    ];
+
+    const definitions = [
+      ["الذكاء الاصطناعي AI", "علم وهندسة إنشاء آلات قادرة على أداء مهام تتطلب عادة ذكاءً بشريًا."],
+      ["التعلم الآلي ML", "فرع من AI يتعلم الأنماط من البيانات دون كتابة كل القواعد يدويًا."],
+      ["التعلم العميق DL", "فرع من ML يستخدم شبكات عصبية بطبقات متعددة."],
+      ["الشبكات العصبية", "نماذج تتكون من عقد ووصلات وطبقات لمعالجة البيانات."],
+      ["NLP", "فرع من AI يجعل الحاسوب يفهم اللغة البشرية."],
+      ["الرؤية الحاسوبية", "فرع من AI يجعل الآلة تفهم الصور والفيديو."],
+      ["كشف الوجوه", "تحديد الوجوه داخل الصور أو الفيديو."],
+      ["كشف الأجسام", "تحديد الأشياء داخل الصور أو الفيديو."],
+      ["الخصوصية", "حماية البيانات الشخصية والحساسة."],
+      ["التحيز الخوارزمي", "نتائج غير عادلة بسبب بيانات أو تصميم غير عادل."],
+      ["الاستخدام المسؤول", "استخدام AI بطريقة تحترم القوانين والحقوق."]
+    ];
+
+    const comparisons = [
+      {
+        title: "AI مقابل ML مقابل DL",
+        a: "AI",
+        b: "ML / DL",
+        pa: ["المجال الأوسع للأنظمة الذكية.", "يشمل التعلم والاستدلال وحل المشكلات."],
+        pb: ["ML يتعلم من البيانات.", "DL فرع من ML يعتمد على الشبكات العصبية."]
+      },
+      {
+        title: "البرمجة التقليدية مقابل التعلم الآلي",
+        a: "البرمجة التقليدية",
+        b: "التعلم الآلي",
+        pa: ["القواعد تكتب يدويًا.", "مناسبة للمهام الواضحة."],
+        pb: ["يتعلم من البيانات.", "أكثر مرونة في المشكلات المعقدة."]
+      },
+      {
+        title: "NLP مقابل Computer Vision",
+        a: "NLP",
+        b: "Computer Vision",
+        pa: ["يتعامل مع اللغة والنص.", "أمثلة: الترجمة والدردشة."],
+        pb: ["يتعامل مع الصور والفيديو.", "أمثلة: كشف الوجوه والأجسام."]
+      },
+      {
+        title: "الخصوصية مقابل التحيز",
+        a: "الخصوصية",
+        b: "التحيز",
+        pa: ["تركز على حماية البيانات.", "مرتبطة بالشفافية."],
+        pb: ["يركز على عدالة النتائج.", "قد ينتج من بيانات غير عادلة."]
+      }
+    ];
+
+    const terms = [
+      ["Reasoning", "الاستدلال: استخدام المنطق للوصول إلى نتيجة."],
+      ["Problem Solving", "حل المشكلات: تحليل المشكلة واقتراح حلول."],
+      ["Automation", "الأتمتة: تنفيذ مهام متكررة بسرعة."],
+      ["Narrow AI", "ذكاء متخصص في مهمة محددة."],
+      ["General AI", "ذكاء نظري قادر على التعلم عبر مجالات متعددة."],
+      ["Super AI", "ذكاء افتراضي يتجاوز قدرات الإنسان."],
+      ["Prediction", "التنبؤ: توقع نتيجة بناءً على البيانات."],
+      ["Recommendation", "التوصية: اقتراح محتوى أو منتجات للمستخدم."],
+      ["Weights", "الأوزان: قوة الروابط بين عقد الشبكة العصبية."],
+      ["Context", "السياق: ما يحدد معنى الكلمة أو الجملة."],
+      ["Chatbot", "روبوت محادثة يفهم النص ويرد عليه."],
+      ["Face Detection", "كشف الوجوه داخل الصور أو الفيديو."],
+      ["Object Detection", "كشف الأشياء ومواقعها داخل الصور."],
+      ["Privacy", "حماية البيانات الشخصية."],
+      ["Responsible AI", "استخدام AI بطريقة عادلة وآمنة ومسؤولة."]
+    ];
+
+    const flashcards = [
+      ["ما تعريف AI؟", "علم وهندسة إنشاء آلات تؤدي مهام تتطلب عادة ذكاءً بشريًا."],
+      ["ما الفرق بين ML والبرمجة التقليدية؟", "ML يتعلم من البيانات، أما البرمجة التقليدية فتبدأ بقواعد مكتوبة يدويًا."],
+      ["لماذا يسمى DL عميقًا؟", "لأنه يستخدم طبقات متعددة داخل الشبكات العصبية."],
+      ["ما معنى NLP؟", "معالجة اللغة الطبيعية، وهي جعل الحاسوب يفهم اللغة البشرية."],
+      ["اذكر تطبيقين لـ NLP.", "الترجمة الآلية وروبوتات الدردشة."],
+      ["ما معنى Computer Vision؟", "جعل الحاسوب يفهم الصور والفيديو."],
+      ["اذكر تحديًا في الرؤية الحاسوبية.", "الإضاءة، الزاوية، تشابه الأجسام، الخصوصية، أو الحاجة إلى بيانات كثيرة."],
+      ["ما معنى التحيز الخوارزمي؟", "نتائج غير عادلة بسبب بيانات أو خوارزميات غير عادلة."],
+      ["لماذا الخصوصية مهمة؟", "لأن AI يحتاج بيانات كثيرة قد تكون شخصية أو حساسة."],
+      ["ما مستقبل AI؟", "توسع في التعليم والطب والأعمال والسيارات والروبوتات والأمن السيبراني."]
+    ];
+
+    const examPoints = [
+      "تعريف AI وأهدافه: التعلم، التفكير، حل المشكلات، واتخاذ القرارات.",
+      "مراحل تطور AI: الذكاء الرمزي، الأنظمة الخبيرة، ML، DL، والذكاء الحديث.",
+      "الفرق بين Narrow AI وGeneral AI وSuper AI.",
+      "الفرق بين البرمجة التقليدية والتعلم الآلي.",
+      "الشبكات العصبية تتكون من عقد ووصلات وطبقات.",
+      "NLP يجعل الآلة تفهم اللغة البشرية عبر تحويل الكلمات إلى رموز وأرقام.",
+      "تطبيقات NLP: الترجمة الآلية وروبوتات الدردشة.",
+      "تحديات NLP: السياق، اللهجات، تعدد المعاني، ودقة الترجمة.",
+      "Computer Vision يجعل الآلة تفهم الصور والفيديو.",
+      "تطبيقات الرؤية الحاسوبية: كشف الوجوه، كشف الأجسام، قراءة اللوحات، وتحليل الأشعة.",
+      "تحديات الرؤية الحاسوبية: الإضاءة، زاوية التصوير، الخصوصية، وتشابه الأجسام.",
+      "AI في التعليم يساعد في التلخيص والترجمة والاختبارات الذكية.",
+      "AI في الصحة يساعد في التشخيص وتحليل الأشعة والكشف المبكر.",
+      "أخلاقيات AI تشمل الخصوصية، حماية البيانات، التحيز، والشفافية.",
+      "مستقبل AI مليء بالفرص والتحديات ويتطلب تعلمًا مستمرًا."
+    ];
+
+    const quiz = [
+      { t:"tf", l:1, q:"AI يعتمد على البيانات والخوارزميات.", c:true, e:"لأن الذكاء الاصطناعي يحلل البيانات باستخدام خوارزميات." },
+      { t:"tf", l:1, q:"AI يمتلك مشاعر وتعاطفًا مثل الإنسان.", c:false, e:"AI لا يمتلك مشاعر أو تعاطفًا ذاتيًا." },
+      { t:"tf", l:2, q:"مؤتمر دارتموث 1956 مهم في تاريخ AI.", c:true, e:"لأنه ارتبط بظهور مصطلح الذكاء الاصطناعي كمجال." },
+      { t:"tf", l:2, q:"الذكاء الرمزي يعتمد على الصور فقط.", c:false, e:"الذكاء الرمزي يعتمد على القواعد والمنطق." },
+      { t:"tf", l:3, q:"الذكاء الضيق متخصص في مهمة محددة.", c:true, e:"مثل الترجمة أو التوصيات أو التعرف على الوجوه." },
+      { t:"tf", l:3, q:"الذكاء العام موجود اليوم بشكل كامل مثل الإنسان.", c:false, e:"الذكاء العام ما يزال مفهومًا نظريًا." },
+      { t:"tf", l:4, q:"ML يتعلم من البيانات.", c:true, e:"هذه هي الفكرة الأساسية للتعلم الآلي." },
+      { t:"tf", l:4, q:"في ML يجب كتابة كل قاعدة يدويًا.", c:false, e:"ML يستنتج الأنماط من البيانات." },
+      { t:"tf", l:5, q:"الشبكات العصبية أساس التعلم العميق.", c:true, e:"Deep Learning يعتمد على الشبكات العصبية متعددة الطبقات." },
+      { t:"tf", l:5, q:"الأوزان في الشبكة العصبية لا تتغير أثناء التدريب.", c:false, e:"الأوزان تتعدل لتقليل الخطأ وتحسين الأداء." },
+      { t:"tf", l:6, q:"NLP يجعل الحاسوب يتعامل مع اللغة البشرية.", c:true, e:"هذا هو الهدف الأساسي لمعالجة اللغة الطبيعية." },
+      { t:"tf", l:6, q:"الترجمة الآلية دقيقة دائمًا بنسبة 100%.", c:false, e:"قد تخطئ بسبب السياق أو المعاني أو اللهجات." },
+      { t:"tf", l:6, q:"السياق قد يغير معنى الجملة.", c:true, e:"السياق من أهم تحديات NLP." },
+      { t:"tf", l:7, q:"الرؤية الحاسوبية تتعامل مع الصور والفيديو.", c:true, e:"Computer Vision يهدف إلى فهم الصور والفيديو." },
+      { t:"tf", l:7, q:"تغير الإضاءة لا يؤثر على كشف الوجوه.", c:false, e:"الإضاءة والزاوية من تحديات كشف الوجوه." },
+      { t:"tf", l:8, q:"AI يساعد في التعليم والطب والأعمال.", c:true, e:"هذه مجالات رئيسية في تطبيقات AI." },
+      { t:"tf", l:8, q:"AI لا يمكن أن يخطئ.", c:false, e:"AI قد يخطئ، لذلك تحتاج النتائج إلى مراجعة ومسؤولية." },
+      { t:"tf", l:9, q:"البيانات غير العادلة قد تؤدي إلى نتائج متحيزة.", c:true, e:"هذا هو جوهر التحيز الخوارزمي." },
+      { t:"tf", l:9, q:"الاستخدام المسؤول لا يهتم بحقوق الإنسان.", c:false, e:"الاستخدام المسؤول يحترم القوانين والحقوق والشفافية." },
+      { t:"tf", l:10, q:"مستقبل AI يجمع بين الفرص والتحديات.", c:true, e:"المحاضرة تؤكد وجود فرص وتحديات مستقبلية." },
+
+      { t:"mc", l:1, q:"أي مما يلي من مهام AI؟", o:["التعلم وحل المشكلات","منع استخدام البيانات","إلغاء الخوارزميات","العمل بلا تحليل"], c:0, e:"AI يتضمن التعلم وحل المشكلات واتخاذ القرار." },
+      { t:"mc", l:2, q:"أي مرحلة اعتمدت على القواعد والمنطق؟", o:["الذكاء الرمزي","الرؤية الحاسوبية","الترجمة","تحليل الصور"], c:0, e:"Symbolic AI يعتمد على القواعد والمنطق." },
+      { t:"mc", l:3, q:"Google Translate مثال على:", o:["ذكاء ضيق","ذكاء عام كامل","ذكاء فائق","ليس AI"], c:0, e:"لأنه متخصص في مهمة الترجمة." },
+      { t:"mc", l:4, q:"في ML، الأساس هو:", o:["البيانات","كتابة كل القواعد يدويًا","إلغاء التدريب","عدم استخدام نماذج"], c:0, e:"ML يعتمد على التعلم من البيانات." },
+      { t:"mc", l:5, q:"الشبكات العصبية تتكون من:", o:["عقد ووصلات وطبقات","نصوص فقط","صور فقط","قواعد قانونية"], c:0, e:"هذا هو تركيب الشبكات العصبية." },
+      { t:"mc", l:5, q:"سبب تسمية DL بالعميق هو:", o:["وجود طبقات متعددة","عدم وجود بيانات","غياب الشبكات","عدم وجود تدريب"], c:0, e:"العمق يشير إلى الطبقات المتعددة." },
+      { t:"mc", l:6, q:"NLP يتعامل مع:", o:["اللغة والنص","الصور فقط","الأجسام فقط","القيادة فقط"], c:0, e:"NLP يختص باللغة البشرية." },
+      { t:"mc", l:6, q:"أي تطبيق من تطبيقات NLP؟", o:["روبوتات الدردشة","كشف الوجوه","قراءة اللوحات","تحليل الأشعة"], c:0, e:"Chatbots تعتمد على NLP." },
+      { t:"mc", l:6, q:"من تحديات NLP:", o:["تعدد المعاني","ثبات كل اللهجات","دقة كاملة دائمًا","عدم الحاجة إلى سياق"], c:0, e:"الكلمة قد تحمل أكثر من معنى." },
+      { t:"mc", l:6, q:"الترجمة الآلية تفيد في:", o:["التواصل بين اللغات","كشف الوجوه","قيادة السيارات","تحليل البكسلات فقط"], c:0, e:"الترجمة تحول النص من لغة إلى أخرى." },
+      { t:"mc", l:7, q:"Computer Vision يتعامل مع:", o:["الصور والفيديو","النصوص فقط","الجداول فقط","الصوت فقط"], c:0, e:"الرؤية الحاسوبية تختص بالصور والفيديو." },
+      { t:"mc", l:7, q:"من تطبيقات الرؤية الحاسوبية:", o:["كشف الأجسام","تلخيص المقالات","تحليل المشاعر النصية","الترجمة"], c:0, e:"كشف الأجسام تطبيق بصري." },
+      { t:"mc", l:7, q:"من تحديات كشف الوجوه:", o:["الإضاءة والزاوية","وضوح كل الصور دائمًا","عدم وجود خصوصية","ثبات الوجوه"], c:0, e:"الإضاءة والزاوية تؤثران على الدقة." },
+      { t:"mc", l:8, q:"AI في التعليم يساعد في:", o:["التلخيص والترجمة","منع الدراسة","إلغاء التعلم","عدم تحليل الأداء"], c:0, e:"AI يساعد في التلخيص والترجمة والاختبارات الذكية." },
+      { t:"mc", l:8, q:"AI في الصحة يساعد في:", o:["تحليل الأشعة والتشخيص","إلغاء دور الطبيب تمامًا","منع العلاج","عدم استخدام البيانات"], c:0, e:"AI يدعم التشخيص وتحليل الأشعة." },
+      { t:"mc", l:8, q:"من تحديات AI:", o:["الخصوصية والتكلفة","استحالة الخطأ","عدم الحاجة للبيانات","غياب المسؤولية"], c:0, e:"الخصوصية والتكلفة والأخطاء من التحديات." },
+      { t:"mc", l:9, q:"التحيز الخوارزمي يعني:", o:["نتائج غير عادلة","زيادة سرعة الجهاز","حماية البيانات","تحسين الشاشة"], c:0, e:"التحيز يعني عدم عدالة النتائج." },
+      { t:"mc", l:9, q:"الخصوصية تهتم بـ:", o:["حماية البيانات الشخصية","إلغاء البيانات","نشر كل المعلومات","عدم وجود قوانين"], c:0, e:"الخصوصية تعني حماية البيانات." },
+      { t:"mc", l:10, q:"من اتجاهات مستقبل AI:", o:["الأمن السيبراني والروبوتات","اختفاء التعليم","توقف الطب","إلغاء البيانات"], c:0, e:"المحاضرة تذكر الأمن السيبراني والروبوتات وغيرها." },
+      { t:"mc", l:10, q:"الاستعداد لمستقبل AI يحتاج إلى:", o:["تعلم مستمر","توقف عن التعلم","عدم فهم الأساسيات","إلغاء الأخلاقيات"], c:0, e:"التعلم المستمر ضروري مع تطور AI." }
+    ].map((q, i) => ({ ...q, id: i + 1 }));
+
+    let userAnswers = {};
+
+    function badge(text, active = false) {
+      return `<span class="badge ${active ? "active" : ""}">${text}</span>`;
+    }
+
+    function render() {
+      renderHeroFocus();
+      renderRoadmap();
+      renderQuick();
+      renderFocus();
+      renderSummaries("all");
+      renderDefinitions();
+      renderComparisons();
+      renderTerms();
+      renderFlashcards();
+      renderExamPoints();
+      renderQuiz();
+      bindFilters();
+    }
+
+    function renderHeroFocus() {
+      const box = document.getElementById("heroFocusList");
+      box.innerHTML = lectures.filter(l => l.type === "focus").map(l => `
+        <div class="sub-card" style="margin-bottom:12px;">
+          <h3>محاضرة ${l.id}: ${l.title}</h3>
+          <p>${l.summary}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderRoadmap() {
+      document.getElementById("roadmapGrid").innerHTML = lectures.map(l => `
+        <div class="card">
+          <div class="lecture-number">${String(l.id).padStart(2, "0")}</div>
+          ${badge(l.type === "focus" ? "تركيز عالي" : "مراجعة سريعة", l.type === "focus")}
+          <h3>${l.title}</h3>
+          <p>${l.concepts.slice(0, 3).join(" • ")}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderQuick() {
+      document.getElementById("quickGrid").innerHTML = lectures.filter(l => l.type === "quick").map(l => `
+        <div class="card">
+          ${badge("محاضرة " + l.id)}
+          <h3>${l.title}</h3>
+          <p>${l.summary}</p>
+          <ul>${l.notes.map(n => `<li>${n}</li>`).join("")}</ul>
+        </div>
+      `).join("");
+    }
+
+    function renderFocus() {
+      document.getElementById("focusGrid").innerHTML = lectures.filter(l => l.type === "focus").map(l => `
+        <div class="card">
+          ${badge("محاضرة " + l.id, true)}
+          <h3>${l.title}</h3>
+          <p>${l.deep}</p>
+          <div class="grid grid-3" style="margin-top:20px;">
+            <div class="sub-card">
+              <h3>المفاهيم</h3>
+              ${l.concepts.map(c => badge(c)).join("")}
+            </div>
+            <div class="sub-card">
+              <h3>ملاحظات اختبار</h3>
+              <ul>${l.notes.map(n => `<li>${n}</li>`).join("")}</ul>
+            </div>
+            <div class="sub-card">
+              <h3>مفهوم يختلط</h3>
+              <p>${l.confusion}</p>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderSummaries(type) {
+      const data = lectures.filter(l => type === "all" || l.type === type);
+      document.getElementById("summariesGrid").innerHTML = data.map(l => `
+        <div class="card">
+          ${badge("محاضرة " + l.id, l.type === "focus")}
+          ${badge(l.type === "focus" ? "تركيز عالي" : "مراجعة سريعة")}
+          <h3>${l.title}</h3>
+          <p>${l.summary}</p>
+          <div class="sub-card" style="margin-top:15px;">
+            <strong>المفاهيم:</strong>
+            <p>${l.concepts.join("، ")}</p>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderDefinitions() {
+      document.getElementById("definitionsGrid").innerHTML = definitions.map(([term, text]) => `
+        <div class="card">
+          <h3>${term}</h3>
+          <p>${text}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderComparisons() {
+      document.getElementById("comparisonsGrid").innerHTML = comparisons.map(c => `
+        <div class="card">
+          <h3>${c.title}</h3>
+          <div class="grid grid-2">
+            <div class="sub-card">
+              <h3>${c.a}</h3>
+              <ul>${c.pa.map(p => `<li>${p}</li>`).join("")}</ul>
+            </div>
+            <div class="sub-card">
+              <h3>${c.b}</h3>
+              <ul>${c.pb.map(p => `<li>${p}</li>`).join("")}</ul>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function renderTerms() {
+      document.getElementById("termsGrid").innerHTML = terms.map(([term, text]) => `
+        <div class="card">
+          <h3>${term}</h3>
+          <p>${text}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderFlashcards() {
+      document.getElementById("flashcardsGrid").innerHTML = flashcards.map(([front, back], i) => `
+        <div class="card flashcard" onclick="flipCard(${i})" id="flash-${i}" data-front="${front}" data-back="${back}" data-state="front">
+          ${badge("السؤال")}
+          <h3 style="margin-top:15px;">${front}</h3>
+          <p class="small">اضغط للقلب</p>
+        </div>
+      `).join("");
+    }
+
+    function flipCard(i) {
+      const card = document.getElementById("flash-" + i);
+      const state = card.dataset.state;
+      if (state === "front") {
+        card.dataset.state = "back";
+        card.innerHTML = `${badge("الإجابة", true)}<h3 style="margin-top:15px;">${card.dataset.back}</h3><p class="small">اضغط للعودة</p>`;
+      } else {
+        card.dataset.state = "front";
+        card.innerHTML = `${badge("السؤال")}<h3 style="margin-top:15px;">${card.dataset.front}</h3><p class="small">اضغط للقلب</p>`;
+      }
+    }
+
+    function renderExamPoints() {
+      document.getElementById("examPointsGrid").innerHTML = examPoints.map((p, i) => `
+        <div class="sub-card">
+          <h3>${i + 1}</h3>
+          <p>${p}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderQuiz() {
+      document.getElementById("tfQuiz").innerHTML = quiz.filter(q => q.t === "tf").map(renderQuestion).join("");
+      document.getElementById("mcQuiz").innerHTML = quiz.filter(q => q.t === "mc").map(renderQuestion).join("");
+      updateScore();
+    }
+
+    function renderQuestion(q) {
+      const options = q.t === "tf"
+        ? [["صح", true], ["خطأ", false]]
+        : q.o.map((x, i) => [x, i]);
+
+      return `
+        <div class="quiz-question" id="q-${q.id}">
+          ${badge("سؤال " + q.id)}
+          ${badge("محاضرة " + q.l)}
+          <p style="margin-top:12px; font-weight:900; color:#fff;">${q.q}</p>
+          <div class="options">
+            ${options.map(([label, value]) => `
+              <button class="option" onclick="answerQuestion(${q.id}, ${JSON.stringify(value)})">${label}</button>
+            `).join("")}
+          </div>
+          <div class="feedback" id="fb-${q.id}" style="display:none;"></div>
+        </div>
+      `;
+    }
+
+    function answerQuestion(id, value) {
+      userAnswers[id] = value;
+      const q = quiz.find(x => x.id === id);
+      const box = document.getElementById("q-" + id);
+      const buttons = box.querySelectorAll(".option");
+
+      buttons.forEach(btn => {
+        btn.classList.remove("correct", "wrong");
+        const label = btn.textContent.trim();
+
+        let optionValue;
+        if (q.t === "tf") {
+          optionValue = label === "صح";
+        } else {
+          optionValue = q.o.indexOf(label);
+        }
+
+        if (optionValue === q.c) btn.classList.add("correct");
+        if (optionValue === value && value !== q.c) btn.classList.add("wrong");
+      });
+
+      const feedback = document.getElementById("fb-" + id);
+      feedback.style.display = "block";
+      feedback.innerHTML = `<strong>${value === q.c ? "إجابة صحيحة: " : "إجابة غير صحيحة: "}</strong>${q.e}`;
+
+      updateScore();
+    }
+
+    function updateScore() {
+      let correct = 0;
+      Object.keys(userAnswers).forEach(id => {
+        const q = quiz.find(x => x.id === Number(id));
+        if (q && userAnswers[id] === q.c) correct++;
+      });
+
+      const answered = Object.keys(userAnswers).length;
+      const wrong = answered - correct;
+      const percent = Math.round((correct / quiz.length) * 100);
+
+      document.getElementById("correctCount").textContent = correct;
+      document.getElementById("wrongCount").textContent = wrong;
+      document.getElementById("answeredCount").textContent = `${answered}/${quiz.length}`;
+      document.getElementById("percentCount").textContent = `${percent}%`;
+      document.getElementById("progressBar").style.width = `${(answered / quiz.length) * 100}%`;
+
+      const finalScore = document.getElementById("finalScore");
+      if (answered === quiz.length) {
+        finalScore.style.display = "block";
+        finalScore.innerHTML = `
+          <h3>النتيجة النهائية: ${correct} من ${quiz.length}</h3>
+          <p>الإجابات الصحيحة: ${correct} • الإجابات الخاطئة: ${wrong} • النسبة: ${percent}%</p>
+        `;
+      } else {
+        finalScore.style.display = "none";
+      }
+    }
+
+    function resetQuiz() {
+      userAnswers = {};
+      renderQuiz();
+      window.location.hash = "quiz";
+    }
+
+    function bindFilters() {
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          renderSummaries(btn.dataset.filter);
+        });
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>

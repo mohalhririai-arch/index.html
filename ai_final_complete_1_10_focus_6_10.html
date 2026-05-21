@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>موسوعة مراجعة أساسيات الذكاء الاصطناعي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --mx:50vw;--my:45vh;--mx2:70vw;--my2:60vh;
+  --text:#f4f4f5;--muted:#c9c9cf;--soft:#9f9fa8;
+  --border:rgba(255,255,255,.14);--border2:rgba(255,255,255,.28);
+  --panel:rgba(255,255,255,.055);--panel2:rgba(255,255,255,.085);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:#000}
+body{min-height:100vh;background:#000;color:var(--text);font-family:"Alexandria","Segoe UI",Tahoma,Arial,sans-serif;line-height:1.95;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button,input{font:inherit}
+.space-layer{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:radial-gradient(circle at 18% 14%,rgba(255,255,255,.09),transparent 25%),radial-gradient(circle at 82% 24%,rgba(170,170,170,.07),transparent 31%),linear-gradient(180deg,#000 0%,#050505 50%,#000 100%)}
+.space-grid{position:absolute;inset:-24% -12% 0 -12%;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);background-size:58px 58px;transform:perspective(850px) rotateX(62deg) translateY(-18%);transform-origin:top center;mask-image:linear-gradient(to bottom,black 0%,transparent 78%);animation:gridDrift 34s linear infinite}
+.space-glow{position:absolute;inset:0;background:radial-gradient(430px circle at var(--mx) var(--my),rgba(255,255,255,.14),transparent 62%),radial-gradient(760px circle at var(--mx2) var(--my2),rgba(180,180,180,.075),transparent 68%);mix-blend-mode:screen}
+.stars{position:absolute;inset:0;opacity:.18;background-image:radial-gradient(circle,rgba(255,255,255,.75) 1px,transparent 1.5px),radial-gradient(circle,rgba(180,180,180,.50) 1px,transparent 1.5px);background-size:120px 120px,190px 190px;animation:starsMove 60s linear infinite}
+.page{position:relative;z-index:2}
+.container{width:min(1200px,92%);margin:auto}
+section{padding:76px 0;scroll-margin-top:98px}
+.nav{position:sticky;top:0;z-index:100;background:rgba(0,0,0,.84);border-bottom:1px solid rgba(255,255,255,.10);backdrop-filter:blur(10px)}
+.nav-inner{width:min(1200px,96%);margin:auto;display:flex;align-items:center;gap:10px;padding:12px 0;overflow:hidden}
+.brand{flex:0 0 auto;border-radius:22px;padding:10px 18px;background:linear-gradient(180deg,#fff,#cfcfcf);color:#050505;font-weight:650;white-space:nowrap}
+.nav-links{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{flex:0 0 auto;padding:9px 14px;border-radius:18px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);color:#e6e6e6;font-size:12.5px;transition:.2s ease;white-space:nowrap}
+.nav-links a:hover{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.24)}
+.hero{min-height:86vh;display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center;padding-top:54px}
+.tag,.badge{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);color:#e6e6e6;font-size:12px;line-height:1.55;margin:3px}
+.tag{margin-bottom:18px}
+.badge.active,.btn.primary,.filter-btn.active,.num{background:linear-gradient(180deg,#fff,#cfcfcf);color:#050505;border-color:rgba(255,255,255,.75);font-weight:600}
+.latin{direction:ltr;unicode-bidi:embed;font-family:"Inter",sans-serif;font-weight:600;display:inline-block}
+h1{max-width:900px;font-size:clamp(38px,6vw,72px);line-height:1.18;font-weight:700;letter-spacing:-.7px;color:#fff;text-wrap:balance}
+h2{font-size:clamp(28px,4vw,44px);line-height:1.32;font-weight:650;color:#f7f7f7;margin-bottom:14px;text-wrap:balance}
+h3{font-size:clamp(19px,2vw,25px);line-height:1.58;font-weight:650;color:#f7f7f7;margin-bottom:10px;text-wrap:balance}
+h4{font-size:17px;line-height:1.5;font-weight:650;color:#f7f7f7;margin-bottom:8px}
+p{color:var(--muted);font-size:15.7px;line-height:2.05}
+.lead{font-size:16.5px;color:#dedee4}
+.hero-main p{margin-top:20px;max-width:850px;font-size:17px;color:#d1d1d7}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:18px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);color:#e6e6e6;padding:12px 20px;font-size:14.5px;cursor:pointer;transition:.22s ease}
+.btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.09)}
+.card,.sub-card{border:1px solid rgba(255,255,255,.16);background:linear-gradient(145deg,rgba(255,255,255,.085),rgba(255,255,255,.025));border-radius:30px;padding:24px;box-shadow:0 30px 90px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.10);backdrop-filter:blur(8px);transition:transform .2s ease,background .2s ease,border-color .2s ease;overflow:hidden}
+.sub-card{border-radius:22px;padding:18px;background:rgba(255,255,255,.035);box-shadow:none}
+.card:hover,.sub-card:hover{transform:translateY(-3px);background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.035));border-color:rgba(255,255,255,.26)}
+.hero-side .card{animation:cardFloatHero 12s ease-in-out infinite}
+.section-title{max-width:900px;margin-bottom:34px}
+.section-title p{font-size:16px;color:#c9c9cf}
+.grid{display:grid;gap:18px}
+.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-4{grid-template-columns:repeat(4,1fr)}.grid-5{grid-template-columns:repeat(5,1fr)}
+.lecture-number{font-size:clamp(44px,6vw,62px);font-weight:700;color:#f6f6f8;line-height:1;margin-bottom:14px;letter-spacing:1px}
+.road-card{min-height:360px;display:flex;flex-direction:column}
+.road-card p{font-size:14.2px}
+.terms-line{margin-top:auto;padding-top:14px;color:#aaaab2;font-size:13.3px;line-height:1.8}
+.focus-card-mini{border-color:rgba(255,255,255,.25)}
+.lecture-block{margin-bottom:22px}
+.lecture-detail{margin-top:20px}
+.focus-lecture{border-color:rgba(255,255,255,.26)}
+ul{list-style:none;margin-top:12px}
+li{color:#ceced4;font-size:14.8px;line-height:1.9;margin-bottom:8px}
+li::before{content:"• ";color:#fff;font-weight:700}
+.pill-box{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px}
+.filter-btn{padding:10px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);color:#e6e6e6;font-size:14px;cursor:pointer}
+.search{width:100%;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);color:#fff;border-radius:18px;padding:13px 16px;margin:10px 0 22px 0;outline:none}
+.term-card h3{direction:ltr;text-align:right;font-family:"Inter","Alexandria",sans-serif;font-size:20px}
+.timeline-item{border-right:2px solid rgba(255,255,255,.25);padding:0 18px 18px 0;margin-bottom:10px}
+.timeline-item strong{color:#fff}
+.quiz-question{border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.025);border-radius:22px;padding:17px;margin-bottom:14px}
+.question-text{margin-top:10px;font-size:15px;line-height:1.95;font-weight:500;color:#fff}
+.options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.option{border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);color:#e6e6e6;border-radius:16px;padding:11px 12px;text-align:right;font-size:14px;line-height:1.75;cursor:pointer;transition:.18s ease}
+.option:hover{background:rgba(255,255,255,.09)}.option.correct{background:linear-gradient(180deg,#fff,#cfcfcf);color:#050505;border-color:rgba(255,255,255,.9);font-weight:600}.option.wrong{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35)}
+.feedback{display:none;margin-top:12px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:rgba(255,255,255,.03);padding:12px;color:#d5d5db;font-size:14px;line-height:1.85}
+.stats{margin-bottom:24px}.stat{text-align:center}.stat strong{display:block;font-size:32px;line-height:1.1;color:#fff;font-weight:650}.stat span{color:#bebec6;font-size:14px}
+.progress{height:14px;border-radius:999px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.04);overflow:hidden;padding:2px;margin-bottom:24px}.progress span{display:block;height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#cfcfcf,#fff,#cfcfcf);transition:.35s ease}
+.center{text-align:center}.hidden{display:none!important}
+.final-text{max-width:920px;margin:16px auto 0;font-size:17px;color:#d7d7dd}
+@keyframes gridDrift{0%{background-position:0 0}100%{background-position:58px 58px}}
+@keyframes starsMove{0%{background-position:0 0,45px 75px}100%{background-position:120px 120px,235px 265px}}
+@keyframes cardFloatHero{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@media(max-width:1100px){.grid-5,.grid-4,.grid-3{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr}}
+@media(max-width:720px){section{padding:56px 0;scroll-margin-top:86px}.container{width:92%}.grid-2,.grid-3,.grid-4,.grid-5,.options{grid-template-columns:1fr}.nav-inner{width:96%;padding:10px 0}.brand{font-size:14px;padding:9px 15px}.nav-links a{font-size:12px;padding:8px 12px}.card,.sub-card{padding:20px;border-radius:24px;backdrop-filter:none}.hero{min-height:auto;padding-top:34px;gap:22px}.hero-side .card{animation:none}p,.section-title p,.hero-main p{font-size:15px}.space-grid{opacity:.10;animation-duration:50s}.stars{opacity:.10;animation-duration:80s}}
+</style>
+</head>
+<body>
+<div class="space-layer"><div class="space-grid"></div><div class="space-glow"></div><div class="stars"></div></div>
+<div class="page">
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="brand">AI نهائي شامل</a>
+    <div class="nav-links">
+      <a href="#roadmap">الخطة</a><a href="#lectures">المحاضرات كاملة</a><a href="#focus">6-10</a><a href="#expected">متوقعة جدًا</a><a href="#memorize">احفظ</a><a href="#mistakes">أخطاء شائعة</a><a href="#defs">التعاريف</a><a href="#comparisons">المقارنات</a><a href="#hour">قبل الاختبار</a><a href="#quiz">اختبار عشوائي</a><a href="#bank">بنك 120</a>
+    </div>
+  </div>
+</nav>
+<main>
+<section id="hero" class="container hero">
+  <div class="hero-main">
+    <span class="tag">موسوعة مراجعة نظرية • <span class="latin">Fundamentals of Artificial Intelligence</span></span>
+    <h1>موقع يغطي المحاضرات 1 إلى 10 مع تركيز قوي على 6 إلى 10</h1>
+    <p>هذا الموقع مصمم ليكون مراجعة قوية جدًا تساعدك على الوصول لأعلى درجة ممكنة في الاختبار النهائي، مع تركيز خاص على المحاضرات 6 إلى 10. تم تنظيم المحتوى النظري داخل الموقع حتى لا تحتاج للرجوع بين الملفات أثناء المذاكرة.</p>
+    <div class="hero-actions"><a class="btn primary" href="#lectures">ابدأ بالمحاضرات كاملة</a><a class="btn" href="#quiz">اختبار عشوائي 40 سؤال</a><a class="btn" href="#memorize">احفظ هذه قبل الاختبار</a></div>
+  </div>
+  <div class="hero-side">
+    <div class="card">
+      <span class="badge active">لا يختصر التفاصيل المهمة</span><span class="badge">نظري فقط</span><span class="badge">120 سؤال</span>
+      <div class="sub-card" style="margin-top:18px"><h3>ماذا أضفت؟</h3><ul><li>تفصيل كامل للمحاضرات 1-10</li><li>تركيز مضاعف للمحاضرات 6-10</li><li>أسئلة متوقعة جدًا للمحاضرات 6-10</li><li>قسم احفظ هذه قبل الاختبار</li><li>قسم أخطاء شائعة في الصح والخطأ</li><li>اختبار عشوائي يختار 40 من بنك 120</li><li>شرح سبب كل إجابة</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap" class="container">
+  <div class="section-title"><span class="tag">Study Roadmap</span><h2>خريطة المحاضرات</h2><p>المحتوى يغطي 1 إلى 10، لكن البطاقات ذات الشارة البيضاء هي الأولوية الأعلى.</p></div>
+  <div class="grid grid-5">
+<article class="card road-card ">
+  <div class="lecture-number">01</div>
+  <span class="badge ">مراجعة سريعة</span>
+  <h3>أساسيات الذكاء الاصطناعي</h3>
+  <p>تقدم المحاضرة أساسيات الذكاء الاصطناعي من حيث التعريف، الأهداف، الفرق بين الذكاء البشري والذكاء الاصطناعي، الأمثلة اليومية، وأهمية AI في العصر الرقمي.</p>
+  <div class="terms-line">AI • الخوارزميات • البيانات • الأتمتة • حل المشكلات</div>
+</article>
+
+<article class="card road-card ">
+  <div class="lecture-number">02</div>
+  <span class="badge ">مراجعة سريعة</span>
+  <h3>نشأة وتطور الذكاء الاصطناعي</h3>
+  <p>تستعرض المحاضرة الجذور التاريخية للذكاء الاصطناعي ومراحل تطوره والنجاحات والإخفاقات المبكرة وظهور الذكاء الاصطناعي الحديث.</p>
+  <div class="terms-line">اختبار تورينغ • الذكاء الرمزي • الأنظمة الخبيرة • التعلم الآلي • التعلم العميق</div>
+</article>
+
+<article class="card road-card ">
+  <div class="lecture-number">03</div>
+  <span class="badge ">مراجعة سريعة</span>
+  <h3>أنواع الذكاء الاصطناعي</h3>
+  <p>تشرح المحاضرة الأنواع الرئيسية الثلاثة للذكاء الاصطناعي: الذكاء الضيق، الذكاء العام، والذكاء الفائق، مع خصائص وأمثلة لكل نوع.</p>
+  <div class="terms-line">Narrow AI • General AI • Super AI • القدرات • القيود</div>
+</article>
+
+<article class="card road-card ">
+  <div class="lecture-number">04</div>
+  <span class="badge ">مراجعة سريعة</span>
+  <h3>مقدمة في التعلم الآلي</h3>
+  <p>تشرح المحاضرة التعلم الآلي بوصفه فرعًا من AI يركز على تطوير خوارزميات تتعلم من البيانات وتكتشف الأنماط لاتخاذ قرارات أو تنبؤات.</p>
+  <div class="terms-line">Machine Learning • Data • Patterns • Prediction • Recommendation</div>
+</article>
+
+<article class="card road-card ">
+  <div class="lecture-number">05</div>
+  <span class="badge ">مراجعة سريعة</span>
+  <h3>التعلم العميق والشبكات العصبية</h3>
+  <p>تشرح المحاضرة التعلم العميق بوصفه فرعًا من ML يستخدم الشبكات العصبية متعددة الطبقات لمعالجة أنماط معقدة مثل الصور والكلام والنصوص.</p>
+  <div class="terms-line">Deep Learning • Neural Networks • Nodes • Connections • Input Layer</div>
+</article>
+
+<article class="card road-card focus-card-mini">
+  <div class="lecture-number">06</div>
+  <span class="badge active">تركيز عالي</span>
+  <h3>معالجة اللغة الطبيعية NLP</h3>
+  <p>تشرح المحاضرة NLP بوصفه فرعًا من AI يجعل الحاسوب يفهم اللغة البشرية عبر تحويل الكلمات إلى أرقام ورموز وتحليلها لاستخراج المعنى.</p>
+  <div class="terms-line">NLP • Natural Language Processing • Translation • Chatbots • Context</div>
+</article>
+
+<article class="card road-card focus-card-mini">
+  <div class="lecture-number">07</div>
+  <span class="badge active">تركيز عالي</span>
+  <h3>الرؤية الحاسوبية Computer Vision</h3>
+  <p>تشرح المحاضرة Computer Vision بوصفها فرعًا من AI يجعل الآلة ترى العالم عبر تحليل الصور والفيديو والتعرف على الوجوه والأجسام والمشاهد.</p>
+  <div class="terms-line">Computer Vision • Images • Videos • Pixels • Face Detection</div>
+</article>
+
+<article class="card road-card focus-card-mini">
+  <div class="lecture-number">08</div>
+  <span class="badge active">تركيز عالي</span>
+  <h3>تطبيقات الذكاء الاصطناعي</h3>
+  <p>تعرض المحاضرة تطبيقات AI في التعليم والصحة والأعمال والحياة اليومية، مع فوائدها وتحدياتها وأمثلة أنظمة واقعية.</p>
+  <div class="terms-line">AI Applications • Education • Healthcare • Business • Everyday AI</div>
+</article>
+
+<article class="card road-card focus-card-mini">
+  <div class="lecture-number">09</div>
+  <span class="badge active">تركيز عالي</span>
+  <h3>أخلاقيات وتحديات الذكاء الاصطناعي</h3>
+  <p>تركز المحاضرة على الاستخدام المسؤول للذكاء الاصطناعي، الخصوصية، حماية البيانات، التحيز الخوارزمي، تأثير الوظائف، الشفافية، والثقة.</p>
+  <div class="terms-line">AI Ethics • Privacy • Data Protection • Bias • Algorithmic Bias</div>
+</article>
+
+<article class="card road-card focus-card-mini">
+  <div class="lecture-number">10</div>
+  <span class="badge active">تركيز عالي</span>
+  <h3>مستقبل الذكاء الاصطناعي ومراجعة المساق</h3>
+  <p>تراجع المحاضرة المفاهيم الرئيسية في المساق وتعرض اتجاهات مستقبل AI والفرص والتحديات والاستعداد للمساقات المتقدمة.</p>
+  <div class="terms-line">Future AI • Innovation • Interactive Education • Precise Healthcare • Cybersecurity</div>
+</article></div>
+</section>
+
+<section id="lectures" class="container">
+  <div class="section-title"><span class="tag">Full Theoretical Content</span><h2>المحاضرات كاملة داخل الموقع</h2><p>تم جمع النقاط النظرية المهمة لكل محاضرة. استبعدت عناصر مثل الحضور والاستراحة والأنشطة العملية فقط، حتى يبقى الموقع مركزًا على الاختبار النظري.</p></div>
+  <input id="lectureSearch" class="search" placeholder="ابحث داخل المحاضرات: مثال NLP، الخصوصية، الأوزان، Computer Vision..." />
+  <div id="lectureList">
+<article class="card lecture-block " id="lecture-1">
+  <div class="lecture-head">
+    <span class="badge ">محاضرة 1</span>
+    <span class="badge">مراجعة سريعة</span>
+  </div>
+  <h3>أساسيات الذكاء الاصطناعي</h3>
+  <p class="lead">تقدم المحاضرة أساسيات الذكاء الاصطناعي من حيث التعريف، الأهداف، الفرق بين الذكاء البشري والذكاء الاصطناعي، الأمثلة اليومية، وأهمية AI في العصر الرقمي.</p>
+  <div class="grid grid-2 lecture-detail">
+    <div class="sub-card">
+      <h4>كل النقاط النظرية المهمة داخل المحاضرة</h4>
+      <ul><li>الذكاء الاصطناعي هو علم وهندسة إنشاء آلات قادرة على أداء مهام تتطلب عادةً ذكاءً بشريًا مثل التفكير، التعلم، حل المشكلات، واتخاذ القرار.</li><li>أهداف AI الأساسية: حل المشكلات، التعلم والتكيف، أتمتة المهام، تعزيز القدرات البشرية، وتوفير الوقت.</li><li>حل المشكلات يعني قدرة النظام على تحليل بيانات كبيرة، اكتشاف الأنماط، واقتراح حلول بسرعة أكبر من الطرق التقليدية.</li><li>التعلم والتكيف يعني أن الخوارزميات تتحسن مع تعرضها لمزيد من البيانات والخبرة.</li><li>الأتمتة تعني تنفيذ المهام المتكررة والروتينية مما يتيح للبشر التركيز على الأعمال الإبداعية والاستراتيجية.</li><li>تعزيز القدرات البشرية يعني استخدام AI لدعم المصممين والأطباء والمهندسين وتحسين الدقة وتسريع الابتكار.</li><li>التعاون بين الإنسان والآلة يجمع القوة الحسابية للآلة مع الإبداع والتعاطف والحكم الأخلاقي البشري.</li><li>الذكاء البشري متعدد الأبعاد، ويتضمن الإبداع والمشاعر والحدس والتفكير الأخلاقي ويتأثر بالثقافة والخبرة.</li><li>الذكاء الاصطناعي يعتمد على الخوارزميات والبيانات، ويتميز بالسرعة والدقة واتخاذ القرارات المنطقية، لكنه يفتقر إلى المشاعر والتعاطف والقيم الأخلاقية.</li><li>الأمثلة اليومية: المساعدات الصوتية مثل Siri وGoogle Assistant، أنظمة التوصية في وسائل التواصل، الملاحة GPS والسيارات ذاتية القيادة، تحليل الصور الطبية، ومنصات التعليم المخصصة.</li><li>AI قوة دافعة للتحول الرقمي في الصحة والتمويل والتعليم والترفيه، ويسهم في زيادة الكفاءة وتقليل التكاليف وخلق صناعات جديدة.</li><li>نقطة اختبار مهمة: AI لا يستبدل دائمًا الإنسان؛ في كثير من الحالات يدعمه ويعزز قدرته.</li></ul>
+    </div>
+    <div class="sub-card">
+      <h4>مصطلحات المحاضرة</h4>
+      <div class="pill-box"><span class="badge">AI</span><span class="badge">الخوارزميات</span><span class="badge">البيانات</span><span class="badge">الأتمتة</span><span class="badge">حل المشكلات</span><span class="badge">التعلم والتكيف</span><span class="badge">التعاون إنسان-آلة</span></div>
+      <h4 style="margin-top:18px">نقاط اختبار لا تتركها</h4>
+      <ul><li>عرّف AI</li><li>اذكر أهداف AI</li><li>قارن الذكاء البشري والذكاء الاصطناعي</li><li>اذكر أمثلة يومية</li><li>اشرح لماذا AI مهم في العصر الرقمي</li></ul>
+    </div>
+  </div>
+</article>
+
+
+<article class="card lecture-block " id="lecture-2">
+  <div class="lecture-head">
+    <span class="badge ">محاضرة 2</span>
+    <span class="badge">مراجعة سريعة</span>
+  </div>
+  <h3>نشأة وتطور الذكاء الاصطناعي</h3>
+  <p class="lead">تستعرض المحاضرة الجذور التاريخية للذكاء الاصطناعي ومراحل تطوره والنجاحات والإخفاقات المبكرة وظهور الذكاء الاصطناعي الحديث.</p>
+  <div class="grid grid-2 lecture-detail">
+    <div class="sub-card">
+      <h4>كل النقاط النظرية المهمة داخل المحاضرة</h4>
+      <ul><li>توضح المحاضرة أن AI تطور عبر مراحل تاريخية، من الأفكار المبكرة حول الآلات الذكية إلى AI الحديث.</li><li>من أهداف المحاضرة فهم نشأة AI، تتبع مراحل تطوره، تحليل إنجازاته المبكرة، وتقدير قوة التقنيات الحديثة.</li><li>اختبار تورينغ في الخمسينيات من العلامات التاريخية المهمة في التفكير حول قدرة الآلة على إظهار سلوك ذكي.</li><li>الذكاء الرمزي اعتمد على القواعد والمنطق والتمثيل الرمزي للمعرفة.</li><li>الأنظمة الخبيرة كانت محاولة لمحاكاة معرفة الخبراء في مجال محدد باستخدام قواعد معرفة.</li><li>من حدود الأنظمة القديمة أنها كانت تحتاج إلى قواعد كثيرة مكتوبة يدويًا وكانت أقل مرونة أمام الحالات الجديدة.</li><li>التعلم الآلي نقل AI من الاعتماد الكامل على القواعد اليدوية إلى التعلم من البيانات.</li><li>التعلم العميق والذكاء التوليدي من مراحل AI الحديثة التي تعتمد على قدرات حوسبة وبيانات كبيرة.</li><li>النجاحات المبكرة أظهرت إمكانية حل بعض المشكلات، بينما الإخفاقات أوضحت أن الذكاء البشري أعقد من مجرد قواعد.</li><li>AI الحديث أقوى بسبب توفر البيانات، قوة الحوسبة، والخوارزميات المتقدمة.</li><li>نقطة اختبار: تطور AI ليس مرحلة واحدة، بل سلسلة من المراحل المتراكمة.</li></ul>
+    </div>
+    <div class="sub-card">
+      <h4>مصطلحات المحاضرة</h4>
+      <div class="pill-box"><span class="badge">اختبار تورينغ</span><span class="badge">الذكاء الرمزي</span><span class="badge">الأنظمة الخبيرة</span><span class="badge">التعلم الآلي</span><span class="badge">التعلم العميق</span><span class="badge">الذكاء الحديث</span></div>
+      <h4 style="margin-top:18px">نقاط اختبار لا تتركها</h4>
+      <ul><li>اذكر مراحل تطور AI</li><li>ما الذكاء الرمزي؟</li><li>ما الأنظمة الخبيرة؟</li><li>لماذا أصبح AI الحديث أقوى؟</li></ul>
+    </div>
+  </div>
+</article>
+
+
+<article class="card lecture-block " id="lecture-3">
+  <div class="lecture-head">
+    <span class="badge ">محاضرة 3</span>
+    <span class="badge">مراجعة سريعة</span>
+  </div>
+  <h3>أنواع الذكاء الاصطناعي</h3>
+  <p class="lead">تشرح المحاضرة الأنواع الرئيسية الثلاثة للذكاء الاصطناعي: الذكاء الضيق، الذكاء العام، والذكاء الفائق، مع خصائص وأمثلة لكل نوع.</p>
+  <div class="grid grid-2 lecture-detail">
+    <div class="sub-card">
+      <h4>كل النقاط النظرية المهمة داخل المحاضرة</h4>
+      <ul><li>الذكاء الاصطناعي الضيق Narrow AI هو AI متخصص في مهمة محددة أو نطاق محدد.</li><li>Narrow AI هو الأكثر انتشارًا في الواقع الحالي؛ مثل الترجمة، التوصيات، كشف الوجوه، المساعدات الصوتية، وأنظمة البحث.</li><li>الذكاء الاصطناعي العام General AI يشير إلى نظام قادر نظريًا على التعلم والفهم والتصرف في مجالات متعددة مثل الإنسان.</li><li>General AI لم يتحقق بشكل كامل في الواقع، وهو مفهوم بحثي ونظري أكثر من كونه نظامًا مستخدمًا يوميًا.</li><li>الذكاء الاصطناعي الفائق Super AI هو مفهوم افتراضي قد يتجاوز الذكاء البشري في معظم المجالات.</li><li>Super AI يثير تساؤلات أخلاقية ومستقبلية حول السيطرة، السلامة، والمسؤولية.</li><li>وجود نظام قوي في مهمة واحدة لا يعني أنه يمتلك ذكاءً عامًا.</li><li>المقارنة الأساسية: Narrow AI متخصص وموجود، General AI نظري، Super AI افتراضي ومستقبلي.</li><li>كل نوع له قدرات ومخاطر مختلفة، ويجب عدم الخلط بينها في أسئلة الصح والخطأ.</li></ul>
+    </div>
+    <div class="sub-card">
+      <h4>مصطلحات المحاضرة</h4>
+      <div class="pill-box"><span class="badge">Narrow AI</span><span class="badge">General AI</span><span class="badge">Super AI</span><span class="badge">القدرات</span><span class="badge">القيود</span><span class="badge">الآثار الأخلاقية</span></div>
+      <h4 style="margin-top:18px">نقاط اختبار لا تتركها</h4>
+      <ul><li>قارن بين Narrow وGeneral وSuper AI</li><li>اذكر مثالًا على Narrow AI</li><li>هل General AI موجود بالكامل؟</li><li>ما المخاوف المرتبطة بـSuper AI؟</li></ul>
+    </div>
+  </div>
+</article>
+
+
+<article class="card lecture-block " id="lecture-4">
+  <div class="lecture-head">
+    <span class="badge ">محاضرة 4</span>
+    <span class="badge">مراجعة سريعة</span>
+  </div>
+  <h3>مقدمة في التعلم الآلي</h3>
+  <p class="lead">تشرح المحاضرة التعلم الآلي بوصفه فرعًا من AI يركز على تطوير خوارزميات تتعلم من البيانات وتكتشف الأنماط لاتخاذ قرارات أو تنبؤات.</p>
+  <div class="grid grid-2 lecture-detail">
+    <div class="sub-card">
+      <h4>كل النقاط النظرية المهمة داخل المحاضرة</h4>
+      <ul><li>التعلم الآلي Machine Learning هو فرع من الذكاء الاصطناعي يركز على خوارزميات تتعلم من البيانات وتكتشف الأنماط.</li><li>النظام في ML لا يُعطى الحل مباشرة، بل يُعطى بيانات ليتعلم منها ويكوّن نموذجًا أو طريقة لاتخاذ القرار.</li><li>ML يختلف عن البرمجة التقليدية؛ البرمجة التقليدية تعتمد على قواعد واضحة يكتبها الإنسان، أما ML فيتعلم القاعدة أو النمط من البيانات.</li><li>من مخرجات ML: تنبؤ، تصنيف، توصية، أو قرار مبني على نمط تم تعلمه.</li><li>من أمثلة ML: أنظمة التوصية، التنبؤ بالمبيعات، تصنيف الرسائل، اقتراح المحتوى، وتحليل البيانات.</li><li>جودة البيانات تؤثر بشكل مباشر في جودة النموذج والنتائج.</li><li>ML يحتاج تدريبًا على بيانات، ثم تقييمًا لمعرفة مدى نجاحه.</li><li>نقطة اختبار: ML لا يعني أن النظام يفهم كإنسان، بل يتعلم أنماطًا إحصائية أو حسابية من البيانات.</li><li>التوصية تعتمد على سلوك المستخدمين وتفضيلاتهم.</li><li>التنبؤ يستخدم البيانات السابقة لتوقع نتائج مستقبلية.</li></ul>
+    </div>
+    <div class="sub-card">
+      <h4>مصطلحات المحاضرة</h4>
+      <div class="pill-box"><span class="badge">Machine Learning</span><span class="badge">Data</span><span class="badge">Patterns</span><span class="badge">Prediction</span><span class="badge">Recommendation</span><span class="badge">Traditional Programming</span></div>
+      <h4 style="margin-top:18px">نقاط اختبار لا تتركها</h4>
+      <ul><li>عرّف ML</li><li>قارن ML بالبرمجة التقليدية</li><li>اذكر أمثلة على التنبؤ والتوصية</li><li>لماذا جودة البيانات مهمة؟</li></ul>
+    </div>
+  </div>
+</article>
+
+
+<article class="card lecture-block " id="lecture-5">
+  <div class="lecture-head">
+    <span class="badge ">محاضرة 5</span>
+    <span class="badge">مراجعة سريعة</span>
+  </div>
+  <h3>التعلم العميق والشبكات العصبية</h3>
+  <p class="lead">تشرح المحاضرة التعلم العميق بوصفه فرعًا من ML يستخدم الشبكات العصبية متعددة الطبقات لمعالجة أنماط معقدة مثل الصور والكلام والنصوص.</p>
+  <div class="grid grid-2 lecture-detail">
+    <div class="sub-card">
+      <h4>كل النقاط النظرية المهمة داخل المحاضرة</h4>
+      <ul><li>التعلم العميق Deep Learning فرع من Machine Learning يستخدم شبكات عصبية اصطناعية مستوحاة من الدماغ البشري.</li><li>الشبكات العصبية مصممة لمعالجة المعلومات عبر طبقات، مما يساعدها على التعرف على أنماط معقدة.</li><li>الشبكة العصبية تتكون من Nodes أو عقد، Connections أو وصلات، وLayers أو طبقات.</li><li>كل عقدة تستقبل معلومات، تعالجها، ثم ترسل نتيجة للعقد التالية.</li><li>الشبكة النموذجية تحتوي على طبقة إدخال، طبقات مخفية، وطبقة إخراج.</li><li>طبقة الإدخال تستقبل البيانات الخام، الطبقات المخفية تجري التحويلات، وطبقة الإخراج تنتج النتيجة النهائية.</li><li>الأوزان Weights تمثل قوة الروابط بين العقد، ويتم تعديلها أثناء التدريب لتحسين الدقة.</li><li>دالة التفعيل Activation Function تحدد ما إذا كانت الإشارة ستمر للعصبون التالي، ومن أمثلتها Sigmoid وReLU وTanh.</li><li>دوال التفعيل تضيف اللاخطية، مما يساعد الشبكات على تعلم علاقات معقدة تتجاوز الأنماط الخطية البسيطة.</li><li>مصطلح التعلم العميق جاء من استخدام طبقات مخفية كثيرة.</li><li>كلما زاد عمق الشبكة زادت قدرتها على التقاط أنماط معقدة، لكن ذلك قد يحتاج بيانات وحوسبة أكثر.</li><li>في التعرف على الصور، الطبقات الأولى قد تكتشف الحواف، والوسطى الأشكال، والعميقة الكائنات الكاملة.</li><li>تطبيقات DL: السيارات ذاتية القيادة، المساعدات الصوتية، تحليل الصور الطبية، والترجمة التلقائية.</li><li>الشبكات العصبية تحاكي التعلم في الدماغ بطريقة رياضية مبسطة، وليست دماغًا حقيقيًا.</li></ul>
+    </div>
+    <div class="sub-card">
+      <h4>مصطلحات المحاضرة</h4>
+      <div class="pill-box"><span class="badge">Deep Learning</span><span class="badge">Neural Networks</span><span class="badge">Nodes</span><span class="badge">Connections</span><span class="badge">Input Layer</span><span class="badge">Hidden Layers</span><span class="badge">Output Layer</span><span class="badge">Weights</span><span class="badge">Activation Function</span></div>
+      <h4 style="margin-top:18px">نقاط اختبار لا تتركها</h4>
+      <ul><li>ما الشبكات العصبية؟</li><li>ما طبقات الشبكة؟</li><li>ما الأوزان؟</li><li>ما دالة التفعيل؟</li><li>لماذا يسمى التعلم العميق عميقًا؟</li></ul>
+    </div>
+  </div>
+</article>
+
+
+<article class="card lecture-block focus-lecture" id="lecture-6">
+  <div class="lecture-head">
+    <span class="badge active">محاضرة 6</span>
+    <span class="badge">تركيز عالي</span>
+  </div>
+  <h3>معالجة اللغة الطبيعية NLP</h3>
+  <p class="lead">تشرح المحاضرة NLP بوصفه فرعًا من AI يجعل الحاسوب يفهم اللغة البشرية عبر تحويل الكلمات إلى أرقام ورموز وتحليلها لاستخراج المعنى.</p>
+  <div class="grid grid-2 lecture-detail">
+    <div class="sub-card">
+      <h4>كل النقاط النظرية المهمة داخل المحاضرة</h4>
+      <ul><li>معالجة اللغة الطبيعية Natural Language Processing هي فرع من الذكاء الاصطناعي هدفه جعل الحاسوب يفهم اللغة البشرية.</li><li>الإنسان يتحدث ويكتب بلغات مختلفة، لكن الآلة لا تفهم اللغة مباشرة كما يفهمها الإنسان.</li><li>حتى تفهم الآلة اللغة يجب تحويل الكلمات والجمل إلى أرقام ورموز قابلة للمعالجة.</li><li>بعد تحويل الكلمات إلى رموز، يتم تحليل هذه الرموز لمعرفة المعنى والسياق.</li><li>البحث في Google يعتمد على NLP لأن الآلة تقرأ النص وتحاول فهم ما يبحث عنه المستخدم.</li><li>بدون NLP لن نستطيع استخدام الترجمة الآلية أو روبوتات الدردشة بالطريقة الحالية.</li><li>NLP يشمل فهم اللغة، تحليل النصوص، الترجمة، الدردشة الذكية، البحث، تلخيص النصوص، وتحويل الكلام إلى نص.</li><li>الترجمة الآلية مثل Google Translate مثال مهم على NLP؛ تحول النصوص بين لغات مختلفة.</li><li>الترجمة ليست دقيقة دائمًا بنسبة 100%، لكنها تساعد على التواصل بسرعة في التعليم والسفر والأعمال.</li><li>روبوتات الدردشة تعتمد على NLP لفهم رسالة المستخدم، تحليلها، ثم إنتاج رد مناسب.</li><li>فوائد NLP في التعليم: تلخيص المقالات الطويلة، تحويل الكلام إلى نص، تسريع البحث، فهم النصوص الصعبة، ترجمة المواد التعليمية، دعم المعلمين، ودعم ذوي الاحتياجات الخاصة.</li><li>فوائد NLP في الأعمال: خدمة العملاء عبر Chatbots، تحليل رسائل العملاء، الرد السريع، فهم شكاوى المستخدمين، وتحسين تجربة العملاء.</li><li>تحديات NLP: تعدد المعاني، اختلاف اللهجات، الأخطاء في الترجمة، صعوبة فهم السياق، التعبيرات غير المباشرة، والنصوص الغامضة.</li><li>السياق هو مفتاح فهم اللغة؛ كلمة واحدة قد تعني أشياء مختلفة بحسب الجملة.</li><li>نقطة اختبار مهمة: NLP ليس الترجمة فقط؛ الترجمة مجرد تطبيق من تطبيقاته.</li><li>نقطة اختبار: دقة الترجمة الآلية ليست كاملة، ولذلك يجب فهم حدودها.</li><li>نقطة اختبار: تحويل اللغة إلى أرقام ورموز شرط أساسي لمعالجة الآلة للنصوص.</li></ul>
+    </div>
+    <div class="sub-card">
+      <h4>مصطلحات المحاضرة</h4>
+      <div class="pill-box"><span class="badge">NLP</span><span class="badge">Natural Language Processing</span><span class="badge">Translation</span><span class="badge">Chatbots</span><span class="badge">Context</span><span class="badge">Symbols</span><span class="badge">Machine Translation</span><span class="badge">Speech to Text</span><span class="badge">Text Summarization</span></div>
+      <h4 style="margin-top:18px">نقاط اختبار لا تتركها</h4>
+      <ul><li>عرّف NLP</li><li>كيف تفهم الآلة اللغة؟</li><li>ما تطبيقات NLP؟</li><li>لماذا الترجمة ليست دقيقة دائمًا؟</li><li>ما تحديات NLP؟</li><li>فوائد NLP في التعليم والأعمال</li></ul>
+    </div>
+  </div>
+</article>
+
+
+<article class="card lecture-block focus-lecture" id="lecture-7">
+  <div class="lecture-head">
+    <span class="badge active">محاضرة 7</span>
+    <span class="badge">تركيز عالي</span>
+  </div>
+  <h3>الرؤية الحاسوبية Computer Vision</h3>
+  <p class="lead">تشرح المحاضرة Computer Vision بوصفها فرعًا من AI يجعل الآلة ترى العالم عبر تحليل الصور والفيديو والتعرف على الوجوه والأجسام والمشاهد.</p>
+  <div class="grid grid-2 lecture-detail">
+    <div class="sub-card">
+      <h4>كل النقاط النظرية المهمة داخل المحاضرة</h4>
+      <ul><li>الرؤية الحاسوبية Computer Vision هي فرع من الذكاء الاصطناعي يجعل الآلة قادرة على فهم الصور والفيديو.</li><li>الآلة لا ترى الصورة مثل الإنسان؛ بل تتعامل معها كبيانات رقمية مثل البكسلات والقيم والخصائص البصرية.</li><li>من محاور المحاضرة: التعرف على الصور والفيديو، التعرف على الوجوه والأجسام، استخدامات الرؤية الحاسوبية، وأمثلة واقعية.</li><li>Face Detection أو كشف الوجوه يحدد وجود الوجوه وقد يستخدم في فتح الهاتف، الكاميرات الأمنية، المطارات، وتنظيم الدخول.</li><li>كشف الوجوه قد يساعد في التعرف على هوية الشخص أو حتى تحليل تعبيرات الوجه، لكنه يحتاج دقة عالية.</li><li>كشف الوجوه قد يفشل أو يخطئ إذا تغيرت الإضاءة أو الزاوية.</li><li>Object Detection أو كشف الأجسام يعني التعرف على أشياء داخل الصورة أو الفيديو مثل سيارة، حيوان، أداة، طعام، منتج، أو عنصر في الطريق.</li><li>كشف الأجسام يستخدم في السيارات ذاتية القيادة، المصانع، الروبوتات، تطبيقات التسوق، وتنظيم الصور في الهاتف.</li><li>الرؤية الحاسوبية تستخدم في الطب لتحليل الصور الطبية والأشعة، وفي الأمن للمراقبة، وفي التعليم لتوضيح وتحليل الصور، وفي الحياة اليومية عبر الهواتف.</li><li>تحديات Computer Vision تشمل: الإضاءة، زاوية التصوير، تشابه الأجسام، الحاجة إلى بيانات تدريب كبيرة، الخصوصية، الأمان، والتكلفة.</li><li>تشابه الأجسام قد يجعل النموذج يخلط بين كائنين متشابهين.</li><li>الخصوصية مشكلة مهمة في التعرف على الوجوه لأن التقنية قد تتعامل مع بيانات شخصية وحساسة.</li><li>الأمان مهم عند استخدام التقنية في أماكن مثل المطارات أو السيارات أو أنظمة الدخول.</li><li>نقطة اختبار: Computer Vision ليس فقط Face Detection؛ كشف الوجوه مجرد تطبيق واحد.</li><li>نقطة اختبار: الرؤية الحاسوبية تختلف عن NLP؛ الأولى للصور والفيديو، والثانية للغة والنصوص.</li></ul>
+    </div>
+    <div class="sub-card">
+      <h4>مصطلحات المحاضرة</h4>
+      <div class="pill-box"><span class="badge">Computer Vision</span><span class="badge">Images</span><span class="badge">Videos</span><span class="badge">Pixels</span><span class="badge">Face Detection</span><span class="badge">Object Detection</span><span class="badge">Image Recognition</span><span class="badge">Lighting</span><span class="badge">Angles</span><span class="badge">Privacy</span></div>
+      <h4 style="margin-top:18px">نقاط اختبار لا تتركها</h4>
+      <ul><li>عرّف Computer Vision</li><li>كيف ترى الآلة الصور؟</li><li>ما Face Detection؟</li><li>ما Object Detection؟</li><li>اذكر تطبيقات وتحديات الرؤية الحاسوبية</li><li>قارن NLP وComputer Vision</li></ul>
+    </div>
+  </div>
+</article>
+
+
+<article class="card lecture-block focus-lecture" id="lecture-8">
+  <div class="lecture-head">
+    <span class="badge active">محاضرة 8</span>
+    <span class="badge">تركيز عالي</span>
+  </div>
+  <h3>تطبيقات الذكاء الاصطناعي</h3>
+  <p class="lead">تعرض المحاضرة تطبيقات AI في التعليم والصحة والأعمال والحياة اليومية، مع فوائدها وتحدياتها وأمثلة أنظمة واقعية.</p>
+  <div class="grid grid-2 lecture-detail">
+    <div class="sub-card">
+      <h4>كل النقاط النظرية المهمة داخل المحاضرة</h4>
+      <ul><li>تطبيقات AI موجودة في التعليم والصحة والأعمال والحياة اليومية.</li><li>في التعليم، AI يساعد في التلخيص، الترجمة، الاختبارات التدريبية، تخطيط الدروس، التعلم التكيفي، الإجابة على الأسئلة، وتوجيه حل المشكلات.</li><li>أمثلة تعليمية: أدوات Gemini في التعليم، Khanmigo كمدرس ذكي، وSocratic الذي يقدم شروحات ومصادر للطلاب.</li><li>في الرعاية الصحية، AI يساعد في التشخيص، التحليل التنبؤي، مراقبة المرضى، تحليل الصور الطبية، تحليل الأشعة، تشخيص الأورام، توقع مخاطر القلب، ودعم سير العمل السريري.</li><li>في الأعمال، AI يساعد في خدمة العملاء، التسويق، تحليل بيانات العملاء، الأمن السيبراني، التواصل الذكي، إنشاء المحتوى، أتمتة سير العمل، تحسين القرار، وزيادة كفاءة العمليات.</li><li>في الحياة اليومية، AI يظهر في المساعدات الذكية، توصيات منصات البث، المنازل الذكية، ChatGPT، Tesla Autopilot، Google Translate، Alexa، وSiri.</li><li>جدول المقارنة في المحاضرة يربط المجال بالمثال والاستخدام: التعليم للتعلم التكيفي والترجمة، الصحة للتشخيص والتنبؤ وتحليل الصور، الأعمال لخدمة العملاء والتسويق والأمن السيبراني، والحياة اليومية للمساعدات والترجمة والتوصيات.</li><li>AI يفيد في السرعة، الدقة، توفير الوقت، دعم القرار، وتقديم خدمات أكثر تخصيصًا.</li><li>تحديات AI في التطبيقات: الحاجة إلى بيانات كثيرة، احتمال الخطأ، الخصوصية، الاستخدام المسؤول، تغير بعض الوظائف، الحاجة إلى تنظيم ورقابة، العدالة وعدم التحيز، التكلفة العالية، والحاجة إلى تدريب الناس على استخدامه.</li><li>نقطة اختبار: AI يدعم المعلم والطبيب ورجل الأعمال، لكنه لا يلغي دور الإنسان بالضرورة.</li><li>نقطة اختبار: الخصوصية والعدالة والتكلفة والتدريب من تحديات تطبيق AI.</li><li>نقطة اختبار: ChatGPT وTesla وGoogle Translate وAlexa/Siri أمثلة واقعية على أنظمة AI في الحياة اليومية.</li></ul>
+    </div>
+    <div class="sub-card">
+      <h4>مصطلحات المحاضرة</h4>
+      <div class="pill-box"><span class="badge">AI Applications</span><span class="badge">Education</span><span class="badge">Healthcare</span><span class="badge">Business</span><span class="badge">Everyday AI</span><span class="badge">ChatGPT</span><span class="badge">Tesla Autopilot</span><span class="badge">Google Translate</span><span class="badge">Alexa</span><span class="badge">Siri</span><span class="badge">Adaptive Learning</span></div>
+      <h4 style="margin-top:18px">نقاط اختبار لا تتركها</h4>
+      <ul><li>اذكر تطبيقات AI في التعليم</li><li>اذكر تطبيقات AI في الصحة</li><li>اذكر تطبيقات AI في الأعمال</li><li>اذكر تحديات AI</li><li>ما أمثلة الأنظمة الواقعية؟</li></ul>
+    </div>
+  </div>
+</article>
+
+
+<article class="card lecture-block focus-lecture" id="lecture-9">
+  <div class="lecture-head">
+    <span class="badge active">محاضرة 9</span>
+    <span class="badge">تركيز عالي</span>
+  </div>
+  <h3>أخلاقيات وتحديات الذكاء الاصطناعي</h3>
+  <p class="lead">تركز المحاضرة على الاستخدام المسؤول للذكاء الاصطناعي، الخصوصية، حماية البيانات، التحيز الخوارزمي، تأثير الوظائف، الشفافية، والثقة.</p>
+  <div class="grid grid-2 lecture-detail">
+    <div class="sub-card">
+      <h4>كل النقاط النظرية المهمة داخل المحاضرة</h4>
+      <ul><li>أخلاقيات AI مهمة لأن التقنية تؤثر في الأفراد والمجتمع والقرارات اليومية.</li><li>الخصوصية تعني حماية البيانات الشخصية والحساسة ومنع استخدامها بطريقة غير مناسبة.</li><li>حماية البيانات تشمل جمع البيانات وتخزينها واستخدامها بطريقة آمنة ومسؤولة.</li><li>التحيز الخوارزمي يحدث عندما تنتج الخوارزمية نتائج غير عادلة بسبب بيانات غير عادلة أو غير متنوعة أو تصميم غير مناسب.</li><li>التحيز ليس دائمًا مقصودًا؛ قد يظهر بسبب البيانات أو طريقة بناء النموذج.</li><li>AI قد يؤثر على الوظائف؛ قد يغير طبيعة بعض الأعمال أو يقلل الحاجة لبعض المهام المتكررة، لكنه قد يخلق فرصًا ومهارات جديدة.</li><li>الاستخدام المسؤول يعني أن يستخدم الإنسان AI بطريقة تراعي القانون والحقوق والعدالة والسلامة.</li><li>الشفافية مهمة لأنها تساعد المستخدمين على فهم القرارات وبناء الثقة.</li><li>الأخلاقيات أساس الثقة في التقنية، وبدونها قد يصبح استخدام AI خطرًا أو غير مقبول.</li><li>من المهم التفكير في حلول للتحديات، مثل تحسين جودة البيانات، الرقابة، التنظيم، توعية المستخدمين، والاختبار المستمر.</li><li>نقطة اختبار: البيانات غير العادلة قد تؤدي إلى نتائج متحيزة.</li><li>نقطة اختبار: الإنسان مسؤول عن طريقة استخدام AI حتى لو كانت التقنية قوية.</li><li>نقطة اختبار: الخصوصية والتحيز والوظائف والشفافية من أهم محاور الأخلاقيات.</li></ul>
+    </div>
+    <div class="sub-card">
+      <h4>مصطلحات المحاضرة</h4>
+      <div class="pill-box"><span class="badge">AI Ethics</span><span class="badge">Privacy</span><span class="badge">Data Protection</span><span class="badge">Bias</span><span class="badge">Algorithmic Bias</span><span class="badge">Responsible AI</span><span class="badge">Transparency</span><span class="badge">Jobs Impact</span><span class="badge">Trust</span></div>
+      <h4 style="margin-top:18px">نقاط اختبار لا تتركها</h4>
+      <ul><li>ما الخصوصية؟</li><li>ما التحيز الخوارزمي؟</li><li>لماذا الشفافية مهمة؟</li><li>كيف يؤثر AI على الوظائف؟</li><li>ما الاستخدام المسؤول؟</li></ul>
+    </div>
+  </div>
+</article>
+
+
+<article class="card lecture-block focus-lecture" id="lecture-10">
+  <div class="lecture-head">
+    <span class="badge active">محاضرة 10</span>
+    <span class="badge">تركيز عالي</span>
+  </div>
+  <h3>مستقبل الذكاء الاصطناعي ومراجعة المساق</h3>
+  <p class="lead">تراجع المحاضرة المفاهيم الرئيسية في المساق وتعرض اتجاهات مستقبل AI والفرص والتحديات والاستعداد للمساقات المتقدمة.</p>
+  <div class="grid grid-2 lecture-detail">
+    <div class="sub-card">
+      <h4>كل النقاط النظرية المهمة داخل المحاضرة</h4>
+      <ul><li>المحاضرة الأخيرة تربط بين مفاهيم AI التي تم تعلمها في المساق كله.</li><li>AI يتطور بسرعة، ومستقبله مليء بالفرص والتحديات.</li><li>اتجاهات مستقبلية: AI سيصبح أذكى، سيستخدم في كل المجالات، التعليم سيصبح أكثر تفاعلًا، الطب أكثر دقة، الأعمال أسرع وأكثر كفاءة.</li><li>السيارات ستقود نفسها، الروبوتات ستساعد في الحياة اليومية، الترجمة ستصبح شبه مثالية، والأمن السيبراني سيعتمد على AI.</li><li>مراجعة Computer Vision: تعلمنا كيف ترى الآلة الصور والفيديو، وأمثلة مثل كشف الوجوه والأجسام، وفوائدها في الطب والأمن والتعليم، وتحديات مثل الإضاءة والزاوية.</li><li>مراجعة تطبيقات AI: في التعليم التلخيص والترجمة، في الطب التشخيص وتحليل الأشعة، في الأعمال خدمة العملاء والتسويق، وأمثلة مثل ChatGPT وTesla.</li><li>مراجعة الأخلاقيات: الخصوصية وحماية البيانات، التحيز في الخوارزميات، تأثير AI على الوظائف، الاستخدام المسؤول، وأهمية الأخلاقيات كأساس للثقة.</li><li>النقاش المفتوح يساعد في مشاركة المعرفة والتفكير في مجالات جديدة للتطبيق والتحديات المهمة.</li><li>الاستعداد للمساقات المتقدمة يحتاج فهم المفاهيم الأساسية جيدًا، تعلم البرمجة والخوارزميات، التدريب على مشاريع عملية، والاستعداد للتعلم المستمر.</li><li>المساقات القادمة قد تغطي موضوعات أعمق مثل الشبكات العصبية والتعلم العميق.</li><li>نقطة اختبار: المستقبل ليس فوائد فقط؛ فيه فرص وتحديات معًا.</li><li>نقطة اختبار: التعلم المستمر ضروري لأن AI يتطور بسرعة.</li><li>نقطة اختبار: المحاضرة 10 مراجعة شاملة تربط NLP وComputer Vision والتطبيقات والأخلاقيات.</li></ul>
+    </div>
+    <div class="sub-card">
+      <h4>مصطلحات المحاضرة</h4>
+      <div class="pill-box"><span class="badge">Future AI</span><span class="badge">Innovation</span><span class="badge">Interactive Education</span><span class="badge">Precise Healthcare</span><span class="badge">Cybersecurity</span><span class="badge">Self-driving cars</span><span class="badge">Robots</span><span class="badge">Continuous Learning</span><span class="badge">Advanced Courses</span></div>
+      <h4 style="margin-top:18px">نقاط اختبار لا تتركها</h4>
+      <ul><li>اذكر اتجاهات مستقبل AI</li><li>ما علاقة AI بالأمن السيبراني؟</li><li>لماذا التعلم المستمر مهم؟</li><li>ما الذي راجعته المحاضرة 10؟</li></ul>
+    </div>
+  </div>
+</article>
+</div>
+</section>
+
+<section id="focus" class="container">
+  <div class="section-title"><span class="tag">High Priority 6-10</span><h2>التركيز الأعلى: المحاضرات 6 إلى 10</h2><p>هذه المحاضرات لها أولوية أكبر، لذلك تم وضع أهم النقاط المتكررة والمفاهيم المربكة بشكل مباشر.</p></div>
+  <div class="grid grid-2">
+<article class="sub-card">
+<h4>محاضرة 6: معالجة اللغة الطبيعية NLP</h4>
+<ul><li>عرّف NLP</li><li>كيف تفهم الآلة اللغة؟</li><li>ما تطبيقات NLP؟</li><li>لماذا الترجمة ليست دقيقة دائمًا؟</li><li>ما تحديات NLP؟</li><li>فوائد NLP في التعليم والأعمال</li><li>تحديات NLP: تعدد المعاني، اختلاف اللهجات، الأخطاء في الترجمة، صعوبة فهم السياق، التعبيرات غير المباشرة، والنصوص الغامضة.</li><li>السياق هو مفتاح فهم اللغة؛ كلمة واحدة قد تعني أشياء مختلفة بحسب الجملة.</li><li>نقطة اختبار مهمة: NLP ليس الترجمة فقط؛ الترجمة مجرد تطبيق من تطبيقاته.</li><li>نقطة اختبار: دقة الترجمة الآلية ليست كاملة، ولذلك يجب فهم حدودها.</li><li>نقطة اختبار: تحويل اللغة إلى أرقام ورموز شرط أساسي لمعالجة الآلة للنصوص.</li></ul>
+</article>
+
+
+<article class="sub-card">
+<h4>محاضرة 7: الرؤية الحاسوبية Computer Vision</h4>
+<ul><li>عرّف Computer Vision</li><li>كيف ترى الآلة الصور؟</li><li>ما Face Detection؟</li><li>ما Object Detection؟</li><li>اذكر تطبيقات وتحديات الرؤية الحاسوبية</li><li>قارن NLP وComputer Vision</li><li>تشابه الأجسام قد يجعل النموذج يخلط بين كائنين متشابهين.</li><li>الخصوصية مشكلة مهمة في التعرف على الوجوه لأن التقنية قد تتعامل مع بيانات شخصية وحساسة.</li><li>الأمان مهم عند استخدام التقنية في أماكن مثل المطارات أو السيارات أو أنظمة الدخول.</li><li>نقطة اختبار: Computer Vision ليس فقط Face Detection؛ كشف الوجوه مجرد تطبيق واحد.</li><li>نقطة اختبار: الرؤية الحاسوبية تختلف عن NLP؛ الأولى للصور والفيديو، والثانية للغة والنصوص.</li></ul>
+</article>
+
+
+<article class="sub-card">
+<h4>محاضرة 8: تطبيقات الذكاء الاصطناعي</h4>
+<ul><li>اذكر تطبيقات AI في التعليم</li><li>اذكر تطبيقات AI في الصحة</li><li>اذكر تطبيقات AI في الأعمال</li><li>اذكر تحديات AI</li><li>ما أمثلة الأنظمة الواقعية؟</li><li>AI يفيد في السرعة، الدقة، توفير الوقت، دعم القرار، وتقديم خدمات أكثر تخصيصًا.</li><li>تحديات AI في التطبيقات: الحاجة إلى بيانات كثيرة، احتمال الخطأ، الخصوصية، الاستخدام المسؤول، تغير بعض الوظائف، الحاجة إلى تنظيم ورقابة، العدالة وعدم التحيز، التكلفة العالية، والحاجة إلى تدريب الناس على استخدامه.</li><li>نقطة اختبار: AI يدعم المعلم والطبيب ورجل الأعمال، لكنه لا يلغي دور الإنسان بالضرورة.</li><li>نقطة اختبار: الخصوصية والعدالة والتكلفة والتدريب من تحديات تطبيق AI.</li><li>نقطة اختبار: ChatGPT وTesla وGoogle Translate وAlexa/Siri أمثلة واقعية على أنظمة AI في الحياة اليومية.</li></ul>
+</article>
+
+
+<article class="sub-card">
+<h4>محاضرة 9: أخلاقيات وتحديات الذكاء الاصطناعي</h4>
+<ul><li>ما الخصوصية؟</li><li>ما التحيز الخوارزمي؟</li><li>لماذا الشفافية مهمة؟</li><li>كيف يؤثر AI على الوظائف؟</li><li>ما الاستخدام المسؤول؟</li><li>الأخلاقيات أساس الثقة في التقنية، وبدونها قد يصبح استخدام AI خطرًا أو غير مقبول.</li><li>من المهم التفكير في حلول للتحديات، مثل تحسين جودة البيانات، الرقابة، التنظيم، توعية المستخدمين، والاختبار المستمر.</li><li>نقطة اختبار: البيانات غير العادلة قد تؤدي إلى نتائج متحيزة.</li><li>نقطة اختبار: الإنسان مسؤول عن طريقة استخدام AI حتى لو كانت التقنية قوية.</li><li>نقطة اختبار: الخصوصية والتحيز والوظائف والشفافية من أهم محاور الأخلاقيات.</li></ul>
+</article>
+
+
+<article class="sub-card">
+<h4>محاضرة 10: مستقبل الذكاء الاصطناعي ومراجعة المساق</h4>
+<ul><li>اذكر اتجاهات مستقبل AI</li><li>ما علاقة AI بالأمن السيبراني؟</li><li>لماذا التعلم المستمر مهم؟</li><li>ما الذي راجعته المحاضرة 10؟</li><li>الاستعداد للمساقات المتقدمة يحتاج فهم المفاهيم الأساسية جيدًا، تعلم البرمجة والخوارزميات، التدريب على مشاريع عملية، والاستعداد للتعلم المستمر.</li><li>المساقات القادمة قد تغطي موضوعات أعمق مثل الشبكات العصبية والتعلم العميق.</li><li>نقطة اختبار: المستقبل ليس فوائد فقط؛ فيه فرص وتحديات معًا.</li><li>نقطة اختبار: التعلم المستمر ضروري لأن AI يتطور بسرعة.</li><li>نقطة اختبار: المحاضرة 10 مراجعة شاملة تربط NLP وComputer Vision والتطبيقات والأخلاقيات.</li></ul>
+</article>
+</div>
+</section>
+
+<section id="expected" class="container">
+  <div class="section-title"><span class="tag">Very Expected</span><h2>أسئلة متوقعة جدًا من 6 إلى 10</h2><p>ليست ضمانًا لأسئلة الاختبار، لكنها مبنية على أكثر نقاط المحاضرات أهمية.</p></div>
+  <div class="card">
+    <div class="grid grid-2">
+      <div class="sub-card"><h3>محاضرة 6 NLP</h3><ul><li>عرّف NLP.</li><li>كيف تفهم الآلة اللغة البشرية؟</li><li>لماذا نحول الكلمات إلى أرقام ورموز؟</li><li>لماذا الترجمة ليست دقيقة دائمًا؟</li><li>اذكر فوائد NLP في التعليم والأعمال.</li><li>اذكر تحديات NLP: السياق، اللهجات، تعدد المعاني.</li></ul></div>
+      <div class="sub-card"><h3>محاضرة 7 Computer Vision</h3><ul><li>عرّف Computer Vision.</li><li>كيف تتعامل الآلة مع الصورة؟</li><li>فرق بين Face Detection وObject Detection.</li><li>اذكر تطبيقات الرؤية الحاسوبية في الطب والأمن والتعليم.</li><li>اذكر تحدياتها: الإضاءة، الزاوية، تشابه الأجسام، الخصوصية.</li></ul></div>
+      <div class="sub-card"><h3>محاضرة 8 Applications</h3><ul><li>اذكر تطبيقات AI في التعليم.</li><li>اذكر تطبيقات AI في الصحة.</li><li>اذكر تطبيقات AI في الأعمال.</li><li>اذكر أمثلة أنظمة واقعية: ChatGPT، Tesla، Google Translate، Siri/Alexa.</li><li>اذكر تحديات التطبيقات: الخصوصية، الخطأ، البيانات، التكلفة.</li></ul></div>
+      <div class="sub-card"><h3>محاضرة 9 Ethics</h3><ul><li>عرّف الخصوصية.</li><li>ما التحيز الخوارزمي؟</li><li>كيف تؤدي البيانات غير العادلة إلى نتائج غير عادلة؟</li><li>ما الاستخدام المسؤول؟</li><li>لماذا الشفافية مهمة؟</li><li>كيف يؤثر AI على الوظائف؟</li></ul></div>
+      <div class="sub-card"><h3>محاضرة 10 Future</h3><ul><li>اذكر اتجاهات مستقبل AI.</li><li>كيف سيؤثر AI في التعليم والطب والأعمال؟</li><li>لماذا الأمن السيبراني سيعتمد على AI؟</li><li>لماذا التعلم المستمر ضروري؟</li><li>ما المفاهيم التي تراجعها المحاضرة 10؟</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="memorize" class="container">
+  <div class="section-title"><span class="tag">Memorize Before Exam</span><h2>احفظ هذه قبل الاختبار</h2><p>هذه النقاط هي خلاصة المفاهيم والمقارنات التي تتكرر غالبًا في أسئلة الصح والخطأ والاختيار.</p></div>
+  <div class="card"><ul><li>تعريف AI وأهدافه: حل المشكلات، التعلم، الأتمتة، تعزيز القدرات، توفير الوقت.</li><li>الذكاء البشري يمتلك مشاعر وإبداعًا وحكمًا أخلاقيًا، أما AI فيعتمد على البيانات والخوارزميات.</li><li>Narrow AI هو الأكثر استخدامًا اليوم، General AI غير متحقق بالكامل، Super AI افتراضي.</li><li>ML يتعلم من البيانات، بينما البرمجة التقليدية تعتمد على قواعد مكتوبة يدويًا.</li><li>DL يعتمد على Neural Networks متعددة الطبقات.</li><li>الشبكة العصبية: Input Layer + Hidden Layers + Output Layer + Nodes + Weights.</li><li>Activation Functions مثل ReLU وSigmoid وTanh تضيف لاخطية تساعد على تعلم الأنماط المعقدة.</li><li>NLP يجعل الحاسوب يفهم اللغة البشرية بتحويل الكلمات إلى رموز وأرقام وتحليلها.</li><li>الترجمة الآلية ليست دقيقة دائمًا 100% بسبب السياق وتعدد المعاني.</li><li>Chatbots وGoogle Translate وGoogle Search أمثلة مرتبطة بـNLP.</li><li>Computer Vision يجعل الآلة تفهم الصور والفيديو كبيانات رقمية وبكسلات.</li><li>Face Detection وObject Detection من أهم تطبيقات Computer Vision.</li><li>تحديات Computer Vision: الإضاءة، الزاوية، تشابه الأجسام، البيانات الكبيرة، الخصوصية، الأمان، التكلفة.</li><li>AI في التعليم: تلخيص، ترجمة، اختبارات تدريبية، تعلم تكيفي، دعم المعلمين والطلاب.</li><li>AI في الصحة: تشخيص، تحليل أشعة، تنبؤ بالمخاطر، مراقبة المرضى.</li><li>AI في الأعمال: خدمة العملاء، التسويق، تحليل البيانات، الأمن السيبراني، أتمتة سير العمل.</li><li>تحديات AI: بيانات كثيرة، احتمال الخطأ، الخصوصية، التكلفة، التنظيم، العدالة، التدريب.</li><li>الأخلاقيات تشمل الخصوصية وحماية البيانات والتحيز والشفافية وتأثير الوظائف.</li><li>البيانات غير العادلة قد تؤدي إلى تحيز خوارزمي.</li><li>مستقبل AI: تعليم تفاعلي، طب دقيق، أعمال أسرع، سيارات ذاتية، روبوتات، ترجمة شبه مثالية، أمن سيبراني يعتمد على AI.</li></ul></div>
+</section>
+
+<section id="mistakes" class="container">
+  <div class="section-title"><span class="tag">Common Mistakes</span><h2>أخطاء شائعة في الصح والخطأ</h2><p>اقرأها جيدًا لأنها تحول العبارات الخاطئة إلى سهلة التمييز.</p></div>
+  <div class="grid grid-2"><article class='sub-card'><h4>AI يمتلك مشاعر مثل الإنسان.</h4><p>خطأ: AI يفتقر إلى المشاعر والتعاطف والقيم الأخلاقية الذاتية.</p></article>
+<article class='sub-card'><h4>أي نظام قوي في مهمة واحدة هو General AI.</h4><p>خطأ: قد يكون Narrow AI متخصصًا فقط.</p></article>
+<article class='sub-card'><h4>ML يعني كتابة كل القواعد يدويًا.</h4><p>خطأ: ML يتعلم الأنماط من البيانات.</p></article>
+<article class='sub-card'><h4>DL ليس له علاقة بـML.</h4><p>خطأ: DL فرع من ML.</p></article>
+<article class='sub-card'><h4>الأوزان لا تتغير أثناء التدريب.</h4><p>خطأ: الأوزان تتعدل لتحسين دقة الشبكة.</p></article>
+<article class='sub-card'><h4>NLP هو الترجمة فقط.</h4><p>خطأ: NLP يشمل الترجمة، المحادثة، البحث، التلخيص، تحويل الكلام إلى نص، وتحليل النصوص.</p></article>
+<article class='sub-card'><h4>الترجمة الآلية دقيقة دائمًا 100%.</h4><p>خطأ: قد تخطئ بسبب السياق وتعدد المعاني واللهجات.</p></article>
+<article class='sub-card'><h4>Computer Vision هو نفسه NLP.</h4><p>خطأ: NLP للغة، وComputer Vision للصور والفيديو.</p></article>
+<article class='sub-card'><h4>الإضاءة والزاوية لا تؤثران في Computer Vision.</h4><p>خطأ: هما من أهم التحديات.</p></article>
+<article class='sub-card'><h4>كشف الوجوه لا يثير أي قضية خصوصية.</h4><p>خطأ: الوجوه بيانات شخصية وحساسة.</p></article>
+<article class='sub-card'><h4>AI لا يخطئ في التطبيقات.</h4><p>خطأ: AI قد يخطئ ويحتاج مراجعة بشرية.</p></article>
+<article class='sub-card'><h4>التحيز الخوارزمي دائمًا مقصود.</h4><p>خطأ: قد يحدث بسبب بيانات غير عادلة أو غير متنوعة.</p></article>
+<article class='sub-card'><h4>الأخلاقيات ليست مهمة في AI.</h4><p>خطأ: الأخلاقيات أساس الثقة والاستخدام المسؤول.</p></article>
+<article class='sub-card'><h4>مستقبل AI كله فوائد فقط.</h4><p>خطأ: المستقبل يحمل فرصًا وتحديات معًا.</p></article></div>
+</section>
+
+<section id="defs" class="container">
+  <div class="section-title"><span class="tag">Definitions</span><h2>التعاريف المهمة</h2><p>مصطلحات أساسية من كل المحاضرات مع تركيز واضح على 6 إلى 10.</p></div>
+  <div class="grid grid-4"><article class='card term-card'><h3>AI</h3><p>علم وهندسة إنشاء آلات قادرة على أداء مهام تتطلب عادة ذكاءً بشريًا مثل التفكير والتعلم وحل المشكلات واتخاذ القرار.</p></article>
+<article class='card term-card'><h3>Machine Learning</h3><p>فرع من AI يتعلم من البيانات ويكتشف الأنماط لتقديم تنبؤات أو قرارات دون كتابة كل القواعد يدويًا.</p></article>
+<article class='card term-card'><h3>Deep Learning</h3><p>فرع من ML يعتمد على شبكات عصبية متعددة الطبقات لتعلم أنماط معقدة مثل الصور والكلام والنصوص.</p></article>
+<article class='card term-card'><h3>Neural Network</h3><p>نموذج يتكون من عقد ووصلات وطبقات يحاكي التعلم بطريقة رياضية مبسطة.</p></article>
+<article class='card term-card'><h3>Weights</h3><p>قيم تمثل قوة الروابط بين العقد وتتعدل أثناء التدريب لتحسين الدقة.</p></article>
+<article class='card term-card'><h3>Activation Function</h3><p>دالة تقرر تمرير الإشارة وتضيف لاخطية تساعد الشبكة على تعلم علاقات معقدة.</p></article>
+<article class='card term-card'><h3>NLP</h3><p>معالجة اللغة الطبيعية: جعل الحاسوب يفهم اللغة البشرية من خلال تحويل الكلمات إلى رموز وتحليل المعنى والسياق.</p></article>
+<article class='card term-card'><h3>Machine Translation</h3><p>تحويل النصوص بين اللغات باستخدام تقنيات NLP، وليست دقيقة دائمًا بنسبة 100%.</p></article>
+<article class='card term-card'><h3>Chatbot</h3><p>نظام يستخدم NLP لفهم رسائل المستخدم والرد عليها.</p></article>
+<article class='card term-card'><h3>Computer Vision</h3><p>فرع من AI يجعل الآلة تفهم الصور والفيديو عبر تحليل البيانات البصرية.</p></article>
+<article class='card term-card'><h3>Face Detection</h3><p>تحديد الوجوه في الصور أو الفيديو، ويستخدم في الهواتف والكاميرات والمطارات.</p></article>
+<article class='card term-card'><h3>Object Detection</h3><p>تحديد الأشياء داخل الصورة أو الفيديو مثل سيارة أو حيوان أو منتج.</p></article>
+<article class='card term-card'><h3>Privacy</h3><p>حماية البيانات الشخصية والحساسة من الاستخدام غير المناسب.</p></article>
+<article class='card term-card'><h3>Algorithmic Bias</h3><p>نتائج غير عادلة قد تظهر بسبب بيانات غير عادلة أو غير متنوعة أو تصميم غير مناسب.</p></article>
+<article class='card term-card'><h3>Responsible AI</h3><p>استخدام AI بطريقة تحترم الحقوق والقوانين والعدالة والسلامة.</p></article>
+<article class='card term-card'><h3>Future AI</h3><p>اتجاهات مستقبلية تشمل تعليمًا أكثر تفاعلًا، طبًا أكثر دقة، أعمالًا أسرع، روبوتات، سيارات ذاتية القيادة، وأمنًا سيبرانيًا يعتمد على AI.</p></article></div>
+</section>
+
+<section id="comparisons" class="container">
+  <div class="section-title"><span class="tag">Comparisons</span><h2>المقارنات المهمة</h2><p>هذه المقارنات تحفظ لك الكثير في أسئلة الاختيار والصح والخطأ.</p></div>
+  <div class="grid grid-2"><article class='card'><h3>AI vs ML vs DL</h3><ul><li>AI هو المجال الأوسع للأنظمة الذكية.</li><li>ML فرع من AI يتعلم من البيانات.</li><li>DL فرع من ML يعتمد على الشبكات العصبية العميقة.</li></ul></article>
+<article class='card'><h3>Human Intelligence vs AI</h3><ul><li>الذكاء البشري: إبداع، مشاعر، حدس، حكم أخلاقي.</li><li>AI: بيانات وخوارزميات وسرعة ودقة، لكنه بلا مشاعر حقيقية.</li></ul></article>
+<article class='card'><h3>Traditional Programming vs ML</h3><ul><li>التقليدية: قواعد مكتوبة يدويًا.</li><li>ML: يتعلم الأنماط من البيانات ويستخدمها للتنبؤ أو القرار.</li></ul></article>
+<article class='card'><h3>Narrow vs General vs Super AI</h3><ul><li>Narrow متخصص وموجود اليوم.</li><li>General نظري وغير متحقق بالكامل.</li><li>Super افتراضي وقد يتجاوز البشر مستقبلًا.</li></ul></article>
+<article class='card'><h3>NLP vs Computer Vision</h3><ul><li>NLP للغة والنصوص والكلام.</li><li>Computer Vision للصور والفيديو والمحتوى البصري.</li></ul></article>
+<article class='card'><h3>Privacy vs Bias</h3><ul><li>الخصوصية: حماية البيانات الشخصية.</li><li>التحيز: عدالة النتائج وتجنب بيانات غير متنوعة أو غير عادلة.</li></ul></article>
+<article class='card'><h3>Training vs Testing</h3><ul><li>التدريب: يتعلم النموذج من البيانات.</li><li>الاختبار: تقييم دقته على أمثلة جديدة.</li></ul></article>
+<article class='card'><h3>Face Detection vs Object Detection</h3><ul><li>Face Detection يركز على الوجوه.</li><li>Object Detection يحدد أشياء متنوعة مثل سيارات وحيوانات ومنتجات.</li></ul></article></div>
+</section>
+
+<section id="hour" class="container">
+  <div class="section-title"><span class="tag">Last Hour Mode</span><h2>وضع المراجعة قبل الاختبار بساعة</h2><p>اضغط على الزر وابدأ مراجعة سريعة حسب الوقت.</p></div>
+  <div class="grid grid-2">
+    <div class="card center">
+      <h3>عداد 60 دقيقة</h3>
+      <div id="timer" style="font-size:56px;font-weight:700;margin:18px 0">60:00</div>
+      <button class="btn primary" id="startTimer">ابدأ العداد</button>
+      <button class="btn" id="resetTimer">إعادة</button>
+    </div>
+    <div class="card"><div class='timeline-item'><strong>الدقائق 60-50</strong><p>اقرأ تعريف AI وأهدافه والفرق بين الذكاء البشري والاصطناعي.</p></div>
+<div class='timeline-item'><strong>الدقائق 50-40</strong><p>راجع ML وDL والشبكات العصبية: layers, weights, activation functions.</p></div>
+<div class='timeline-item'><strong>الدقائق 40-25</strong><p>ركز على NLP: التعريف، تحويل اللغة إلى رموز، الترجمة، Chatbots، التحديات.</p></div>
+<div class='timeline-item'><strong>الدقائق 25-15</strong><p>ركز على Computer Vision: الصور والفيديو، البكسلات، Face/Object Detection، التحديات.</p></div>
+<div class='timeline-item'><strong>الدقائق 15-8</strong><p>راجع تطبيقات AI في التعليم والصحة والأعمال والحياة اليومية.</p></div>
+<div class='timeline-item'><strong>الدقائق 8-3</strong><p>راجع الأخلاقيات: الخصوصية، التحيز، حماية البيانات، الوظائف، الشفافية.</p></div>
+<div class='timeline-item'><strong>آخر 3 دقائق</strong><p>اقرأ احفظ هذه قبل الاختبار + الأخطاء الشائعة فقط.</p></div></div>
+  </div>
+</section>
+
+<section id="quiz" class="container">
+  <div class="section-title"><span class="tag">Random Final Quiz</span><h2>اختبار عشوائي: 40 سؤال من بنك 120</h2><p>كل مرة يعطيك 40 سؤالًا مختلفًا تقريبًا مع شرح فوري لكل إجابة. البنك يميل أكثر للمحاضرات 6 إلى 10.</p></div>
+  <div class="grid grid-4 stats">
+    <div class="card stat"><strong id="correctCount">0</strong><span>صحيحة</span></div>
+    <div class="card stat"><strong id="wrongCount">0</strong><span>خاطئة</span></div>
+    <div class="card stat"><strong id="answeredCount">0/40</strong><span>تمت الإجابة</span></div>
+    <div class="card stat"><strong id="percentCount">0%</strong><span>النسبة</span></div>
+  </div>
+  <div class="progress"><span id="progressBar"></span></div>
+  <div class="center" style="margin-bottom:22px"><button class="btn primary" id="newQuiz">اختبار عشوائي جديد</button><button class="btn" id="resetQuiz">إعادة نفس الاختبار</button></div>
+  <div id="finalScore" class="card center" style="display:none;margin-bottom:24px"></div>
+  <div id="quizBox" class="grid grid-2"></div>
+</section>
+
+<section id="bank" class="container">
+  <div class="section-title"><span class="tag">Question Bank</span><h2>بنك الأسئلة الكامل: 120 سؤال</h2><p>يمكنك تصفية الأسئلة حسب المحاضرة أو البحث عن كلمة.</p></div>
+  <div class="filters">
+    <button class="filter-btn active" data-lecture="all">الكل</button>
+    <button class="filter-btn" data-lecture="1">محاضرة 1</button><button class="filter-btn" data-lecture="2">محاضرة 2</button><button class="filter-btn" data-lecture="3">محاضرة 3</button><button class="filter-btn" data-lecture="4">محاضرة 4</button><button class="filter-btn" data-lecture="5">محاضرة 5</button><button class="filter-btn" data-lecture="6">محاضرة 6</button><button class="filter-btn" data-lecture="7">محاضرة 7</button><button class="filter-btn" data-lecture="8">محاضرة 8</button><button class="filter-btn" data-lecture="9">محاضرة 9</button><button class="filter-btn" data-lecture="10">محاضرة 10</button>
+  </div>
+  <input id="bankSearch" class="search" placeholder="ابحث في بنك الأسئلة..." />
+  <div id="bankBox" class="grid grid-2"></div>
+</section>
+
+<section id="final" class="container">
+  <div class="card center">
+    <h2>ختام المراجعة</h2>
+    <p class="final-text">تم إعداد هذا الموقع كمراجعة منظمة وشاملة للمحتوى النظري في ملف المحاضرات من 1 إلى 10، مع تركيز أكبر على المحاضرات 6 إلى 10 استعدادًا للاختبار النهائي.</p>
+  </div>
+</section>
+</main>
+</div>
+
+<script>
+const QUESTIONS = [{"id": 1, "lecture": 1, "type": "tf", "q": "AI هو علم وهندسة إنشاء آلات تؤدي مهام تتطلب عادة ذكاءً بشريًا.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "AI يرتبط بمهام مثل التفكير والتعلم وحل المشكلات."}, {"id": 2, "lecture": 1, "type": "mc", "q": "ما التعريف الأقرب للذكاء الاصطناعي؟", "options": ["علم وهندسة إنشاء آلات تؤدي مهام ذكية", "حفظ ملفات فقط", "تصميم واجهات فقط", "شبكة إنترنت فقط"], "answer": "علم وهندسة إنشاء آلات تؤدي مهام ذكية", "explain": "AI يرتبط بمهام مثل التفكير والتعلم وحل المشكلات."}, {"id": 3, "lecture": 1, "type": "tf", "q": "من أهداف AI حل المشكلات والتعلم والتكيف والأتمتة وتعزيز القدرات البشرية.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الأهداف الرئيسية تشمل التعلم وحل المشكلات والأتمتة."}, {"id": 4, "lecture": 1, "type": "mc", "q": "أي مجموعة تمثل أهداف AI؟", "options": ["حل المشكلات والتعلم والأتمتة", "حذف البيانات", "منع التنبؤ", "إلغاء دور الإنسان تمامًا"], "answer": "حل المشكلات والتعلم والأتمتة", "explain": "الأهداف الرئيسية تشمل التعلم وحل المشكلات والأتمتة."}, {"id": 5, "lecture": 1, "type": "tf", "q": "الذكاء البشري يتضمن مشاعر وإبداعًا وحدسًا وحكمًا أخلاقيًا.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "البشر يملكون أبعادًا شعورية وأخلاقية لا يملكها AI."}, {"id": 6, "lecture": 1, "type": "mc", "q": "ما الذي يميز الذكاء البشري؟", "options": ["المشاعر والإبداع والحكم الأخلاقي", "البيانات فقط", "الخوارزميات فقط", "السرعة الحسابية فقط"], "answer": "المشاعر والإبداع والحكم الأخلاقي", "explain": "البشر يملكون أبعادًا شعورية وأخلاقية لا يملكها AI."}, {"id": 7, "lecture": 1, "type": "tf", "q": "AI يعتمد على البيانات والخوارزميات ويمتاز بالسرعة والدقة لكنه يفتقر للمشاعر.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "AI سريع ودقيق لكنه ليس صاحب مشاعر أو أخلاق ذاتية."}, {"id": 8, "lecture": 1, "type": "mc", "q": "ما الوصف الصحيح لـAI؟", "options": ["يعتمد على البيانات والخوارزميات", "يمتلك مشاعر حقيقية", "يملك قيمًا أخلاقية ذاتية", "لا يحتاج إلى بيانات"], "answer": "يعتمد على البيانات والخوارزميات", "explain": "AI سريع ودقيق لكنه ليس صاحب مشاعر أو أخلاق ذاتية."}, {"id": 9, "lecture": 2, "type": "tf", "q": "تطور AI مر بمراحل مثل اختبار تورينغ والذكاء الرمزي والتعلم الآلي والتعلم العميق.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المحاضرة تعرض مراحل تاريخية متراكمة."}, {"id": 10, "lecture": 2, "type": "mc", "q": "أي تسلسل يعبر عن تطور AI؟", "options": ["اختبار تورينغ ثم الذكاء الرمزي ثم ML وDL", "DL ثم الورق ثم الطباعة", "الترجمة فقط ثم الصور فقط", "لا توجد مراحل"], "answer": "اختبار تورينغ ثم الذكاء الرمزي ثم ML وDL", "explain": "المحاضرة تعرض مراحل تاريخية متراكمة."}, {"id": 11, "lecture": 2, "type": "tf", "q": "الذكاء الرمزي يعتمد على القواعد والمنطق وتمثيل المعرفة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "Symbolic AI كان يعتمد على قواعد ومنطق."}, {"id": 12, "lecture": 2, "type": "mc", "q": "ما أساس الذكاء الرمزي؟", "options": ["القواعد والمنطق", "البكسلات فقط", "المشاعر فقط", "التسويق فقط"], "answer": "القواعد والمنطق", "explain": "Symbolic AI كان يعتمد على قواعد ومنطق."}, {"id": 13, "lecture": 2, "type": "tf", "q": "الأنظمة الخبيرة تحاول تمثيل معرفة الخبراء في مجال محدد باستخدام قواعد.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "Expert systems تقوم على معرفة وقواعد ضمن مجال."}, {"id": 14, "lecture": 2, "type": "mc", "q": "ما فكرة الأنظمة الخبيرة؟", "options": ["تمثيل معرفة خبير بقواعد", "كشف الوجوه فقط", "ترجمة الكلمات فقط", "إلغاء المعرفة"], "answer": "تمثيل معرفة خبير بقواعد", "explain": "Expert systems تقوم على معرفة وقواعد ضمن مجال."}, {"id": 15, "lecture": 2, "type": "tf", "q": "AI الحديث أصبح أقوى بسبب البيانات وقوة الحوسبة والخوارزميات المتقدمة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "تطور البيانات والحوسبة والخوارزميات دعم AI الحديث."}, {"id": 16, "lecture": 2, "type": "mc", "q": "ما سبب قوة AI الحديث؟", "options": ["البيانات والحوسبة والخوارزميات", "غياب البيانات", "غياب التدريب", "عدم وجود خوارزميات"], "answer": "البيانات والحوسبة والخوارزميات", "explain": "تطور البيانات والحوسبة والخوارزميات دعم AI الحديث."}, {"id": 17, "lecture": 3, "type": "tf", "q": "Narrow AI متخصص في مهمة محددة وهو الأكثر انتشارًا اليوم.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الذكاء الضيق يعمل ضمن نطاق محدد."}, {"id": 18, "lecture": 3, "type": "mc", "q": "ما المقصود بـNarrow AI؟", "options": ["ذكاء متخصص في مهمة محددة", "ذكاء عام كامل", "ذكاء فائق مؤكد", "وعي إنساني"], "answer": "ذكاء متخصص في مهمة محددة", "explain": "الذكاء الضيق يعمل ضمن نطاق محدد."}, {"id": 19, "lecture": 3, "type": "tf", "q": "General AI مفهوم نظري لنظام قادر على التعلم في مجالات متعددة مثل الإنسان.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "General AI لم يتحقق بشكل كامل."}, {"id": 20, "lecture": 3, "type": "mc", "q": "ما وضع General AI حاليًا؟", "options": ["مفهوم نظري غير متحقق بالكامل", "متوفر بالكامل", "هو كشف الوجوه فقط", "هو التوصيات فقط"], "answer": "مفهوم نظري غير متحقق بالكامل", "explain": "General AI لم يتحقق بشكل كامل."}, {"id": 21, "lecture": 3, "type": "tf", "q": "Super AI مفهوم افتراضي قد يتجاوز قدرات الإنسان ويثير قضايا مستقبلية.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "Super AI فكرة مستقبلية افتراضية."}, {"id": 22, "lecture": 3, "type": "mc", "q": "ما المقصود بـSuper AI؟", "options": ["ذكاء افتراضي قد يتجاوز الإنسان", "ذكاء متخصص فقط", "نظام توصية عادي", "برنامج جدول بيانات"], "answer": "ذكاء افتراضي قد يتجاوز الإنسان", "explain": "Super AI فكرة مستقبلية افتراضية."}, {"id": 23, "lecture": 3, "type": "tf", "q": "قوة النظام في مهمة واحدة لا تعني أنه يمتلك ذكاءً عامًا.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "النظام قد يكون قويًا في مهمة واحدة فقط."}, {"id": 24, "lecture": 3, "type": "mc", "q": "ما العبارة الصحيحة؟", "options": ["التخصص لا يعني ذكاءً عامًا", "أي تطبيق ذكي هو Super AI", "الترجمة تعني وعيًا إنسانيًا", "Narrow AI هو General AI"], "answer": "التخصص لا يعني ذكاءً عامًا", "explain": "النظام قد يكون قويًا في مهمة واحدة فقط."}, {"id": 25, "lecture": 4, "type": "tf", "q": "Machine Learning فرع من AI يتعلم من البيانات ويكتشف الأنماط.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "ML يبني معرفة من البيانات."}, {"id": 26, "lecture": 4, "type": "mc", "q": "ما تعريف ML؟", "options": ["تعلم الأنماط من البيانات", "حذف البيانات", "كتابة كل قاعدة يدويًا", "تصميم الصور فقط"], "answer": "تعلم الأنماط من البيانات", "explain": "ML يبني معرفة من البيانات."}, {"id": 27, "lecture": 4, "type": "tf", "q": "البرمجة التقليدية تعتمد على قواعد مكتوبة، بينما ML يتعلم القواعد أو الأنماط من البيانات.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الفارق الأساسي في مصدر القواعد/النمط."}, {"id": 28, "lecture": 4, "type": "mc", "q": "ما الفرق الأساسي بين ML والبرمجة التقليدية؟", "options": ["ML يتعلم من البيانات والتقليدية تعتمد على قواعد مكتوبة", "لا فرق", "التقليدية تحتاج بيانات فقط", "ML لا يستخدم بيانات"], "answer": "ML يتعلم من البيانات والتقليدية تعتمد على قواعد مكتوبة", "explain": "الفارق الأساسي في مصدر القواعد/النمط."}, {"id": 29, "lecture": 4, "type": "tf", "q": "من أمثلة ML التنبؤ والتوصيات والتصنيف واكتشاف الأنماط.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "التوصيات مثال واضح على تعلم الأنماط."}, {"id": 30, "lecture": 4, "type": "mc", "q": "أي مثال ينتمي إلى ML؟", "options": ["أنظمة التوصية", "كسر الشاشة", "رفع الصوت فقط", "طباعة ورقة"], "answer": "أنظمة التوصية", "explain": "التوصيات مثال واضح على تعلم الأنماط."}, {"id": 31, "lecture": 4, "type": "tf", "q": "جودة البيانات تؤثر مباشرة على جودة نتائج نموذج ML.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "النموذج يتعلم مما نقدمه له."}, {"id": 32, "lecture": 4, "type": "mc", "q": "لماذا جودة البيانات مهمة؟", "options": ["لأنها تؤثر على دقة النتائج", "لأنها لا تدخل في التدريب", "لأن ML لا يحتاج بيانات", "لأنها تلغي النموذج"], "answer": "لأنها تؤثر على دقة النتائج", "explain": "النموذج يتعلم مما نقدمه له."}, {"id": 33, "lecture": 5, "type": "tf", "q": "Deep Learning فرع من ML يعتمد على الشبكات العصبية الاصطناعية.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "التعلم العميق فرع من التعلم الآلي."}, {"id": 34, "lecture": 5, "type": "mc", "q": "ما علاقة DL بـML؟", "options": ["DL فرع من ML", "DL عكس ML تمامًا", "DL لا يستخدم بيانات", "DL مجرد قاعدة ثابتة"], "answer": "DL فرع من ML", "explain": "التعلم العميق فرع من التعلم الآلي."}, {"id": 35, "lecture": 5, "type": "tf", "q": "الشبكة العصبية تتكون من عقد ووصلات وطبقات.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "العقد والوصلات والطبقات مكونات أساسية."}, {"id": 36, "lecture": 5, "type": "mc", "q": "مم تتكون الشبكة العصبية؟", "options": ["عقد ووصلات وطبقات", "أوراق فقط", "صور فقط", "أوامر صوتية فقط"], "answer": "عقد ووصلات وطبقات", "explain": "العقد والوصلات والطبقات مكونات أساسية."}, {"id": 37, "lecture": 5, "type": "tf", "q": "الأوزان تمثل قوة الروابط بين العقد وتتعدل أثناء التدريب.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الأوزان تتعدل لتحسين النتائج."}, {"id": 38, "lecture": 5, "type": "mc", "q": "ما معنى weights في الشبكة؟", "options": ["قوة الروابط بين العقد", "نوع خط الكتابة", "لون الصورة", "حجم الشاشة"], "answer": "قوة الروابط بين العقد", "explain": "الأوزان تتعدل لتحسين النتائج."}, {"id": 39, "lecture": 5, "type": "tf", "q": "دوال التفعيل مثل ReLU وSigmoid وTanh تساعد الشبكة على تعلم علاقات معقدة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "Activation functions تساعد على التعقيد غير الخطي."}, {"id": 40, "lecture": 5, "type": "mc", "q": "ما فائدة دالة التفعيل؟", "options": ["إضافة اللاخطية وتعلم علاقات معقدة", "حذف الطبقات", "إيقاف التدريب", "تحويل الصورة إلى صوت فقط"], "answer": "إضافة اللاخطية وتعلم علاقات معقدة", "explain": "Activation functions تساعد على التعقيد غير الخطي."}, {"id": 41, "lecture": 6, "type": "tf", "q": "NLP فرع من AI يهدف إلى جعل الحاسوب يفهم اللغة البشرية.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "NLP مجال لغوي يركز على النص والكلام."}, {"id": 42, "lecture": 6, "type": "mc", "q": "ما الهدف الأساسي من NLP؟", "options": ["جعل الحاسوب يفهم اللغة البشرية", "كشف الوجوه", "قيادة السيارات فقط", "تحليل الأشعة فقط"], "answer": "جعل الحاسوب يفهم اللغة البشرية", "explain": "NLP مجال لغوي يركز على النص والكلام."}, {"id": 43, "lecture": 6, "type": "tf", "q": "الآلة لا تفهم الكلمات مباشرة؛ يجب تحويلها إلى أرقام ورموز ثم تحليلها.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "النص يحتاج تمثيلًا قابلًا للمعالجة."}, {"id": 44, "lecture": 6, "type": "mc", "q": "كيف تتعامل الآلة مع اللغة غالبًا؟", "options": ["تحويل الكلمات إلى رموز/أرقام وتحليلها", "قراءتها بعاطفة بشرية", "إهمال السياق دائمًا", "تحويلها إلى صور فقط"], "answer": "تحويل الكلمات إلى رموز/أرقام وتحليلها", "explain": "النص يحتاج تمثيلًا قابلًا للمعالجة."}, {"id": 45, "lecture": 6, "type": "tf", "q": "Google Search يعتمد على NLP لأن الآلة تقرأ النص وتحاول فهمه.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "البحث النصي يحتاج فهمًا لغويًا."}, {"id": 46, "lecture": 6, "type": "mc", "q": "أي خدمة تعتمد على NLP لفهم النص؟", "options": ["البحث في Google", "مقبض الباب", "مصباح عادي", "كرسي"], "answer": "البحث في Google", "explain": "البحث النصي يحتاج فهمًا لغويًا."}, {"id": 47, "lecture": 6, "type": "tf", "q": "Google Translate مثال مهم على الترجمة الآلية ضمن NLP.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الترجمة الآلية من أبرز تطبيقات NLP."}, {"id": 48, "lecture": 6, "type": "mc", "q": "ما التطبيق المرتبط بـNLP؟", "options": ["Google Translate", "كشف السيارة في الصورة", "فتح الباب يدويًا", "تحليل حرارة الغرفة"], "answer": "Google Translate", "explain": "الترجمة الآلية من أبرز تطبيقات NLP."}, {"id": 49, "lecture": 6, "type": "tf", "q": "الترجمة الآلية ليست دقيقة دائمًا بنسبة 100%.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "السياق وتعدد المعاني يؤثران في الترجمة."}, {"id": 50, "lecture": 6, "type": "mc", "q": "ما العبارة الصحيحة عن الترجمة الآلية؟", "options": ["قد تخطئ بسبب السياق والمعنى", "مضمونة 100% دائمًا", "لا تستخدم لغة", "ليست جزءًا من NLP"], "answer": "قد تخطئ بسبب السياق والمعنى", "explain": "السياق وتعدد المعاني يؤثران في الترجمة."}, {"id": 51, "lecture": 6, "type": "tf", "q": "Chatbots تستخدم NLP لفهم رسائل المستخدم والرد عليها.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المحادثة تعتمد على اللغة."}, {"id": 52, "lecture": 6, "type": "mc", "q": "لماذا تستخدم Chatbots تقنيات NLP؟", "options": ["لفهم النص والرد المناسب", "لتحديد لون الشاشة فقط", "لتشغيل المصباح", "لتحليل البكسلات فقط"], "answer": "لفهم النص والرد المناسب", "explain": "المحادثة تعتمد على اللغة."}, {"id": 53, "lecture": 6, "type": "tf", "q": "NLP يفيد التعليم عبر التلخيص والترجمة وتحويل الكلام إلى نص وفهم النصوص الصعبة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المحاضرة ذكرت فوائد تعليمية متعددة."}, {"id": 54, "lecture": 6, "type": "mc", "q": "أي فائدة تعليمية لـNLP؟", "options": ["تلخيص المقالات وترجمة المواد", "تغيير إطارات السيارة", "طبخ الطعام", "كشف الوجه فقط"], "answer": "تلخيص المقالات وترجمة المواد", "explain": "المحاضرة ذكرت فوائد تعليمية متعددة."}, {"id": 55, "lecture": 6, "type": "tf", "q": "تحديات NLP تشمل السياق وتعدد المعاني واللهجات والتعبيرات غير المباشرة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "اللغة غنية ومعقدة وتتغير بالسياق."}, {"id": 56, "lecture": 6, "type": "mc", "q": "أي تحدٍ مهم في NLP؟", "options": ["تعدد المعاني والسياق", "ثبات كل الكلمات بمعنى واحد", "عدم وجود لهجات", "الصور فقط"], "answer": "تعدد المعاني والسياق", "explain": "اللغة غنية ومعقدة وتتغير بالسياق."}, {"id": 57, "lecture": 7, "type": "tf", "q": "Computer Vision فرع من AI يجعل الآلة تفهم الصور والفيديو.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الرؤية الحاسوبية مجال بصري."}, {"id": 58, "lecture": 7, "type": "mc", "q": "ما مجال Computer Vision؟", "options": ["الصور والفيديو", "النصوص فقط", "القواعد النحوية فقط", "المشاعر البشرية فقط"], "answer": "الصور والفيديو", "explain": "الرؤية الحاسوبية مجال بصري."}, {"id": 59, "lecture": 7, "type": "tf", "q": "الحاسوب يتعامل مع الصورة كبيانات رقمية مثل البكسلات.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الصورة تمثل رقميًا للحاسوب."}, {"id": 60, "lecture": 7, "type": "mc", "q": "كيف تفهم الآلة الصور؟", "options": ["كبيانات رقمية وبكسلات", "كشعور إنساني", "كنص فقط", "كملف صوتي فقط"], "answer": "كبيانات رقمية وبكسلات", "explain": "الصورة تمثل رقميًا للحاسوب."}, {"id": 61, "lecture": 7, "type": "tf", "q": "Face Detection تطبيق من تطبيقات Computer Vision.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "كشف الوجوه جزء من فهم الصور."}, {"id": 62, "lecture": 7, "type": "mc", "q": "ما علاقة كشف الوجوه بـComputer Vision؟", "options": ["تطبيق من تطبيقاتها", "مجال لغوي", "أسلوب كتابة", "نوع ترجمة"], "answer": "تطبيق من تطبيقاتها", "explain": "كشف الوجوه جزء من فهم الصور."}, {"id": 63, "lecture": 7, "type": "tf", "q": "كشف الوجوه يستخدم في فتح الهاتف والكاميرات الأمنية والمطارات.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المحاضرة ذكرت استخدامات أمنية وهواتف ومطارات."}, {"id": 64, "lecture": 7, "type": "mc", "q": "أي استخدام صحيح لـFace Detection؟", "options": ["فتح الهاتف والتعرف الأمني", "تلخيص مقال فقط", "تحويل نص إلى لغة أخرى", "حساب الضريبة"], "answer": "فتح الهاتف والتعرف الأمني", "explain": "المحاضرة ذكرت استخدامات أمنية وهواتف ومطارات."}, {"id": 65, "lecture": 7, "type": "tf", "q": "Object Detection يحدد الأشياء مثل سيارة أو حيوان أو أداة داخل الصورة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "كشف الأجسام يركز على العناصر البصرية."}, {"id": 66, "lecture": 7, "type": "mc", "q": "ما المقصود بـObject Detection؟", "options": ["كشف الأشياء داخل الصور أو الفيديو", "تفسير لهجة", "كتابة شعر", "ترجمة جملة"], "answer": "كشف الأشياء داخل الصور أو الفيديو", "explain": "كشف الأجسام يركز على العناصر البصرية."}, {"id": 67, "lecture": 7, "type": "tf", "q": "Computer Vision يستخدم في السيارات ذاتية القيادة والروبوتات والمصانع والتسوق.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "السيارات تستخدم فهم المشاهد والطرق."}, {"id": 68, "lecture": 7, "type": "mc", "q": "أي تطبيق يرتبط بـComputer Vision؟", "options": ["السيارات ذاتية القيادة", "قواعد الإملاء فقط", "اختيار خط النص", "شرح النحو"], "answer": "السيارات ذاتية القيادة", "explain": "السيارات تستخدم فهم المشاهد والطرق."}, {"id": 69, "lecture": 7, "type": "tf", "q": "تحديات الرؤية الحاسوبية تشمل الإضاءة والزاوية وتشابه الأجسام.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الظروف البصرية قد تغير النتيجة."}, {"id": 70, "lecture": 7, "type": "mc", "q": "أي تحدٍ في Computer Vision؟", "options": ["الإضاءة والزاوية", "سهولة كل الصور دائمًا", "عدم وجود بكسلات", "ثبات كل المشاهد"], "answer": "الإضاءة والزاوية", "explain": "الظروف البصرية قد تغير النتيجة."}, {"id": 71, "lecture": 7, "type": "tf", "q": "الخصوصية مشكلة مهمة في التعرف على الوجوه.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الوجوه بيانات حساسة."}, {"id": 72, "lecture": 7, "type": "mc", "q": "لماذا الخصوصية مهمة في Face Detection؟", "options": ["لأنه يتعامل مع بيانات شخصية", "لأنه يترجم النصوص", "لأنه يغير الصوت", "لأنه يمنع الصور"], "answer": "لأنه يتعامل مع بيانات شخصية", "explain": "الوجوه بيانات حساسة."}, {"id": 73, "lecture": 8, "type": "tf", "q": "AI في التعليم يساعد في التلخيص والترجمة والاختبارات التدريبية والتعلم التكيفي.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "التعليم من المجالات المهمة للتطبيق."}, {"id": 74, "lecture": 8, "type": "mc", "q": "أي تطبيق تعليمي لـAI؟", "options": ["التلخيص والترجمة والتعلم التكيفي", "إصلاح السيارة فقط", "تغيير الطقس", "إغلاق الإنترنت"], "answer": "التلخيص والترجمة والتعلم التكيفي", "explain": "التعليم من المجالات المهمة للتطبيق."}, {"id": 75, "lecture": 8, "type": "tf", "q": "Khanmigo مثال لمدرس ذكي يساعد الطلاب في التعلم الشخصي.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "ذكرته المحاضرة ضمن التعليم."}, {"id": 76, "lecture": 8, "type": "mc", "q": "ما وظيفة Khanmigo في سياق المحاضرة؟", "options": ["مدرس/مساعد ذكي للتعلم الشخصي", "كاميرا مطار فقط", "محرك سيارة فقط", "أداة طبخ"], "answer": "مدرس/مساعد ذكي للتعلم الشخصي", "explain": "ذكرته المحاضرة ضمن التعليم."}, {"id": 77, "lecture": 8, "type": "tf", "q": "AI في الصحة يساعد في التشخيص وتحليل الأشعة والتنبؤ بالمخاطر ومراقبة المرضى.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الصحة مجال رئيسي لتطبيق AI."}, {"id": 78, "lecture": 8, "type": "mc", "q": "أي تطبيق صحي لـAI؟", "options": ["تحليل الأشعة والتشخيص", "تلخيص أغنية فقط", "إيقاف التعليم", "تنظيم الصور الشخصية فقط"], "answer": "تحليل الأشعة والتشخيص", "explain": "الصحة مجال رئيسي لتطبيق AI."}, {"id": 79, "lecture": 8, "type": "tf", "q": "AI في الأعمال يساعد في خدمة العملاء والتسويق وتحليل بيانات العملاء والأمن السيبراني.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "AI يدعم عمليات الأعمال والقرار."}, {"id": 80, "lecture": 8, "type": "mc", "q": "أي تطبيق أعمال لـAI؟", "options": ["خدمة العملاء وتحليل البيانات", "كشف الوجه فقط", "ترجمة كلمة واحدة فقط", "الاستراحة"], "answer": "خدمة العملاء وتحليل البيانات", "explain": "AI يدعم عمليات الأعمال والقرار."}, {"id": 81, "lecture": 8, "type": "tf", "q": "ChatGPT وTesla Autopilot وGoogle Translate وAlexa/Siri أمثلة لأنظمة AI في الحياة اليومية.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "هذه أمثلة وردت في المحاضرة."}, {"id": 82, "lecture": 8, "type": "mc", "q": "أي مجموعة تمثل أنظمة AI يومية؟", "options": ["ChatGPT وTesla وGoogle Translate وSiri", "قلم وورقة فقط", "كرسي وطاولة", "مصباح يدوي فقط"], "answer": "ChatGPT وTesla وGoogle Translate وSiri", "explain": "هذه أمثلة وردت في المحاضرة."}, {"id": 83, "lecture": 8, "type": "tf", "q": "تحديات AI تشمل الحاجة إلى بيانات كثيرة واحتمال الخطأ والخصوصية والتكلفة والتنظيم.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المحاضرة ذكرت تحديات متعددة."}, {"id": 84, "lecture": 8, "type": "mc", "q": "أي تحدٍ من تحديات AI؟", "options": ["الخصوصية والحاجة إلى بيانات", "استحالة الخطأ", "غياب التكلفة دائمًا", "عدم الحاجة للرقابة"], "answer": "الخصوصية والحاجة إلى بيانات", "explain": "المحاضرة ذكرت تحديات متعددة."}, {"id": 85, "lecture": 8, "type": "tf", "q": "AI يجب أن يستخدم بطريقة مسؤولة وعادلة وغير متحيزة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "التطبيق يحتاج مسؤولية."}, {"id": 86, "lecture": 8, "type": "mc", "q": "ما شرط مهم عند تطبيق AI؟", "options": ["المسؤولية والعدالة وعدم التحيز", "إخفاء النتائج دائمًا", "إلغاء الرقابة", "تجاهل الخصوصية"], "answer": "المسؤولية والعدالة وعدم التحيز", "explain": "التطبيق يحتاج مسؤولية."}, {"id": 87, "lecture": 8, "type": "tf", "q": "AI يدعم الإنسان ولا يلغي دور المعلم أو الطبيب أو صاحب القرار بالضرورة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الدور البشري يبقى مهمًا."}, {"id": 88, "lecture": 8, "type": "mc", "q": "ما العبارة الصحيحة؟", "options": ["AI يدعم الإنسان وقد لا يستبدله", "يلغي البشر دائمًا", "لا يحتاج لمراجعة", "لا يخطئ أبدًا"], "answer": "AI يدعم الإنسان وقد لا يستبدله", "explain": "الدور البشري يبقى مهمًا."}, {"id": 89, "lecture": 9, "type": "tf", "q": "أخلاقيات AI مهمة لأن التقنية تؤثر في الأفراد والمجتمع والقرارات.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "AI قد يؤثر على حقوق وقرارات."}, {"id": 90, "lecture": 9, "type": "mc", "q": "لماذا أخلاقيات AI مهمة؟", "options": ["لأن التقنية تؤثر في الناس والقرارات", "لأنها تمنع التعلم", "لأنها تختص بالصور فقط", "لأنها تلغي البيانات"], "answer": "لأن التقنية تؤثر في الناس والقرارات", "explain": "AI قد يؤثر على حقوق وقرارات."}, {"id": 91, "lecture": 9, "type": "tf", "q": "الخصوصية تعني حماية البيانات الشخصية والحساسة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "Privacy تدور حول حماية المعلومات."}, {"id": 92, "lecture": 9, "type": "mc", "q": "ما معنى الخصوصية؟", "options": ["حماية البيانات الشخصية", "نشر البيانات", "حذف الأخلاق", "إلغاء المسؤولية"], "answer": "حماية البيانات الشخصية", "explain": "Privacy تدور حول حماية المعلومات."}, {"id": 93, "lecture": 9, "type": "tf", "q": "التحيز الخوارزمي قد يحدث بسبب بيانات غير عادلة أو غير متنوعة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "البيانات تؤثر على عدالة النتائج."}, {"id": 94, "lecture": 9, "type": "mc", "q": "ما سبب محتمل للتحيز؟", "options": ["بيانات غير عادلة أو غير متنوعة", "دقة كاملة دائمًا", "غياب البيانات فقط", "الشفافية المطلقة"], "answer": "بيانات غير عادلة أو غير متنوعة", "explain": "البيانات تؤثر على عدالة النتائج."}, {"id": 95, "lecture": 9, "type": "tf", "q": "التحيز ليس دائمًا مقصودًا؛ قد يظهر بسبب البيانات أو تصميم النموذج.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "التحيز قد يظهر من مصادر غير مباشرة."}, {"id": 96, "lecture": 9, "type": "mc", "q": "ما العبارة الأدق عن التحيز؟", "options": ["قد يكون غير مقصود بسبب البيانات", "هو مستحيل", "هو دائمًا مقصود", "لا علاقة له بالبيانات"], "answer": "قد يكون غير مقصود بسبب البيانات", "explain": "التحيز قد يظهر من مصادر غير مباشرة."}, {"id": 97, "lecture": 9, "type": "tf", "q": "AI قد يغير طبيعة بعض الوظائف ويجعل التعلم المستمر مهمًا.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المحاضرة تربط AI بالتغير الوظيفي."}, {"id": 98, "lecture": 9, "type": "mc", "q": "كيف يؤثر AI على الوظائف؟", "options": ["قد يغير بعض المهام ويتطلب مهارات جديدة", "لا أثر نهائيًا", "يلغي التعليم", "يمنع المهارات"], "answer": "قد يغير بعض المهام ويتطلب مهارات جديدة", "explain": "المحاضرة تربط AI بالتغير الوظيفي."}, {"id": 99, "lecture": 9, "type": "tf", "q": "الاستخدام المسؤول يعني احترام القوانين والحقوق والعدالة والسلامة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المسؤولية تعني تقليل الضرر واحترام الحقوق."}, {"id": 100, "lecture": 9, "type": "mc", "q": "ما معنى Responsible AI؟", "options": ["استخدام يحترم الحقوق والقوانين", "تجاهل الخصوصية", "نشر البيانات", "منع الشفافية"], "answer": "استخدام يحترم الحقوق والقوانين", "explain": "المسؤولية تعني تقليل الضرر واحترام الحقوق."}, {"id": 101, "lecture": 9, "type": "tf", "q": "الشفافية تساعد على فهم القرارات وبناء الثقة في AI.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الشفافية من أسس الثقة."}, {"id": 102, "lecture": 9, "type": "mc", "q": "لماذا الشفافية مهمة؟", "options": ["لفهم القرارات وبناء الثقة", "لإخفاء النتائج", "لزيادة الغموض", "لمنع الرقابة"], "answer": "لفهم القرارات وبناء الثقة", "explain": "الشفافية من أسس الثقة."}, {"id": 103, "lecture": 9, "type": "tf", "q": "الأخلاقيات أساس الثقة في التقنية.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الاستخدام الأخلاقي يجعل التقنية مقبولة وآمنة."}, {"id": 104, "lecture": 9, "type": "mc", "q": "ما علاقة الأخلاقيات بالثقة؟", "options": ["الأخلاقيات أساس الثقة", "لا علاقة", "تمنع الثقة", "تلغي البيانات"], "answer": "الأخلاقيات أساس الثقة", "explain": "الاستخدام الأخلاقي يجعل التقنية مقبولة وآمنة."}, {"id": 105, "lecture": 10, "type": "tf", "q": "AI يتطور بسرعة ومستقبله مليء بالفرص والتحديات.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المحاضرة تؤكد الفرص والتحديات."}, {"id": 106, "lecture": 10, "type": "mc", "q": "كيف تصف المحاضرة مستقبل AI؟", "options": ["فرص وتحديات معًا", "فوائد فقط بلا تحديات", "توقف كامل", "لا علاقة بالمجتمع"], "answer": "فرص وتحديات معًا", "explain": "المحاضرة تؤكد الفرص والتحديات."}, {"id": 107, "lecture": 10, "type": "tf", "q": "من اتجاهات المستقبل أن التعليم سيصبح أكثر تفاعلًا والطب أكثر دقة.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المستقبل يشمل التعليم والصحة."}, {"id": 108, "lecture": 10, "type": "mc", "q": "أي اتجاه مستقبلي مذكور؟", "options": ["تعليم أكثر تفاعلًا وطب أكثر دقة", "إلغاء التعليم", "إيقاف الطب", "منع الابتكار"], "answer": "تعليم أكثر تفاعلًا وطب أكثر دقة", "explain": "المستقبل يشمل التعليم والصحة."}, {"id": 109, "lecture": 10, "type": "tf", "q": "السيارات ذاتية القيادة والروبوتات من اتجاهات AI المستقبلية.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المحاضرة ذكرت السيارات والروبوتات."}, {"id": 110, "lecture": 10, "type": "mc", "q": "أي مثال من اتجاهات المستقبل؟", "options": ["سيارات ذاتية القيادة وروبوتات مساعدة", "دفتر ورقي فقط", "قلم رصاص فقط", "أبواب خشبية"], "answer": "سيارات ذاتية القيادة وروبوتات مساعدة", "explain": "المحاضرة ذكرت السيارات والروبوتات."}, {"id": 111, "lecture": 10, "type": "tf", "q": "الأمن السيبراني سيعتمد على AI بدرجة أكبر.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "الأمن السيبراني ضمن الاتجاهات المستقبلية."}, {"id": 112, "lecture": 10, "type": "mc", "q": "ما المجال الذي سيعتمد على AI مستقبلًا؟", "options": ["الأمن السيبراني", "الطبخ اليدوي فقط", "النوم فقط", "الاستراحة"], "answer": "الأمن السيبراني", "explain": "الأمن السيبراني ضمن الاتجاهات المستقبلية."}, {"id": 113, "lecture": 10, "type": "tf", "q": "محاضرة 10 تراجع Computer Vision وتطبيقات AI والأخلاقيات والتحديات.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المحاضرة الأخيرة تربط المفاهيم."}, {"id": 114, "lecture": 10, "type": "mc", "q": "ما طبيعة Lecture 10؟", "options": ["مراجعة شاملة واتجاهات مستقبلية", "درس عملي فقط", "اختبار رياضيات", "لا علاقة بـAI"], "answer": "مراجعة شاملة واتجاهات مستقبلية", "explain": "المحاضرة الأخيرة تربط المفاهيم."}, {"id": 115, "lecture": 10, "type": "tf", "q": "الأخلاقيات أساس الثقة وتظهر في مراجعة المحاضرة 10.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المراجعة تؤكد الخصوصية والتحيز والمسؤولية."}, {"id": 116, "lecture": 10, "type": "mc", "q": "ما فكرة الأخلاقيات في المراجعة؟", "options": ["أساس الثقة والاستخدام المسؤول", "غير مهمة", "تمنع التعلم", "خاصة بالصور فقط"], "answer": "أساس الثقة والاستخدام المسؤول", "explain": "المراجعة تؤكد الخصوصية والتحيز والمسؤولية."}, {"id": 117, "lecture": 10, "type": "tf", "q": "الاستعداد للمساقات المتقدمة يتطلب فهم الأساسيات والتعلم المستمر.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "المحاضرة تربط المستقبل بأساس قوي."}, {"id": 118, "lecture": 10, "type": "mc", "q": "كيف نستعد للمساقات المتقدمة؟", "options": ["فهم الأساسيات والتعلم المستمر", "ترك الدراسة", "تجاهل الخوارزميات", "إلغاء المشاريع"], "answer": "فهم الأساسيات والتعلم المستمر", "explain": "المحاضرة تربط المستقبل بأساس قوي."}, {"id": 119, "lecture": 10, "type": "tf", "q": "المساقات القادمة قد تغطي موضوعات أعمق مثل الشبكات العصبية والتعلم العميق.", "options": ["صح", "خطأ"], "answer": "صح", "explain": "هذه موضوعات أعمق مذكورة في التحضير للمستقبل."}, {"id": 120, "lecture": 10, "type": "mc", "q": "أي موضوعات أعمق قد تظهر لاحقًا؟", "options": ["الشبكات العصبية والتعلم العميق", "لا شيء", "الاستراحة فقط", "الحضور فقط"], "answer": "الشبكات العصبية والتعلم العميق", "explain": "هذه موضوعات أعمق مذكورة في التحضير للمستقبل."}];
+const root = document.documentElement;
+let mouseX = innerWidth/2, mouseY = innerHeight/2, ticking = false;
+function updateMouseGlow() {
+  root.style.setProperty("--mx", mouseX + "px");
+  root.style.setProperty("--my", mouseY + "px");
+  root.style.setProperty("--mx2", mouseX * .75 + 120 + "px");
+  root.style.setProperty("--my2", mouseY * .85 + 90 + "px");
+  ticking = false;
+}
+addEventListener("mousemove", e => { mouseX=e.clientX; mouseY=e.clientY; if(!ticking){requestAnimationFrame(updateMouseGlow); ticking=true;} });
+addEventListener("touchmove", e => { const t=e.touches[0]; if(!t) return; mouseX=t.clientX; mouseY=t.clientY; if(!ticking){requestAnimationFrame(updateMouseGlow); ticking=true;} }, {passive:true});
+document.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener("click", e=>{const target=document.querySelector(link.getAttribute("href")); if(target){e.preventDefault(); target.scrollIntoView({behavior:"smooth",block:"start"}); history.replaceState(null,"",link.getAttribute("href"));}}));
+
+const lectureSearch = document.getElementById("lectureSearch");
+lectureSearch?.addEventListener("input", ()=> {
+  const q = lectureSearch.value.trim().toLowerCase();
+  document.querySelectorAll(".lecture-block").forEach(card => {
+    card.style.display = !q || card.textContent.toLowerCase().includes(q) ? "" : "none";
+  });
+});
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+let currentQuiz = [], answers = new Map();
+function makeQuiz() {
+  currentQuiz = shuffle(QUESTIONS).slice(0,40);
+  answers = new Map();
+  renderQuiz();
+}
+function renderQuiz() {
+  const box = document.getElementById("quizBox");
+  box.innerHTML = currentQuiz.map((q,idx)=> {
+    const opts = shuffle(q.options);
+    return `<article class="quiz-question" data-idx="${idx}" data-answer="${escapeHtml(q.answer)}" data-explain="${escapeHtml(q.explain)}">
+      <span class="badge">سؤال ${idx+1}</span><span class="badge">محاضرة ${q.lecture}</span><span class="badge">${q.type === "tf" ? "صح/خطأ" : "اختيار"}</span>
+      <p class="question-text">${escapeHtml(q.q)}</p>
+      <div class="options">${opts.map(o=>`<button class="option" data-value="${escapeHtml(o)}">${escapeHtml(o)}</button>`).join("")}</div>
+      <div class="feedback"></div>
+    </article>`;
+  }).join("");
+  box.querySelectorAll(".option").forEach(btn => btn.addEventListener("click", () => answerQuestion(btn.closest(".quiz-question"), btn)));
+  updateScore();
+}
+function answerQuestion(card, btn) {
+  const idx = card.dataset.idx, ans = card.dataset.answer, val = btn.dataset.value;
+  const ok = val === ans;
+  answers.set(idx, ok);
+  card.querySelectorAll(".option").forEach(b => {
+    b.classList.remove("correct","wrong");
+    if(b.dataset.value === ans) b.classList.add("correct");
+    if(b === btn && !ok) b.classList.add("wrong");
+  });
+  const fb = card.querySelector(".feedback");
+  fb.style.display = "block";
+  fb.innerHTML = `<strong>${ok ? "إجابة صحيحة: " : "إجابة غير صحيحة: "}</strong>${escapeHtml(card.dataset.explain)}`;
+  updateScore();
+}
+function updateScore() {
+  let correct = 0; answers.forEach(v=>{if(v) correct++;});
+  const answered = answers.size, wrong = answered - correct, percent = Math.round((correct/currentQuiz.length)*100) || 0;
+  document.getElementById("correctCount").textContent = correct;
+  document.getElementById("wrongCount").textContent = wrong;
+  document.getElementById("answeredCount").textContent = answered + "/" + currentQuiz.length;
+  document.getElementById("percentCount").textContent = percent + "%";
+  document.getElementById("progressBar").style.width = (answered/currentQuiz.length*100 || 0) + "%";
+  const final = document.getElementById("finalScore");
+  if(answered === currentQuiz.length) {
+    final.style.display = "block";
+    final.innerHTML = `<h3>النتيجة النهائية: ${correct} من ${currentQuiz.length}</h3><p>الصحيحة: ${correct} • الخاطئة: ${wrong} • النسبة: ${percent}%</p>`;
+  } else final.style.display = "none";
+}
+document.getElementById("newQuiz").addEventListener("click", makeQuiz);
+document.getElementById("resetQuiz").addEventListener("click", () => {answers = new Map(); renderQuiz();});
+
+let activeLecture = "all";
+function renderBank() {
+  const q = (document.getElementById("bankSearch").value || "").trim().toLowerCase();
+  const data = QUESTIONS.filter(x => (activeLecture==="all" || String(x.lecture)===activeLecture) && (!q || (x.q+" "+x.options.join(" ")+" "+x.explain).toLowerCase().includes(q)));
+  document.getElementById("bankBox").innerHTML = data.map((x,i)=>`<article class="sub-card"><span class="badge">محاضرة ${x.lecture}</span><span class="badge">${x.type==="tf"?"صح/خطأ":"اختيار"}</span><h4>${i+1}. ${escapeHtml(x.q)}</h4><p><strong>الإجابة:</strong> ${escapeHtml(x.answer)}</p><p>${escapeHtml(x.explain)}</p></article>`).join("");
+}
+document.querySelectorAll("[data-lecture]").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("[data-lecture]").forEach(b=>b.classList.remove("active"));btn.classList.add("active");activeLecture=btn.dataset.lecture;renderBank();}));
+document.getElementById("bankSearch").addEventListener("input", renderBank);
+
+function escapeHtml(s) {return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+
+let timerInt=null, seconds=3600;
+function paintTimer() { const m=String(Math.floor(seconds/60)).padStart(2,"0"), s=String(seconds%60).padStart(2,"0"); document.getElementById("timer").textContent = m + ":" + s; }
+document.getElementById("startTimer").addEventListener("click",()=>{if(timerInt) return; timerInt=setInterval(()=>{seconds=Math.max(0,seconds-1);paintTimer(); if(seconds===0){clearInterval(timerInt);timerInt=null;}},1000);});
+document.getElementById("resetTimer").addEventListener("click",()=>{clearInterval(timerInt);timerInt=null;seconds=3600;paintTimer();});
+makeQuiz(); renderBank(); paintTimer();
+</script>
+</body>
+</html>
